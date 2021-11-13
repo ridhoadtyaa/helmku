@@ -5,5 +5,3 @@ Bikin logo
 Home page
 cart
 detail produk
-
-ss
