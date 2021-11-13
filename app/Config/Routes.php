@@ -17,7 +17,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
+$routes->setDefaultController('Pages');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -45,7 +45,11 @@ $routes->get('/dashboard/produk', 'Dashboard/Produk::index');
 $routes->get('/dashboard/produk/tambah-produk', 'Dashboard/Produk::create');
 $routes->get('/dashboard/produk/edit', 'Dashboard/Produk::edit'); // tambahin /kodeproduk
 
-$routes->get('/dashboard/data-transaksi', 'Dashboard/Transaksi::index');
+$routes->get('/dashboard/data-transaksi/belum-membayar', 'Dashboard/Transaksi::belum_membayar');
+$routes->get('/dashboard/data-transaksi/sudah-membayar', 'Dashboard/Transaksi::sudah_membayar');
+$routes->get('/dashboard/data-transaksi/terverifikasi', 'Dashboard/Transaksi::terverifikasi');
+$routes->get('/dashboard/data-transaksi/dikirim', 'Dashboard/Transaksi::dikirim');
+$routes->get('/dashboard/data-transaksi/selesai', 'Dashboard/Transaksi::selesai');
 
 $routes->get('/dashboard/admin', 'Dashboard/Admin::index');
 $routes->get('/dashboard/admin/edit', 'Dashboard/Admin::edit'); // tambahin /id
@@ -55,6 +59,8 @@ $routes->get('/dashboard/admin/edit-profile', 'Dashboard/admin::edit_profile'); 
 $routes->get('/dashboard/admin/ubah-password', 'Dashboard/admin::password'); // tambahin /id dari session
 
 $routes->get('/dashboard/laporan-penjualan', 'Dashboard/LaporanPenjualan::index');
+
+$routes->get('/dashboard/data-pelanggan', 'Dashboard/pelanggan::index');
 
 /*
  * --------------------------------------------------------------------

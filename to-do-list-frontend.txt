@@ -1,11 +1,7 @@
-Editor kasih di tambah & edit produk
-
-Transaksi
-- Belum membayar
-- Sudah membayar
-- Terverifikasi
-- Sedang dikirim
-
-Daftar Pelanggan
-
 Dashboard
+
+Bikin logo
+
+Home page
+cart
+detail produk

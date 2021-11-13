@@ -1,5 +1,9 @@
 <?= $this->extend('templates/dashboard/dashboard-template') ?>
 
+<?= $this->section('styles') ?>
+<link rel="stylesheet" href="/assets/css/selectric.css">
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 <section class="section">
     <div class="section-header">
@@ -38,8 +42,8 @@
                     </div>
                     <div class="form-group row">
                         <label for="role" class="col-sm-2 col-form-label">Role</label>
-                        <div class="col-sm-4">
-                            <select name="role" id="role" class="form-control">
+                        <div class="col-sm-10">
+                            <select name="role" id="role" class="form-control selectric">
                                 <option value="superadmin">Super Admin</option>
                                 <option value="admin">Admin</option>
                             </select>
@@ -57,4 +61,11 @@
         </div>
     </div>
 </section>
+<?= $this->endSection() ?>
+
+<?= $this->section('javascript') ?>
+<script src="/assets/js/jquery.selectric.min.js"></script>
+<script>
+    $("select").selectric();
+</script>
 <?= $this->endSection() ?>

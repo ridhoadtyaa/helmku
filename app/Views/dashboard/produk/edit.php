@@ -1,5 +1,9 @@
 <?= $this->extend('templates/dashboard/dashboard-template') ?>
 
+<?= $this->section('styles') ?>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 <section class="section">
     <div class="section-header">
@@ -45,13 +49,16 @@
                     <div class="form-group row">
                         <label for="harga" class="col-sm-2 col-form-label">Deskripsi</label>
                         <div class="col-sm-10">
-                            <textarea name="deskripsi" id="deskripsi" placeholder="Masukkan deskripsi produk" class="form-control">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate, suscipit?</textarea>
+                            <textarea class="summernote-simple" name="deskripsi" id="deskripsi">Lorem <strong>asdasds</strong> dolor sit amet consectetur adipisicing elit. Ipsa, provident.</textarea>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="foto" class="col-sm-2 col-form-label">Foto</label>
-                        <div class="col-sm-4">
-                            <input type="file" class="form-control" name="foto" id="foto" value="foto.jpg">
+                        <div class="col-sm-10">
+                            <div id="image-preview" class="image-preview">
+                                <label for="image-upload" id="image-label">Pilih Foto</label>
+                                <input type="file" name="foto" id="image-upload"/>
+                            </div>
                             <!-- <div class="invalid-feedback">
                             </div> -->
                         </div>
@@ -62,4 +69,20 @@
         </div>
     </div>
 </section>
+<?= $this->endSection() ?>
+
+<?= $this->section('javascript') ?>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<script src="/assets/js/jquery.uploadPreview.min.js"></script>
+<script>
+$.uploadPreview({
+  input_field: "#image-upload",   // Default: .image-upload
+  preview_box: "#image-preview",  // Default: .image-preview
+  label_field: "#image-label",    // Default: .image-label
+  label_default: "Pilih Foto",   // Default: Choose File
+  label_selected: "Ganti Foto",  // Default: Change File
+  no_label: false,                // Default: false
+  success_callback: null          // Default: null
+});
+</script>
 <?= $this->endSection() ?>

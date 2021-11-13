@@ -3,10 +3,10 @@
 <?= $this->section('content') ?>
 <section class="section">
     <div class="section-header">
-    <h1>Data Transaksi</h1>
+    <h1>Data Transaksi Belum Membayar</h1>
     <div class="section-header-breadcrumb">
         <div class="breadcrumb-item active"><a href="/dashboard">Dashboard</a></div>
-        <div class="breadcrumb-item">Data Transaksi</div>
+        <div class="breadcrumb-item">Data Transaksi Belum Membayar</div>
     </div>
     </div>
 
@@ -16,47 +16,34 @@
             <table id="tabel-transaksi" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
+                        <th>No. Pesanan</th>
                         <th>Tanggal Order</th>
                         <th>Nama</th>
-                        <th>Alamat</th>
-                        <th>Keranjang</th>
-                        <th>Bukti Transfer</th>
+                        <th>Detail Pesanan</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
+                        <td>124124891</td>
                         <td>10:09:00 12 Maret 2021</td>
                         <td>Dede Inoen</td>
-                        <td>Jl. bangau no 23 Tangerang</td>
                         <td><button class="btn btn-primary" data-toggle="modal" data-target="#keranjangModal"><i class="fas fa-shopping-bag"></i></i></button></td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#buktiModal"><i class="fas fa-image"></i></button></td>
-                        <td>
-                            <button class="btn btn-success" title="Valid"><i class="fas fa-check"></i></button>
-                            <button class="btn btn-danger" title="Tidak Valid"><i class="fas fa-times"></i></button>
-                        </td>
+                        <td><button class="btn btn-danger" title="Batalkan"><i class="fas fa-times"></i></button></td>
                     </tr>
                     <tr>
+                        <td>124124891</td>
                         <td>10:09:00 12 Maret 2021</td>
                         <td>Dede Inoen</td>
-                        <td>Jl. bangau no 23 Tangerang</td>
                         <td><button class="btn btn-primary" data-toggle="modal" data-target="#keranjangModal"><i class="fas fa-shopping-bag"></i></i></button></td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#buktiModal"><i class="fas fa-image"></i></button></td>
-                        <td>
-                            <button class="btn btn-success" title="Valid"><i class="fas fa-check"></i></button>
-                            <button class="btn btn-danger" title="Tidak Valid"><i class="fas fa-times"></i></button>
-                        </td>
+                        <td><button class="btn btn-danger" title="Batalkan"><i class="fas fa-times"></i></button></td>
                     </tr>
                     <tr>
+                        <td>124124891</td>
                         <td>10:09:00 12 Maret 2021</td>
                         <td>Dede Inoen</td>
-                        <td>Jl. bangau no 23 Tangerang</td>
                         <td><button class="btn btn-primary" data-toggle="modal" data-target="#keranjangModal"><i class="fas fa-shopping-bag"></i></i></button></td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#buktiModal"><i class="fas fa-image"></i></button></td>
-                        <td>
-                            <button class="btn btn-success" title="Valid"><i class="fas fa-check"></i></button>
-                            <button class="btn btn-danger" title="Tidak Valid"><i class="fas fa-times"></i></button>
-                        </td>
+                        <td><button class="btn btn-danger" title="Batalkan"><i class="fas fa-times"></i></button></td>
                     </tr>
                 </tfoot>
             </table>
@@ -70,12 +57,16 @@
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Daftar Keranjang</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Detail Pesanan</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
+      <ul class="list-group mb-3">
+        <li class="list-group-item"><strong>Alamat : </strong>Jl. bangau no 23 Tangerang</li>
+        <li class="list-group-item"><strong>Kurir : </strong>SiCepat</li>
+      </ul>
       <table class="table">
         <thead>
             <tr>
