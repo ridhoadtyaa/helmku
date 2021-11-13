@@ -1,0 +1,11 @@
+Editor kasih di tambah & edit produk
+
+Transaksi
+- Belum membayar
+- Sudah membayar
+- Terverifikasi
+- Sedang dikirim
+
+Daftar Pelanggan
+
+Dashboard

@@ -23,4 +23,13 @@ class Produk extends BaseController
 
         return view('dashboard/produk/create', $data);
     }
+
+    public function edit()
+    {
+        $data = [
+            'title' => 'Edit Produk'
+        ];
+
+        return view('dashboard/produk/edit', $data);
+    }
 }

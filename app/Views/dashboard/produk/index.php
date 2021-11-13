@@ -31,11 +31,11 @@
                         <td>Bogo Retro</td>
                         <td>12</td>
                         <td>Rp 200.000</td>
-                        <td><button class="btn btn-primary"><i class="fas fa-sticky-note"></i></button></td>
-                        <td><button class="btn btn-primary"><i class="fas fa-image"></i></button></td>
+                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#deskripsiModal"><i class="fas fa-sticky-note"></i></button></td>
+                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#fotoModal"><i class="fas fa-image"></i></button></td>
                         <td>
-                            <button class="btn btn-success">Edit</button>
-                            <button class="btn btn-danger">Hapus</button>
+                            <a href="/dashboard/produk/edit" class="btn btn-success"><i class="fas fa-edit"></i></a>  <!-- tambahin /kodeproduk -->
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -43,11 +43,11 @@
                         <td>Bogo Retro</td>
                         <td>12</td>
                         <td>Rp 200.000</td>
-                        <td><button class="btn btn-primary"><i class="fas fa-sticky-note"></i></button></td>
-                        <td><button class="btn btn-primary"><i class="fas fa-image"></i></button></td>
+                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#deskripsiModal"><i class="fas fa-sticky-note"></i></button></td>
+                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#fotoModal"><i class="fas fa-image"></i></button></td>
                         <td>
-                            <button class="btn btn-success">Edit</button>
-                            <button class="btn btn-danger">Hapus</button>
+                            <a href="/dashboard/produk/edit" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -55,11 +55,11 @@
                         <td>Bogo Retro</td>
                         <td>12</td>
                         <td>Rp 200.000</td>
-                        <td><button class="btn btn-primary"><i class="fas fa-sticky-note"></i></button></td>
-                        <td><button class="btn btn-primary"><i class="fas fa-image"></i></button></td>
+                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#deskripsiModal"><i class="fas fa-sticky-note"></i></button></td>
+                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#fotoModal"><i class="fas fa-image"></i></button></td>
                         <td>
-                            <button class="btn btn-success">Edit</button>
-                            <button class="btn btn-danger">Hapus</button>
+                            <a href="/dashboard/produk/edit" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
                         </td>
                     </tr>
                 </tfoot>
@@ -68,6 +68,61 @@
         </div>
     </div>
 </section>
+
+<!-- deskripsi Modal -->
+<div class="modal fade" id="deskripsiModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat nam perferendis sint? Quo animi a magnam architecto corporis sunt nisi qui ut, incidunt ea unde rerum aut necessitatibus consequatur explicabo voluptatum optio. Obcaecati veniam, praesentium laboriosam porro quod culpa veritatis doloribus pariatur nobis harum quaerat eligendi ea beatae, fuga placeat aut commodi eius quasi in tenetur iusto. Ea labore tempora vero accusantium exercitationem optio possimus saepe doloribus quasi, nulla, consequuntur, quaerat ducimus quo porro maiores quia deserunt corporis? Qui amet libero vitae temporibus quasi aspernatur. Perspiciatis voluptatibus delectus maxime tempora, quas ea, quaerat placeat veritatis corrupti, pariatur reiciendis distinctio fuga?</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- foto Modal -->
+<div class="modal fade" id="fotoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <img src="/assets/img/produk/helm.png">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        Yakin ingin menghapusnya ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+        <form action="/dashboard/produk/" method="post">  <!-- Tambahin /id -->
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit" class="btn btn-danger">Ya</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 <?= $this->endSection() ?>
 
 <?= $this->section('javascript') ?>

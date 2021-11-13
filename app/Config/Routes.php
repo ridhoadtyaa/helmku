@@ -43,8 +43,18 @@ $routes->get('/dashboard', 'Dashboard::index');
 
 $routes->get('/dashboard/produk', 'Dashboard/Produk::index');
 $routes->get('/dashboard/produk/tambah-produk', 'Dashboard/Produk::create');
+$routes->get('/dashboard/produk/edit', 'Dashboard/Produk::edit'); // tambahin /kodeproduk
 
 $routes->get('/dashboard/data-transaksi', 'Dashboard/Transaksi::index');
+
+$routes->get('/dashboard/admin', 'Dashboard/Admin::index');
+$routes->get('/dashboard/admin/edit', 'Dashboard/Admin::edit'); // tambahin /id
+$routes->delete('/dashboard/admin/', 'Dashboard/Admin::delete');
+$routes->get('/dashboard/admin/tambah-admin', 'Dashboard/Admin::create');
+$routes->get('/dashboard/admin/edit-profile', 'Dashboard/admin::edit_profile'); // tambahin /id dari session
+$routes->get('/dashboard/admin/ubah-password', 'Dashboard/admin::password'); // tambahin /id dari session
+
+$routes->get('/dashboard/laporan-penjualan', 'Dashboard/LaporanPenjualan::index');
 
 /*
  * --------------------------------------------------------------------
