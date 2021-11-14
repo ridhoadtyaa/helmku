@@ -41,7 +41,7 @@
             </nav>
             <div class="account">
                 <a href="/user" style="color: black;"><i class='bx bx-user'></i></a>
-                <a href="/keranjang" style="color: black;"><i class='bx bx-shopping-bag'></i></a>
+                <a href="/keranjang" class="cart" style="color: black;" data-totalitems="0"><i class='bx bx-shopping-bag'></i></a>
             </div>
         </div>
 
