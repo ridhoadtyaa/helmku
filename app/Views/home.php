@@ -25,7 +25,7 @@
 
     <div class="row mt-4">
         <div class="col-md-4">
-            <h5 class="title">Flash Sale!!!</h5>
+            <h5 class="title py-1">Flash Sale!!!</h5>
             <div class="row">
                 <div class="col-md-6 mt-3">
                     <div class="card">
@@ -36,10 +36,19 @@
                                     <h5 class="card-title">KYT</h5>
                                 </div>
                                 <div class="col-md-6">
-                                    <p class="card-text py-1">200.000</p>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p class="card-text text-decoration-line-through">200.000</p>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <p class="card-text">100.000</p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <a href="#" class="btn btn-primary btn-sm form-control"><i class="fas fa-cart-plus"></i> Cart</a>
+                                    <div class="py-1">
+                                        <a href="#" class="btn btn-primary btn-sm form-control py-2"><i class="fas fa-cart-plus"></i> Cart</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -51,13 +60,22 @@
                         <div class="card-footer bg-white">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h5 class="card-title">Cakil</h5>
+                                    <h5 class="card-title">KYT</h5>
                                 </div>
                                 <div class="col-md-6">
-                                    <p class="card-text py-1">100.000</p>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p class="card-text text-decoration-line-through">200.000</p>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <p class="card-text">100.000</p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <a href="#" class="btn btn-primary btn-sm form-control"><i class="fas fa-cart-plus"></i> Cart</a>
+                                    <div class="py-1">
+                                        <a href="#" class="btn btn-primary btn-sm form-control py-2"><i class="fas fa-cart-plus"></i> Cart</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -102,7 +120,17 @@
             </div>
         </div>
         <div class="col-md-8">
-            <h5 class="title">Produk</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="title py-1">Produk</h5>
+                </div>
+                <div class="col-md-6">
+                    <form class="d-flex">
+                        <input id="form_search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success btn" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-4 mt-3">
                     <div class="card">
@@ -231,9 +259,17 @@
 </div>
 <?= $this->endSection() ?>
 
-<?= $this->section('script') ?>
+<?= $this->section('javascript') ?>
 <script type="text/javascript">
     let myCarousel = document.querySelector('#myCarousel')
     let carousel = new bootstrap.Carousel(myCarousel)
+    $(document).ready(function(){
+        const keyword = ['Helm cakil', 'Kyt', 'dj maru'];
+        let form_search = $('#form_search');
+        setInterval(function(){
+            let random = Math.floor(Math.random() * keyword.length);
+            form_search.attr("placeholder", (keyword[random]).toString()); 
+        }, 2000);
+    });
 </script>
 <?= $this->endSection() ?>
