@@ -20,7 +20,7 @@ class Produk extends BaseController
         $data = [
             'title' => 'Tambah Produk'
         ];
-
+        
         return view('dashboard/produk/create', $data);
     }
 
