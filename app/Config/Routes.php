@@ -45,6 +45,10 @@ $routes->get('/dashboard/produk', 'Dashboard/Produk::index');
 $routes->get('/dashboard/produk/tambah-produk', 'Dashboard/Produk::create');
 $routes->get('/dashboard/produk/edit', 'Dashboard/Produk::edit'); // tambahin /kodeproduk
 
+$routes->get('/dashboard/kategori', 'Dashboard/Kategori::index');
+$routes->get('/dashboard/kategori/tambah-kategori', 'Dashboard/Kategori::create');
+$routes->get('/dashboard/kategori/edit-kategori', 'Dashboard/Kategori::edit');
+
 $routes->get('/dashboard/data-transaksi/belum-membayar', 'Dashboard/Transaksi::belum_membayar');
 $routes->get('/dashboard/data-transaksi/sudah-membayar', 'Dashboard/Transaksi::sudah_membayar');
 $routes->get('/dashboard/data-transaksi/terverifikasi', 'Dashboard/Transaksi::terverifikasi');

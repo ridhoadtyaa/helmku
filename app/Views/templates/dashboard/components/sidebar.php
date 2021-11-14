@@ -41,6 +41,14 @@ $uri3 = $uri[3] ?? '';
                 </ul>
             </li>
 
+            <li class="nav-item dropdown <?= ($uri1 == 'kategori') ? 'active' : '' ?>">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-tags"></i> <span>Kategori</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="/dashboard/kategori">Daftar Kategori</a></li>
+                    <li><a class="nav-link" href="/dashboard/kategori/tambah-kategori">Tambah Kategori</a></li>
+                </ul>
+            </li>
+
             <li class="<?= $uri1 == 'data-pelanggan' ? 'active' : '' ?>"><a class="nav-link" href="/dashboard/data-pelanggan"><i class="fas fa-users"></i> <span>Data Pelanggan</span></a></li>
 
             <li class="menu-header">Admin</li>
