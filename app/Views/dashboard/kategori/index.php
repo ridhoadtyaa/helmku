@@ -9,59 +9,26 @@
         <div class="breadcrumb-item">Produk</div>
     </div>
     </div>
-
     <div class="section-body">
         <div class="card">
             <div class="card-body">
             <table id="tabel-produk" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Kode</th>
                         <th>Nama</th>
-                        <th>Stok</th>
-                        <th>Harga</th>
-                        <th>Deskripsi</th>
-                        <th>Foto</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
+                  <?php foreach($data_kategori as $kat) : ?>
                     <tr>
-                        <td>1241-1411-4512-2000</td>
-                        <td>Bogo Retro</td>
-                        <td>12</td>
-                        <td>Rp 200.000</td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#deskripsiModal"><i class="fas fa-sticky-note"></i></button></td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#fotoModal"><i class="fas fa-image"></i></button></td>
+                        <td><?= $kat['nama'] ?></td>
                         <td>
-                            <a href="/dashboard/produk/edit" class="btn btn-success"><i class="fas fa-edit"></i></a>  <!-- tambahin /kodeproduk -->
+                            <a href="<?= base_url('dashboard/kategori/edit-kategori/'.$kat['id_kategori']) ?>" class="btn btn-success"><i class="fas fa-edit"></i></a>  
                             <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
                         </td>
                     </tr>
-                    <tr>
-                        <td>1241-1411-4512-2452</td>
-                        <td>Bogo Retro</td>
-                        <td>12</td>
-                        <td>Rp 200.000</td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#deskripsiModal"><i class="fas fa-sticky-note"></i></button></td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#fotoModal"><i class="fas fa-image"></i></button></td>
-                        <td>
-                            <a href="/dashboard/produk/edit" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1241-1411-4512-2452</td>
-                        <td>Bogo Retro</td>
-                        <td>12</td>
-                        <td>Rp 200.000</td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#deskripsiModal"><i class="fas fa-sticky-note"></i></button></td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#fotoModal"><i class="fas fa-image"></i></button></td>
-                        <td>
-                            <a href="/dashboard/produk/edit" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
-                        </td>
-                    </tr>
+                  <?php endforeach; ?>
                 </tfoot>
             </table>
             </div>

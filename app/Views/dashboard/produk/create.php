@@ -15,13 +15,7 @@
     </div>
     </div>
 
-    <div class="row">
-        <div class="col-12">
-            <div class="alert alert-success" role="alert">
-                Produk berhasil ditambahkan
-            </div>
-        </div>
-    </div>
+    <?= $this->include('templates/dashboard/partials/alert') ?>
 
     <div class="section-body">
         <div class="card">
