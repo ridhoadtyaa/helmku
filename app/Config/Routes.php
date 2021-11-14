@@ -39,32 +39,34 @@ $routes->get('/login', 'Auth::login');
 $routes->get('/register', 'Auth::register');
 
 // Dashboard
-$routes->get('/dashboard', 'Dashboard::index');
+$routes->group('dashboard', function($routes){
+    $routes->get('/', 'Dashboard::index');
 
-$routes->get('/dashboard/produk', 'Dashboard/Produk::index');
-$routes->get('/dashboard/produk/tambah-produk', 'Dashboard/Produk::create');
-$routes->get('/dashboard/produk/edit', 'Dashboard/Produk::edit'); // tambahin /kodeproduk
+    $routes->get('produk', 'Dashboard/Produk::index');
+    $routes->get('produk/tambah-produk', 'Dashboard/Produk::create');
+    $routes->get('produk/edit', 'Dashboard/Produk::edit'); // tambahin /kodeproduk
 
-$routes->get('/dashboard/kategori', 'Dashboard/Kategori::index');
-$routes->get('/dashboard/kategori/tambah-kategori', 'Dashboard/Kategori::create');
-$routes->get('/dashboard/kategori/edit-kategori', 'Dashboard/Kategori::edit');
+    $routes->get('kategori', 'Dashboard/Kategori::index');
+    $routes->get('kategori/tambah-kategori', 'Dashboard/Kategori::create');
+    $routes->get('kategori/edit-kategori', 'Dashboard/Kategori::edit');
 
-$routes->get('/dashboard/data-transaksi/belum-membayar', 'Dashboard/Transaksi::belum_membayar');
-$routes->get('/dashboard/data-transaksi/sudah-membayar', 'Dashboard/Transaksi::sudah_membayar');
-$routes->get('/dashboard/data-transaksi/terverifikasi', 'Dashboard/Transaksi::terverifikasi');
-$routes->get('/dashboard/data-transaksi/dikirim', 'Dashboard/Transaksi::dikirim');
-$routes->get('/dashboard/data-transaksi/selesai', 'Dashboard/Transaksi::selesai');
+    $routes->get('data-transaksi/belum-membayar', 'Dashboard/Transaksi::belum_membayar');
+    $routes->get('data-transaksi/sudah-membayar', 'Dashboard/Transaksi::sudah_membayar');
+    $routes->get('data-transaksi/terverifikasi', 'Dashboard/Transaksi::terverifikasi');
+    $routes->get('data-transaksi/dikirim', 'Dashboard/Transaksi::dikirim');
+    $routes->get('data-transaksi/selesai', 'Dashboard/Transaksi::selesai');
 
-$routes->get('/dashboard/admin', 'Dashboard/Admin::index');
-$routes->get('/dashboard/admin/edit', 'Dashboard/Admin::edit'); // tambahin /id
-$routes->delete('/dashboard/admin/', 'Dashboard/Admin::delete');
-$routes->get('/dashboard/admin/tambah-admin', 'Dashboard/Admin::create');
-$routes->get('/dashboard/admin/edit-profile', 'Dashboard/admin::edit_profile'); // tambahin /id dari session
-$routes->get('/dashboard/admin/ubah-password', 'Dashboard/admin::password'); // tambahin /id dari session
+    $routes->get('admin', 'Dashboard/Admin::index');
+    $routes->get('admin/edit', 'Dashboard/Admin::edit'); // tambahin /id
+    $routes->delete('admin', 'Dashboard/Admin::delete');
+    $routes->get('admin/tambah-admin', 'Dashboard/Admin::create');
+    $routes->get('admin/edit-profile', 'Dashboard/admin::edit_profile'); // tambahin /id dari session
+    $routes->get('admin/ubah-password', 'Dashboard/admin::password'); // tambahin /id dari session
 
-$routes->get('/dashboard/laporan-penjualan', 'Dashboard/LaporanPenjualan::index');
+    $routes->get('laporan-penjualan', 'Dashboard/LaporanPenjualan::index');
 
-$routes->get('/dashboard/data-pelanggan', 'Dashboard/pelanggan::index');
+    $routes->get('data-pelanggan', 'Dashboard/pelanggan::index');
+});
 
 /*
  * --------------------------------------------------------------------
