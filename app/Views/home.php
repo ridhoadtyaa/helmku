@@ -1,293 +1,143 @@
-<?= $this->extend('templates/main/main-template') ?>
-<?= $this->section('content') ?>
-<div class="container mb-5">
-    <div id="carouselExampleControls" class="carousel slide mt-3" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="<?= base_url('assets/img/carousel/1.png') ?>" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="<?= base_url('assets/img/carousel/2.png') ?>" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="<?= base_url('assets/img/carousel/3.png') ?>" class="d-block w-100" alt="...">
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-
-    <div class="row mt-4">
-        <div class="col-md-4">
-            <h5 class="title py-1">Flash Sale!!!</h5>
-            <div class="row">
-                <div class="col-md-6 mt-3">
-                    <div class="card">
-                        <img src="<?= base_url('assets/img/produk/helm2.png') ?>"  class="card-img-top" alt="...">
-                        <div class="card-footer bg-white">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h5 class="card-title">KYT</h5>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <p class="card-text text-decoration-line-through">200.000</p>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <p class="card-text">100.000</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="py-1">
-                                        <a href="#" class="btn btn-primary btn-sm form-control py-2"><i class="fas fa-cart-plus"></i> Cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 mt-3">
-                    <div class="card">
-                        <img src="<?= base_url('assets/img/produk/helm2.png') ?>"  class="card-img-top" alt="...">
-                        <div class="card-footer bg-white">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h5 class="card-title">KYT</h5>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <p class="card-text text-decoration-line-through">200.000</p>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <p class="card-text">100.000</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="py-1">
-                                        <a href="#" class="btn btn-primary btn-sm form-control py-2"><i class="fas fa-cart-plus"></i> Cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 mt-3">
-                    <div class="card">
-                        <img src="<?= base_url('assets/img/produk/helm2.png') ?>"  class="card-img-top" alt="...">
-                        <div class="card-footer bg-white">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h5 class="card-title">KYT</h5>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <p class="card-text text-decoration-line-through">200.000</p>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <p class="card-text">100.000</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="py-1">
-                                        <a href="#" class="btn btn-primary btn-sm form-control py-2"><i class="fas fa-cart-plus"></i> Cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 mt-3">
-                    <div class="card">
-                        <img src="<?= base_url('assets/img/produk/helm2.png') ?>"  class="card-img-top" alt="...">
-                        <div class="card-footer bg-white">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h5 class="card-title">KYT</h5>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <p class="card-text text-decoration-line-through">200.000</p>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <p class="card-text">100.000</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="py-1">
-                                        <a href="#" class="btn btn-primary btn-sm form-control py-2"><i class="fas fa-cart-plus"></i> Cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-8">
-            <div class="row">
-                <div class="col-md-6">
-                    <h5 class="title py-1">Produk</h5>
-                </div>
-                <div class="col-md-6">
-                    <form class="d-flex">
-                        <input id="form_search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success btn" type="submit">Search</button>
-                    </form>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 mt-3">
-                    <div class="card">
-                        <img src="<?= base_url('assets/img/produk/helm2.png') ?>"  class="card-img-top" alt="...">
-                        <div class="card-footer bg-white">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h5 class="card-title">KYT</h5>
-                                </div>
-                                <div class="col-md-6">
-                                    <p class="card-text py-1">200.000</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <a href="#" class="btn btn-primary btn-sm form-control"><i class="fas fa-cart-plus"></i> Cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mt-3">
-                    <div class="card">
-                        <img src="<?= base_url('assets/img/produk/helm2.png') ?>"  class="card-img-top" alt="...">
-                        <div class="card-footer bg-white">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h5 class="card-title">Cakil</h5>
-                                </div>
-                                <div class="col-md-6">
-                                    <p class="card-text py-1">100.000</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <a href="#" class="btn btn-primary btn-sm form-control"><i class="fas fa-cart-plus"></i> Cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mt-3">
-                    <div class="card">
-                        <img src="<?= base_url('assets/img/produk/helm2.png') ?>"  class="card-img-top" alt="...">
-                        <div class="card-footer bg-white">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h5 class="card-title">Cakil</h5>
-                                </div>
-                                <div class="col-md-6">
-                                    <p class="card-text py-1">100.000</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <a href="#" class="btn btn-primary btn-sm form-control"><i class="fas fa-cart-plus"></i> Cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mt-3">
-                    <div class="card">
-                        <img src="<?= base_url('assets/img/produk/helm2.png') ?>"  class="card-img-top" alt="...">
-                        <div class="card-footer bg-white">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h5 class="card-title">Cakil</h5>
-                                </div>
-                                <div class="col-md-6">
-                                    <p class="card-text py-1">100.000</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <a href="#" class="btn btn-primary btn-sm form-control"><i class="fas fa-cart-plus"></i> Cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mt-3">
-                    <div class="card">
-                        <img src="<?= base_url('assets/img/produk/helm2.png') ?>"  class="card-img-top" alt="...">
-                        <div class="card-footer bg-white">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h5 class="card-title">Cakil</h5>
-                                </div>
-                                <div class="col-md-6">
-                                    <p class="card-text py-1">100.000</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <a href="#" class="btn btn-primary btn-sm form-control"><i class="fas fa-cart-plus"></i> Cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mt-3">
-                    <div class="card">
-                        <img src="<?= base_url('assets/img/produk/helm2.png') ?>"  class="card-img-top" alt="...">
-                        <div class="card-footer bg-white">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h5 class="card-title">Cakil</h5>
-                                </div>
-                                <div class="col-md-6">
-                                    <p class="card-text py-1">100.000</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <a href="#" class="btn btn-primary btn-sm form-control"><i class="fas fa-cart-plus"></i> Cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-end mt-3">
-            <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-            </li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-            </li>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/assets/img/logo/logo.png" type="image/gif" sizes="16x16">
+    <title>HELMKU</title>
+    <link rel="stylesheet" href="/assets/css/pages/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="sidebar-modal-content">
+        <ul>
+            <li class="clickable"><i class='bx bx-x'></i></li>
+            <li><a href="#">Produk</a></li>
+            <li><a href="#">Tentang</a></li>
+            <li><a href="#">Bantuan</a></li>
         </ul>
-    </nav>
-</div>
-<?= $this->endSection() ?>
 
-<?= $this->section('javascript') ?>
-<script type="text/javascript">
-    let myCarousel = document.querySelector('#myCarousel')
-    let carousel = new bootstrap.Carousel(myCarousel)
-    $(document).ready(function(){
-        const keyword = ['Helm cakil', 'Kyt', 'dj maru'];
-        let form_search = $('#form_search');
-        setInterval(function(){
-            let random = Math.floor(Math.random() * keyword.length);
-            form_search.attr("placeholder", (keyword[random]).toString()); 
-        }, 2000);
-    });
-</script>
-<?= $this->endSection() ?>
+        <a href="/login">Login</a>
+        <a href="/register">Buat Akun</a>
+        <a href="/kontak">Kontak Kami</a>
+    </div>
+    <div class="container">
+
+        <div class="promotion-bar">🎉 GRATIS ONGKOS KIRIM KE SELURUH INDONESIA</div>
+        <div class="navbar">
+            <div class="burger clickable">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+            <div class="header"><a href="/">HELMKU</a></div>
+            <nav>
+                <ul>
+                    <li><a href="#">Produk</a></li>
+                    <li><a href="#">Tentang</a></li>
+                    <li><a href="#">Bantuan</a></li>
+                </ul>
+            </nav>
+            <div class="account">
+                <a href="/user" style="color: black;"><i class='bx bx-user'></i></a>
+                <a href="/keranjang" style="color: black;"><i class='bx bx-shopping-bag'></i></a>
+            </div>
+        </div>
+
+        <div class="hero"></div>
+        <div class="featured-products">
+            <h2>Produk Unggulan</h2>
+            <div class="card-wrapper">
+                <div class="card">
+                    <img class="card-img" src="/assets/img/produk/helm1.png">
+                    <div class="card-title">Full Face Black</div>
+                    <div class="card-price">Rp 350.000</div>
+                    <button class="card-button">Beli</button>
+                </div>
+                <div class="card">
+                    <img class="card-img" src="/assets/img/produk/helm2.png">
+                    <div class="card-title">White Bogo Retro</div>
+                    <div class="card-price">Rp 300.000</div>
+                    <button class="card-button">Beli</button>
+                </div>
+            </div>
+
+            <div class="card-wrapper">
+                <div class="card">
+                    <img class="card-img" src="/assets/img/produk/helm3.png">
+                    <div class="card-title">Ordinary Black</div>
+                    <div class="card-price">Rp 150.000</div>
+                    <button class="card-button">Beli</button>
+                </div>
+                <div class="card">
+                    <img class="card-img" src="/assets/img/produk/helm4.png">
+                    <div class="card-title">Full Face Red White Black</div>
+                    <div class="card-price">Rp 300.000</div>
+                    <button class="card-button">Beli</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="helm">
+            <div class="helm-wrapper">
+                <img class="helm-img" src="/assets/img/hero2.png">
+                <div class="helm-text">
+                    <h2 class="helm-header">Ambil kontrol untuk memilih helm yang anda sukai.</h2>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab, ipsa a tempora molestias doloremque quae veniam consectetur alias corrupti iure eum, assumenda ducimus eligendi unde officia impedit, perferendis praesentium laboriosam voluptas. Enim eligendi porro ratione esse rerum, eum reprehenderit dicta architecto facilis, totam, dolor ducimus!</p>
+                    <div class="helm-extra-text">
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illo sapiente, in, excepturi facere repellat earum distinctio exercitationem vitae aut quam autem possimus quo, veniam a esse magnam facilis cupiditate? Molestias, maiores veniam aliquam illum optio, alias repudiandae laudantium quae earum repellendus eligendi explicabo nobis nihil.</p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident natus maiores excepturi voluptatum et corporis, eius delectus itaque ab, dolor totam error amet. Earum ullam sed, officia enim, dolorem quas nostrum vitae, odio accusamus debitis aspernatur?</p>
+                    </div>
+                    <p class="helm-read-more">Baca selengkapnya...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-wrapper">
+                <div class="footer-list">
+                    <ul>
+                        <li>More</li>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">helm</a></li>
+                        <li><a href="#">Kids</a></li>
+                        <li><a href="#">Apparel</a></li>
+                    </ul>
+                    <ul>
+                        <li>Help</li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Customer Service</a></li>
+                    </ul>
+                    <ul>
+                        <li>Discover</li>
+                        <li><a href="#">Stores</a></li>
+                        <li><a href="#">Wholesale</a></li>
+                        <li><a href="#">Refer Friends</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="signup">
+                    <p>Daftar untuk berlangganan dan jadilah yang pertama mendengar tentang diskon, dan produk baru kami.</p>
+                    <div class="signup-form">
+                        <input class="signup-input" type="text" name="mail" placeholder="Masukkan alamat email">
+                        <button class="signup-button"><i class='bx bxs-right-arrow-circle'></i></button>
+                    </div>
+                    <div class="signup-icons">
+                        <a href="https://facebook.com/helmku"><i class='bx bxl-facebook-circle'></i></a>
+                        <a href="https://twitter.com/helmku"><i class='bx bxl-twitter'></i></a>
+                        <a href="https://youtube.com/helmku"><i class='bx bxl-youtube'></i></a>
+                        <a href="https://instagram.com/helmku"><i class='bx bxl-instagram'></i></a>
+                        <a href="https://pinterest.com/helmku"><i class='bx bxl-pinterest'></i></a>
+                    </div>
+                </div> <!-- signup -->
+            </div> <!-- footer-wrapper -->
+        </div> <!-- footer -->
+
+    </div> <!-- container -->
+
+    <script src="/assets/js/app.js"></script>
+</body>
+</html>

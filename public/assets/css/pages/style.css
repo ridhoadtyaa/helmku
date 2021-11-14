@@ -1,0 +1,478 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Jost', sans-serif;
+}
+
+/* LAYOUT */
+.container {
+    width: 100%;
+}
+
+.topbar {
+    position: relative;
+    height: 126px;
+}
+
+.promotion-bar {
+    background-color: #000;
+    color: #FFF;
+    text-align: center;
+    font-size: .9rem;
+    width: 100%;
+    padding: .5rem;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar {
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFF;
+    width: 100%;
+    top: 36px;
+    position: fixed;
+    z-index: 1000;
+}
+
+.burger {
+    display: none;
+}
+
+.burger div {
+    width: 1.8rem;
+    height: 5px;
+    background-color: #000;
+    margin: 4px;
+}
+
+.sidebar-modal-content {
+    width: 40%;
+    height: 100%;
+    padding: 1rem 2rem;
+    background-color: #000;
+    color: #FFF;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in;
+    position: fixed;
+}
+
+.active {
+    transform: translateX(0%);
+}
+
+.sidebar-modal-content a {
+    color: #FFF;
+    text-decoration: none;
+    margin: .3rem 0;
+}
+
+.sidebar-modal-content ul {
+    list-style: none;
+    margin: 0 0 2rem 0;
+    padding: 0;
+}
+
+.sidebar-modal-content li {
+    padding: 1rem 0;
+    border-bottom: 1px solid #333;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.header {
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+.header a {
+    text-decoration: none;
+    color: #000;
+}
+
+nav {
+    width: 60%;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: .3rem;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    text-decoration: none;
+    color: #000;
+    position: relative;
+}
+
+nav a::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #000;
+    visibility: hidden;
+    transform: scaleX(0);
+    transition: all 0.3s ease-in-out 0s;
+}
+
+nav a:hover::before {
+    visibility: visible;
+    transform: scaleX(1);
+}
+
+.account {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.account a {
+    font-size: 1.3rem;
+    margin: .7rem;
+}
+
+.hero {
+    height: 630px;
+    background-color: #EEE;
+    background: url("/assets/img/hero.png");
+    background-size: cover;
+    margin-top: 126px;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.featured-products {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 3em;
+    margin-top: 2em;
+}
+
+.featured-products h2 {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: .5em;
+    font-size: 1.5rem;
+}
+
+.card-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+}
+
+.card {
+    margin: 1em;
+    text-align: center;
+    width: 50%;
+}
+
+.card-img {
+    width: 100%;
+    transition: transform .2s;
+    z-index: -100;
+}
+
+.card-img:hover, .helm-img:hover {
+    transform: scale(1.02);
+}
+
+.card-title {
+    letter-spacing: .1rem;
+    margin-bottom: 1em;
+    font-size: 1rem;
+}
+
+.card-price {
+    display: inline;
+}
+
+.card-button {
+    display: inline;
+    border: 1px solid #000;
+    outline: none;
+    margin: 0 1em;
+    padding: .3em 1em;
+    background-color: #FFF;
+    box-shadow: 2px 2px #000;
+    font-size: .8rem;
+    text-transform: uppercase;
+    font-family: 'Jost', sans-serif;
+}
+
+.card-button:hover {
+    background-color: navy;
+    color: #FFF;
+}
+
+.helm-wrapper {
+    width: 100%;
+    padding: 0 5em 3em 5em;
+    display: flex;
+    margin-bottom: 4em;
+}
+
+.helm-header {
+    font-size: 2rem;
+}
+
+.helm-text {
+    margin: 0 2em;
+    position: relative;
+    line-height: 2.3rem;
+}
+
+.helm-img {
+    width: 50%;
+    align-self: center;
+    transition: transform .2s;
+}
+
+.helm-read-more {
+    display: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    margin: 0 1em 5em 1em;
+}
+
+.footer-wrapper {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-list {
+    display: flex;
+}
+
+.footer-list ul > li:first-child {
+    font-weight: 600;
+}
+
+.footer-list a {
+    text-decoration: none;
+    color: #333;
+}
+
+.footer-list a:hover {
+    border-bottom: 1px solid #000;
+}
+
+.footer-list ul {
+    list-style: none;
+    margin: 0 3em;
+    padding: 0;
+}
+
+.footer-list ul li {
+    margin: 1em 0;
+}
+
+.signup {
+    font-size: 1.2rem;
+    width: 30%;
+}
+
+.signup-input {
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid #333;
+    height: 35px;
+    outline: none;
+    font-size: .8em;
+    font-family: 'Jost', sans-serif;
+    padding-bottom: .5em;
+}
+
+.signup-form {
+    position: relative;
+    display: flex;
+    margin: 0 1em 1em 0;
+}
+
+.signup-button {
+    position: absolute;
+    right: 0;
+    border: 0;
+    background-color: #FFF;
+    font-size: 1.5rem;
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+
+.signup-icons {
+    margin-top: -10px;
+    margin-left: -20px;
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 2rem;
+}
+
+.signup-icons a {
+    color: #000;
+}
+
+@media screen and (max-width: 1400px) {
+    .helm {
+        display: flex;
+        justify-content: center;
+    }
+
+    .helm-img {
+        width: 100%;
+    }
+    
+    .helm-text {
+        text-align: center;
+    }
+
+    .helm-header {
+        font-size: 1.9rem;
+    }
+    
+    .helm-wrapper {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .helm-read-more {
+        display: block;
+    }
+
+    .helm-extra-text {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .promotion-bar, .navbar {
+        position: static;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .navbar {
+        justify-content: space-between;
+    }
+
+    .burger {
+        display: block;
+        width: 1.8rem;
+    }
+
+    .account {
+        width: 1.8rem;
+    }
+    
+    .account a:first-child {
+        display: none;
+    }
+
+    .hero {
+        height: 400px;
+        margin: 0;
+    }
+
+    .sponsors {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sponsors img {
+        width: 50px;
+    }
+
+    .card {
+        width: 100%;
+    }
+
+    .footer-list {
+        display: none;
+    }
+
+    .signup {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .promotion-bar, .navbar {
+        position: static;
+    }
+
+    .sidebar-modal-content {
+        width: 80%;
+    }
+
+    .hero {
+        height: 250px;
+        margin: 0;
+    }
+
+    .header {
+        font-size: 2rem;
+    }
+
+    .burger div {
+        width: 1.3rem;
+        height: 3px;
+        background-color: #000;
+        margin: 4px;
+    }
+
+    .sponsors img {
+        width: 40px;
+        margin: 0 1rem;
+    }
+
+    .navbar {
+        padding: .5em;
+    }
+
+    .featured-products h2 {
+        font-size: 1.3rem;
+        letter-spacing: .3em;
+    }
+
+    .card-wrapper {
+        display: block;
+    }
+
+    .card {
+        width: 100%;
+        margin: 1em 0;
+    }
+    
+    .helm-wrapper {
+        padding: 0 0 3em 0;
+    }
+}
