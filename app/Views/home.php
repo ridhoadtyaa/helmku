@@ -87,13 +87,22 @@
                         <div class="card-footer bg-white">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h5 class="card-title">Cakil</h5>
+                                    <h5 class="card-title">KYT</h5>
                                 </div>
                                 <div class="col-md-6">
-                                    <p class="card-text py-1">100.000</p>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p class="card-text text-decoration-line-through">200.000</p>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <p class="card-text">100.000</p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <a href="#" class="btn btn-primary btn-sm form-control"><i class="fas fa-cart-plus"></i> Cart</a>
+                                    <div class="py-1">
+                                        <a href="#" class="btn btn-primary btn-sm form-control py-2"><i class="fas fa-cart-plus"></i> Cart</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -105,13 +114,22 @@
                         <div class="card-footer bg-white">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h5 class="card-title">Cakil</h5>
+                                    <h5 class="card-title">KYT</h5>
                                 </div>
                                 <div class="col-md-6">
-                                    <p class="card-text py-1">100.000</p>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p class="card-text text-decoration-line-through">200.000</p>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <p class="card-text">100.000</p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <a href="#" class="btn btn-primary btn-sm form-control"><i class="fas fa-cart-plus"></i> Cart</a>
+                                    <div class="py-1">
+                                        <a href="#" class="btn btn-primary btn-sm form-control py-2"><i class="fas fa-cart-plus"></i> Cart</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
