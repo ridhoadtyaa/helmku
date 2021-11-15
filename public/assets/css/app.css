@@ -1,0 +1,271 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Jost', sans-serif;
+}
+
+/* LAYOUT */
+.my-container {
+    width: 100%;
+}
+
+.promotion-bar {
+    font-size: .9rem;
+    width: 100%;
+    padding: .5rem;
+    z-index: 1000;
+    background-color: #000;
+    top: 0;
+    position: fixed;
+}
+
+.navbar {
+    padding: 1em;
+    justify-content: center;
+    width: 100%;
+    top: 36px;
+    position: fixed;
+    z-index: 1000;
+}
+
+.burger {
+    display: none;
+}
+
+.burger div {
+    width: 1.8rem;
+    height: 5px;
+    background-color: #000;
+    margin: 4px;
+}
+
+.sidebar-modal-content {
+    width: 40%;
+    height: 100%;
+    padding: 1rem 2rem;
+    background-color: #000;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in;
+    z-index: 999;
+}
+
+.active {
+    transform: translateX(0%);
+}
+
+.sidebar-modal-content a {
+    margin: .3rem 0;
+}
+
+.sidebar-modal-content ul {
+    list-style: none;
+    margin: 0 0 2rem 0;
+    padding: 0;
+}
+
+.sidebar-modal-content li {
+    padding: 1rem 0;
+    border-bottom: 1px solid #333;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.header {
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+.header a {
+    color: #000;
+}
+
+nav {
+    width: 60%;
+    font-size: 1.3rem;
+    letter-spacing: .3rem;
+}
+
+nav a {
+    color: #000;
+}
+
+nav a:hover {
+    color: #000;
+}
+
+nav a::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #000;
+    visibility: hidden;
+    transform: scaleX(0);
+    transition: all 0.3s ease-in-out 0s;
+}
+
+nav a:hover::before {
+    visibility: visible;
+    transform: scaleX(1);
+}
+
+.account a {
+    font-size: 1.3rem;
+    margin: .7rem;
+}
+
+.cart::before {
+    content:attr(data-totalitems);
+    font-size:12px;
+    font-weight:600;
+    position:absolute;
+    top:-10px;
+    right:-12px;
+    background:#000;
+    line-height:24px;
+    padding:0 5px;
+    height:22px;
+    min-width:22px;
+    color:white;
+    text-align:center;
+    border-radius:22px;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+footer {
+    margin: 0 1em 5em 1em;
+}
+
+.footer-wrapper {
+    width: 80%;
+    justify-content: space-between;
+}
+
+.footer-list {
+    display: flex;
+}
+
+.footer-list ul > li:first-child {
+    font-weight: 600;
+}
+
+.footer-list a {
+    color: #333;
+}
+
+.footer-list a:hover {
+    border-bottom: 1px solid #000;
+}
+
+.footer-list ul {
+    list-style: none;
+    margin: 0 3em;
+}
+
+.footer-list ul li {
+    margin: 1em 0;
+}
+
+.signup {
+    font-size: 1.2rem;
+    width: 30%;
+}
+
+.signup-input {
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid #333;
+    height: 35px;
+    outline: none;
+    font-size: .8em;
+    font-family: 'Jost', sans-serif;
+    padding-bottom: .5em;
+}
+
+.signup-form {
+    margin: 0 1em 1em 0;
+}
+
+.signup-button {
+    right: 0;
+    font-size: 1.5rem;
+    outline: none;
+}
+
+.signup-icons {
+    margin-top: -10px;
+    margin-left: -20px;
+    font-size: 2rem;
+}
+
+.signup-icons a {
+    color: #000;
+}
+
+@media screen and (max-width: 992px) {
+    .promotion-bar, .navbar {
+        position: static;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .navbar {
+        justify-content: space-between;
+    }
+
+    .burger {
+        display: block;
+        width: 1.8rem;
+    }
+
+    .account {
+        width: 1.8rem;
+    }
+    
+    .account a:first-child {
+        display: none;
+    }
+
+    .footer-list {
+        display: none;
+    }
+
+    .signup {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .promotion-bar, .navbar {
+        position: static;
+    }
+
+    .sidebar-modal-content {
+        width: 80%;
+    }
+
+    .header {
+        font-size: 2rem;
+    }
+
+    .burger div {
+        width: 1.3rem;
+        height: 3px;
+        background-color: #000;
+        margin: 4px;
+    }
+
+    .navbar {
+        padding: .5em;
+    }
+}

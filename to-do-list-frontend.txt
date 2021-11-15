@@ -1,2 +1,4 @@
 cart
-detail produk
+profile
+semua produk
+tentang

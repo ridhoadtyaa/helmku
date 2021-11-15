@@ -1,34 +1,19 @@
-<div class="container">
-	<div class="row">
-		<div class="col-md-6 offset-md-3 text-center">
-			<img src="<?= base_url('assets/img/logo/logo.png') ?>" class="img-fluid" width="250px" height="250px">
-		</div>
+<section class="navbar bg-white d-flex align-items-center">
+	<div class="burger clickable">
+		<div class="line"></div>
+		<div class="line"></div>
+		<div class="line"></div>
 	</div>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<div class="container">
-			<a class="navbar-brand" href="#">HELMKU</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarNav">
-			<ul class="navbar-nav">
-				<li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="#">Home</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Produk</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Tentang</a>
-				</li>
-				<li class="nav-item float-right">
-					<a class="nav-link" href="#">Masuk</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Daftar</a>
-				</li>
-			</ul>
-			</div>
-		</div>
+	<div class="header"><a href="/" class="text-decoration-none">HELMKU</a></div>
+	<nav class="text-uppercase">
+		<ul class="d-flex justify-content-evenly m-0 p-0 list-unstyled">
+			<li><a href="#" class="text-decoration-none position-relative">Produk</a></li>
+			<li><a href="#" class="text-decoration-none position-relative">Tentang</a></li>
+			<li><a href="#" class="text-decoration-none position-relative">Bantuan</a></li>
+		</ul>
 	</nav>
-</div>
+	<div class="account d-flex justify-content-center align-items-center">
+		<a href="/user" style="color: black;"><i class='bx bx-user'></i></a>
+		<a href="/keranjang" class="cart position-relative" style="color: black;" data-totalitems="0"><i class='bx bx-shopping-bag'></i></a>
+	</div>
+</section>
