@@ -9,6 +9,7 @@
         <div class="breadcrumb-item">Produk</div>
     </div>
     </div>
+    <?= $this->include('templates/dashboard/partials/alert') ?>
     <div class="section-body">
         <div class="card">
             <div class="card-body">
@@ -25,7 +26,7 @@
                         <td><?= $kat['nama'] ?></td>
                         <td>
                             <a href="<?= base_url('dashboard/kategori/edit-kategori/'.$kat['id_kategori']) ?>" class="btn btn-success"><i class="fas fa-edit"></i></a>  
-                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
+                            <button class="deleteButton btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="<?= $kat['id_kategori'] ?>"><i class="fas fa-trash-alt"></i></button>
                         </td>
                     </tr>
                   <?php endforeach; ?>
@@ -52,22 +53,6 @@
   </div>
 </div>
 
-<!-- foto Modal -->
-<div class="modal fade" id="fotoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body text-center">
-        <img src="/assets/img/produk/helm.png">
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- delete Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
@@ -82,8 +67,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
-        <form action="/dashboard/produk/" method="post">  <!-- Tambahin /id -->
-            <input type="hidden" name="_method" value="DELETE">
+        <form id="formDelete" action="<?= base_url() ?>" method="GET">  <!-- Tambahin /id -->
             <button type="submit" class="btn btn-danger">Ya</button>
         </form>
       </div>
@@ -95,7 +79,9 @@
 <?= $this->section('javascript') ?>
 <script>
     $(document).ready(function() {
-        $('#tabel-produk').DataTable();
+        $('.deleteButton').on("click", function(){
+          $('#formDelete').attr("action", "<?= base_url('dashboard/kategori/hapus-kategori') ?>/"+ $(this).data('id'));
+        })
     } );
 </script>
 <?= $this->endSection() ?>

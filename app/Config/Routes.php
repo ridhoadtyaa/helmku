@@ -45,11 +45,13 @@ $routes->group('dashboard', function($routes){
 
     $routes->get('produk', 'Dashboard\Produk::index');
     $routes->get('produk/tambah-produk', 'Dashboard\Produk::create');
+    $routes->post('produk/tambah-produk/save', 'Dashboard\Produk::save');
     $routes->get('produk/edit', 'Dashboard\Produk::edit'); // tambahin /kodeproduk
 
     $routes->get('kategori', 'Dashboard/Kategori::index');
     $routes->add('kategori/tambah-kategori', 'Dashboard\Kategori::create');
     $routes->add('kategori/edit-kategori/(:num)', 'Dashboard\Kategori::edit/$1');
+    $routes->get('kategori/hapus-kategori/(:num)', 'Dashboard\Kategori::delete/$1');
 
     $routes->get('data-transaksi/belum-membayar', 'Dashboard\Transaksi::belum_membayar');
     $routes->get('data-transaksi/sudah-membayar', 'Dashboard\Transaksi::sudah_membayar');

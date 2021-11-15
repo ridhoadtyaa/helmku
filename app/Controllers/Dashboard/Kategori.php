@@ -60,4 +60,21 @@ class Kategori extends BaseController
         }
         return view('dashboard/kategori/edit', $data);
     }
+
+    public function delete($id = false)
+    {
+        $data['title'] = 'Edit Kategori';
+        $data_kategori = $this->kategoriModel->where('id_kategori', $id);
+        if(!$data_kategori->first()){
+            return view('errors/errors-404');
+        }
+        $data['data_kategori'] = $data_kategori->first();
+        if($this->kategoriModel->delete(['id_kategori', $id])){
+            session()->setFlashdata('success', 'Sukses hapus kategori ' . $data['data_kategori']['nama']);
+        }else{
+            session()->setFlashdata('danger', 'Gagal hapus kategori ' . $data['data_kategori']['nama']);
+        }
+        return redirect()->to('dashboard/kategori');
+
+    }
 }

@@ -1,2 +1,1 @@
-Add feature delete (KATEGORI)
-Add feature CRUD (PRODUK)
+Add feature UD (PRODUK)
