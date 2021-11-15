@@ -1,1 +1,1 @@
-Added Feature (CRU KATEGORI)
+Added Feature (CRUD KATEGORI)
