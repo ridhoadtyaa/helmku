@@ -53,13 +53,13 @@
                     <img class="card-img" src="/assets/img/produk/helm1.png">
                     <div class="card-title">Full Face Black</div>
                     <div class="card-price">Rp 350.000</div>
-                    <button class="card-button">Beli</button>
+                    <button class="card-button" onclick="addCart()">Beli</button>
                 </div>
                 <div class="card">
                     <img class="card-img" src="/assets/img/produk/helm2.png">
                     <div class="card-title">White Bogo Retro</div>
                     <div class="card-price">Rp 300.000</div>
-                    <button class="card-button">Beli</button>
+                    <button class="card-button" onclick="addCart()">Beli</button>
                 </div>
             </div>
 
@@ -68,13 +68,13 @@
                     <img class="card-img" src="/assets/img/produk/helm3.png">
                     <div class="card-title">Ordinary Black</div>
                     <div class="card-price">Rp 150.000</div>
-                    <button class="card-button">Beli</button>
+                    <button class="card-button" onclick="addCart()">Beli</button>
                 </div>
                 <div class="card">
                     <img class="card-img" src="/assets/img/produk/helm4.png">
                     <div class="card-title">Full Face Red White Black</div>
                     <div class="card-price">Rp 300.000</div>
-                    <button class="card-button">Beli</button>
+                    <button class="card-button" onclick="addCart()">Beli</button>
                 </div>
             </div>
         </div>

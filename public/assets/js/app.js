@@ -27,5 +27,13 @@ const readMore = () => {
     });
 }
 
+const cart = document.querySelector('.cart');
+
+const addCart = () => {
+    let cartTotal = Number(cart.dataset.totalitems);
+    newCartTotal = cartTotal + 1
+    cart.setAttribute('data-totalitems', newCartTotal);
+}
+
 sidebarSlide();
 readMore();

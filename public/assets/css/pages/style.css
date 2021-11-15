@@ -148,6 +148,27 @@ nav a:hover::before {
     margin: .7rem;
 }
 
+.cart {
+    position: relative;
+}
+
+.cart::before {
+    content:attr(data-totalitems);
+    font-size:12px;
+    font-weight:600;
+    position:absolute;
+    top:-10px;
+    right:-12px;
+    background:#000;
+    line-height:24px;
+    padding:0 5px;
+    height:22px;
+    min-width:16px;
+    color:white;
+    text-align:center;
+    border-radius:24px;
+}
+
 .hero {
     height: 630px;
     background-color: #EEE;
