@@ -16,52 +16,38 @@
             <table id="tabel-produk" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Kode</th>
+                        <th>#</th>
                         <th>Nama</th>
-                        <th>Stok</th>
-                        <th>Harga</th>
+                        <th>Total Stok</th>
                         <th>Deskripsi</th>
                         <th>Foto</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
+                  <?php $i = 1; $z = 0; $stokS = 0; $ukuran = ""; foreach($data_produk as $produk) : ?>
+                    <?php 
+                      foreach($produk['data_stok'] as $stok) {
+                        if((count($produk['data_stok']) - 1) != $z){
+                          $ukuran .= $stok['ukuran']."\t: ".$stok['stok']."</br>";
+                        }else{
+                          $ukuran .= $stok['ukuran']."\t: ".$stok['stok'];
+                        }
+                        $z++;
+                      }
+                    ?>
                     <tr>
-                        <td>1241-1411-4512-2000</td>
-                        <td>Bogo Retro</td>
-                        <td>12</td>
-                        <td>Rp 200.000</td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#deskripsiModal"><i class="fas fa-sticky-note"></i></button></td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#fotoModal"><i class="fas fa-image"></i></button></td>
+                        <td><?= $i++ ?></td>
+                        <td><?= $produk['data_produk']['nama'] ?></td>
+                        <td><?= $ukuran ?></td>
+                        <td><button class="openDeskripsi btn btn-primary" data-toggle="modal" data-target="#deskripsiModal" data-deskripsi="<?= $produk['data_produk']['deskripsi'] ?>"><i class="fas fa-sticky-note"></i></button></td>
+                        <td><button class="openGambar btn btn-primary" data-toggle="modal" data-target="#fotoModal" data-alamatgambar="<?= $produk['data_produk']['gambar'] ?>"><i class="fas fa-image"></i></button></td>
                         <td>
-                            <a href="/dashboard/produk/edit" class="btn btn-success"><i class="fas fa-edit"></i></a>  <!-- tambahin /kodeproduk -->
+                            <a href="<?= base_url('dashboard/produk/edit/'.$produk['data_produk']['url_slug']) ?> " class="btn btn-success"><i class="fas fa-edit"></i></a>  <!-- tambahin /kodeproduk -->
                             <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
                         </td>
                     </tr>
-                    <tr>
-                        <td>1241-1411-4512-2452</td>
-                        <td>Bogo Retro</td>
-                        <td>12</td>
-                        <td>Rp 200.000</td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#deskripsiModal"><i class="fas fa-sticky-note"></i></button></td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#fotoModal"><i class="fas fa-image"></i></button></td>
-                        <td>
-                            <a href="/dashboard/produk/edit" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1241-1411-4512-2452</td>
-                        <td>Bogo Retro</td>
-                        <td>12</td>
-                        <td>Rp 200.000</td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#deskripsiModal"><i class="fas fa-sticky-note"></i></button></td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#fotoModal"><i class="fas fa-image"></i></button></td>
-                        <td>
-                            <a href="/dashboard/produk/edit" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
-                        </td>
-                    </tr>
+                  <?php $ukuran = ""; endforeach; ?>
                 </tfoot>
             </table>
             </div>
@@ -79,7 +65,7 @@
         </button>
       </div>
       <div class="modal-body text-center">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat nam perferendis sint? Quo animi a magnam architecto corporis sunt nisi qui ut, incidunt ea unde rerum aut necessitatibus consequatur explicabo voluptatum optio. Obcaecati veniam, praesentium laboriosam porro quod culpa veritatis doloribus pariatur nobis harum quaerat eligendi ea beatae, fuga placeat aut commodi eius quasi in tenetur iusto. Ea labore tempora vero accusantium exercitationem optio possimus saepe doloribus quasi, nulla, consequuntur, quaerat ducimus quo porro maiores quia deserunt corporis? Qui amet libero vitae temporibus quasi aspernatur. Perspiciatis voluptatibus delectus maxime tempora, quas ea, quaerat placeat veritatis corrupti, pariatur reiciendis distinctio fuga?</p>
+        <p id="textDeskripsi"></p>
       </div>
     </div>
   </div>
@@ -95,7 +81,7 @@
         </button>
       </div>
       <div class="modal-body text-center">
-        <img src="/assets/img/produk/helm.png">
+        <img id="srcGambar" width="300px" height="300px" class="img-fluid">
       </div>
     </div>
   </div>
@@ -129,6 +115,13 @@
 <script>
     $(document).ready(function() {
         $('#tabel-produk').DataTable();
+        $('.openGambar').on("click", function(){
+          $('#srcGambar').attr("src", "<?= base_url('assets/img/produk') ?>" + "/" + ($(this).data('alamatgambar')).toString());
+        });
+        $('.openDeskripsi').on("click", function(){
+          $("#textDeskripsi").empty();
+          $("#textDeskripsi").append($(this).data('deskripsi'));
+        });
     } );
 </script>
 <?= $this->endSection() ?>

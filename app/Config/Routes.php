@@ -47,7 +47,9 @@ $routes->group('dashboard', function($routes){
     $routes->get('produk', 'Dashboard\Produk::index');
     $routes->get('produk/tambah-produk', 'Dashboard\Produk::create');
     $routes->post('produk/tambah-produk/save', 'Dashboard\Produk::save');
-    $routes->get('produk/edit', 'Dashboard\Produk::edit'); // tambahin /kodeproduk
+    $routes->get('produk/edit/(:any)', 'Dashboard\Produk::edit/$1'); // tambahin /kodeproduk
+    $routes->post('produk/edit/save', 'Dashboard\Produk::editSave');
+    $routes->get('produk/hapus-variasi/(:num)/(:num)', 'Dashboard\Produk::hapusVariasi/$1/$2');
 
     $routes->get('kategori', 'Dashboard/Kategori::index');
     $routes->add('kategori/tambah-kategori', 'Dashboard\Kategori::create');
