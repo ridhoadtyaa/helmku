@@ -15,6 +15,17 @@ class Auth extends BaseController
     public function register()
     {
         $data['title'] = 'Registrasi Akun';
+        if($this->validate([
+            'first_name'    => [
+                'rules'     => 'required',
+                'errors'    => '{field} tidak boleh kosong'
+            ],
+            'last_name'     => [
+                'rules'     => 'required',
+                'errors'    => '{field} tidak boleh kosong'
+            ],
+            'email'    
+        ]))
         return view('auth/register', $data);
     }
 }
