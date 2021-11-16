@@ -50,6 +50,7 @@ $routes->group('dashboard', function($routes){
     $routes->get('produk/edit/(:any)', 'Dashboard\Produk::edit/$1'); // tambahin /kodeproduk
     $routes->post('produk/edit/save', 'Dashboard\Produk::editSave');
     $routes->get('produk/hapus-variasi/(:num)/(:num)', 'Dashboard\Produk::hapusVariasi/$1/$2');
+    $routes->get('produk/hapus-produk/(:num)', 'Dashboard\Produk::hapusProduk/$1');
 
     $routes->get('kategori', 'Dashboard/Kategori::index');
     $routes->add('kategori/tambah-kategori', 'Dashboard\Kategori::create');

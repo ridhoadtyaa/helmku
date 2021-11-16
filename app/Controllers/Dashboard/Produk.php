@@ -231,4 +231,22 @@ class Produk extends BaseController
         }
         return redirect()->to('dashboard/produk/edit/'.$this->produkModel->where('id', $idProduk)->first()['url_slug']);
     }
+
+    public function hapusProduk($id)
+    {
+        $data['data_produk'] = $this->produkModel->where('id', $id)->first();
+        if(!$data['data_produk']){
+            return view('errors/errors-404');
+        }
+        if($this->stokModel->where('id_produk', $id)->first()){
+            $this->stokModel->where('id_produk', $id)->delete();
+        }
+        if($this->produkModel->where('id', $id)->delete()){
+            unlink('assets/img/produk/'.$data['data_produk']['nama']);
+            session()->setFlashdata('success', 'Sukses menghapus produk '.$data['data_produk']['nama']);
+        }else{
+            session()->setFlashdata('danger', 'Gagal menghapus produk '.$data['data_produk']['nama']);
+        }
+        return redirect()->to('dashboard/produk');
+    }
 }

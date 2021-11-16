@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 <section class="section">
     <div class="section-header">
-    <h1>Daftar Produk</h1>
+    <h1><?= $title ?></h1>
     <div class="section-header-breadcrumb">
         <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
         <div class="breadcrumb-item">Produk</div>
@@ -25,7 +25,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                  <?php $i = 1; $z = 0; $stokS = 0; $ukuran = ""; foreach($data_produk as $produk) : ?>
+                  <?php $i = 1; $z = 0; $ukuran = ""; foreach($data_produk as $produk) : ?>
                     <?php 
                       foreach($produk['data_stok'] as $stok) {
                         if((count($produk['data_stok']) - 1) != $z){
@@ -44,7 +44,7 @@
                         <td><button class="openGambar btn btn-primary" data-toggle="modal" data-target="#fotoModal" data-alamatgambar="<?= $produk['data_produk']['gambar'] ?>"><i class="fas fa-image"></i></button></td>
                         <td>
                             <a href="<?= base_url('dashboard/produk/edit/'.$produk['data_produk']['url_slug']) ?> " class="btn btn-success"><i class="fas fa-edit"></i></a>  <!-- tambahin /kodeproduk -->
-                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
+                            <button class="deleteProduct btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="<?= $produk['data_produk']['id'] ?>"><i class="fas fa-trash-alt"></i></button>
                         </td>
                     </tr>
                   <?php $ukuran = ""; endforeach; ?>
@@ -101,8 +101,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
-        <form action="/dashboard/produk/" method="post">  <!-- Tambahin /id -->
-            <input type="hidden" name="_method" value="DELETE">
+        <form id="deleteForm" method="GET">  <!-- Tambahin /id -->
             <button type="submit" class="btn btn-danger">Ya</button>
         </form>
       </div>
@@ -122,6 +121,9 @@
           $("#textDeskripsi").empty();
           $("#textDeskripsi").append($(this).data('deskripsi'));
         });
+        $('.deleteProduct').on('click', function(){
+          $('#deleteForm').attr("action", "<?= base_url('dashboard/produk/hapus-produk') ?>/" + ($(this).data('id')));
+        })
     } );
 </script>
 <?= $this->endSection() ?>

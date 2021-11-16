@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2021 at 12:46 PM
+-- Generation Time: Nov 16, 2021 at 03:18 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 7.3.28
 
@@ -63,7 +63,8 @@ CREATE TABLE `data_kategori` (
 --
 
 INSERT INTO `data_kategori` (`id_kategori`, `nama`) VALUES
-(3, 'Helm');
+(3, 'Sport'),
+(4, 'Bogo');
 
 -- --------------------------------------------------------
 
@@ -99,6 +100,13 @@ CREATE TABLE `data_produk` (
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `data_produk`
+--
+
+INSERT INTO `data_produk` (`id`, `nama`, `deskripsi`, `gambar`, `kategori`, `url_slug`, `created_at`, `updated_at`) VALUES
+(8, 'KYT', 'KYT Sport ', '1637072078_3534ee7278fc29178664.png', 3, 'KYT-6193bcce85c6c', '2021-11-16 21:14:38', '2021-11-16 21:15:53');
+
 -- --------------------------------------------------------
 
 --
@@ -112,6 +120,14 @@ CREATE TABLE `data_stok_produk` (
   `stok` int(10) NOT NULL,
   `harga` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `data_stok_produk`
+--
+
+INSERT INTO `data_stok_produk` (`id`, `id_produk`, `ukuran`, `stok`, `harga`) VALUES
+(12, 8, 'XL', 10, 800000),
+(13, 8, 'L', 10, 499999);
 
 -- --------------------------------------------------------
 
@@ -219,7 +235,7 @@ ALTER TABLE `data_bank`
 -- AUTO_INCREMENT for table `data_kategori`
 --
 ALTER TABLE `data_kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `data_pengguna`
@@ -231,13 +247,13 @@ ALTER TABLE `data_pengguna`
 -- AUTO_INCREMENT for table `data_produk`
 --
 ALTER TABLE `data_produk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `data_stok_produk`
 --
 ALTER TABLE `data_stok_produk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `data_transaksi`
