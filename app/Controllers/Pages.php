@@ -17,4 +17,13 @@ class Pages extends BaseController
 
         return view('detail', $data);
     }
+
+    public function cart()  
+    {
+        $data = [
+            'title' => 'Keranjang'
+        ];
+
+        return view('cart', $data);
+    }
 }
