@@ -13,43 +13,45 @@
     <div class="section-body">
         <div class="card">
             <div class="card-body">
-            <table id="tabel-produk" class="table table-striped table-bordered" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nama</th>
-                        <th>Total Stok</th>
-                        <th>Deskripsi</th>
-                        <th>Foto</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                  <?php $i = 1; $z = 0; $ukuran = ""; foreach($data_produk as $produk) : ?>
-                    <?php 
-                      foreach($produk['data_stok'] as $stok) {
-                        if((count($produk['data_stok']) - 1) != $z){
-                          $ukuran .= $stok['ukuran']."\t: ".$stok['stok']."</br>";
-                        }else{
-                          $ukuran .= $stok['ukuran']."\t: ".$stok['stok'];
-                        }
-                        $z++;
-                      }
-                    ?>
-                    <tr>
-                        <td><?= $i++ ?></td>
-                        <td><?= $produk['data_produk']['nama'] ?></td>
-                        <td><?= $ukuran ?></td>
-                        <td><button class="openDeskripsi btn btn-primary" data-toggle="modal" data-target="#deskripsiModal" data-deskripsi="<?= $produk['data_produk']['deskripsi'] ?>"><i class="fas fa-sticky-note"></i></button></td>
-                        <td><button class="openGambar btn btn-primary" data-toggle="modal" data-target="#fotoModal" data-alamatgambar="<?= $produk['data_produk']['gambar'] ?>"><i class="fas fa-image"></i></button></td>
-                        <td>
-                            <a href="<?= base_url('dashboard/produk/edit/'.$produk['data_produk']['url_slug']) ?> " class="btn btn-success"><i class="fas fa-edit"></i></a>  <!-- tambahin /kodeproduk -->
-                            <button class="deleteProduct btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="<?= $produk['data_produk']['id'] ?>"><i class="fas fa-trash-alt"></i></button>
-                        </td>
-                    </tr>
-                  <?php $ukuran = ""; endforeach; ?>
-                </tfoot>
-            </table>
+              <div class="table-responsive">
+                <table id="tabel-produk" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nama</th>
+                            <th>Total Stok</th>
+                            <th>Deskripsi</th>
+                            <th>Foto</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <?php $i = 1; $z = 0; $ukuran = ""; foreach($data_produk as $produk) : ?>
+                        <?php 
+                          foreach($produk['data_stok'] as $stok) {
+                            if((count($produk['data_stok']) - 1) != $z){
+                              $ukuran .= $stok['ukuran']."\t: ".$stok['stok']."</br>";
+                            }else{
+                              $ukuran .= $stok['ukuran']."\t: ".$stok['stok'];
+                            }
+                            $z++;
+                          }
+                        ?>
+                        <tr>
+                            <td><?= $i++ ?></td>
+                            <td><?= $produk['data_produk']['nama'] ?></td>
+                            <td><?= $ukuran ?></td>
+                            <td><button class="openDeskripsi btn btn-primary" data-toggle="modal" data-target="#deskripsiModal" data-deskripsi="<?= $produk['data_produk']['deskripsi'] ?>"><i class="fas fa-sticky-note"></i></button></td>
+                            <td><button class="openGambar btn btn-primary" data-toggle="modal" data-target="#fotoModal" data-alamatgambar="<?= $produk['data_produk']['gambar'] ?>"><i class="fas fa-image"></i></button></td>
+                            <td>
+                                <a href="<?= base_url('dashboard/produk/edit/'.$produk['data_produk']['url_slug']) ?> " class="btn btn-success"><i class="fas fa-edit"></i></a>  <!-- tambahin /kodeproduk -->
+                                <button class="deleteProduct btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="<?= $produk['data_produk']['id'] ?>"><i class="fas fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+                      <?php $ukuran = ""; endforeach; ?>
+                    </tfoot>
+                </table>
+              </div>
             </div>
         </div>
     </div>
