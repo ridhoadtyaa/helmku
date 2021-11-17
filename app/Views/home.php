@@ -14,7 +14,6 @@
                 <a href="/detail"><img class="card-img mb-2" src="/assets/img/produk/helm1.png"></a>
                 <div class="card-title">Full Face Black</div>
                 <div class="card-price d-inline">Rp 350.000</div>
-                <button class="card-button d-inline bg-white text-uppercase" onclick="addCart()">Beli</button>
             </div>
         </div>
         <div class="card border-0 text-center">
@@ -22,7 +21,6 @@
                 <a href="/detail"><img class="card-img mb-2" src="/assets/img/produk/helm2.png"></a>
                 <div class="card-title">Full Face Black</div>
                 <div class="card-price d-inline">Rp 350.000</div>
-                <button class="card-button d-inline bg-white text-uppercase" onclick="addCart()">Beli</button>
             </div>
         </div>
     </div>
@@ -33,7 +31,6 @@
                 <a href="/detail"><img class="card-img mb-2" src="/assets/img/produk/helm3.png"></a>
                 <div class="card-title">Full Face Black</div>
                 <div class="card-price d-inline">Rp 350.000</div>
-                <button class="card-button d-inline bg-white text-uppercase" onclick="addCart()">Beli</button>
             </div>
         </div>
         <div class="card border-0 text-center">
@@ -41,7 +38,6 @@
                 <a href="/detail"><img class="card-img mb-2" src="/assets/img/produk/helm4.png"></a>
                 <div class="card-title">Full Face Black</div>
                 <div class="card-price d-inline">Rp 350.000</div>
-                <button class="card-button d-inline bg-white text-uppercase" onclick="addCart()">Beli</button>
             </div>
         </div>
     </div>
@@ -61,32 +57,6 @@
         </div>
     </div>
 </section>
-
-<!-- Cart Modal -->
-<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Berhasil di tambahkan ke keranjang</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-            <div class="col-md-4">
-                <img src="/assets/img/produk/helm1.png" alt="" class="rounded img-thumbnail border-0">
-            </div>
-            <div class="col-md-8">
-                <h3>Bogo Retro</h3>
-            </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-        <button type="button" class="btn btn-primary">Keranjang</button>
-      </div>
-    </div>
-  </div>
-</div>
 <?= $this->endSection() ?>
 
 <?= $this->section('javascript') ?>
@@ -104,15 +74,6 @@ const readMore = () => {
             readMore.textContent = "Baca selengkapnya..."
         }
     });
-}
-
-const cart = document.querySelector('.cart');
-
-const addCart = () => {
-    let cartTotal = Number(cart.dataset.totalitems);
-    newCartTotal = cartTotal + 1
-    cart.setAttribute('data-totalitems', newCartTotal);
-    $('#cartModal').modal('show');
 }
 
 readMore();

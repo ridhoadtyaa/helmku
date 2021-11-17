@@ -37,7 +37,7 @@
                                 <img src="/assets/img/produk/helm1.png" class="img-thumbnail rounded border-0">
                             </div>
                             <div class="col-md-5 col-sm-5 col-5">
-                                <p>Bogo Retro</p>
+                                <p>Bogo Retro x1</p>
                                 <p>L</p>
                                 <i class='bx bx-trash'></i>
                             </div>
@@ -51,7 +51,7 @@
                                 <img src="/assets/img/produk/helm1.png" class="img-thumbnail rounded border-0">
                             </div>
                             <div class="col-md-5 col-sm-5 col-5">
-                                <p>Bogo Retro</p>
+                                <p>Bogo Retro x1</p>
                                 <p>L</p>
                                 <i class='bx bx-trash'></i>
                             </div>
@@ -65,7 +65,7 @@
                                 <img src="/assets/img/produk/helm1.png" class="img-thumbnail rounded border-0">
                             </div>
                             <div class="col-md-5 col-sm-5 col-5">
-                                <p>Bogo Retro</p>
+                                <p>Bogo Retro x1</p>
                                 <p>L</p>
                                 <i class='bx bx-trash'></i>
                             </div>

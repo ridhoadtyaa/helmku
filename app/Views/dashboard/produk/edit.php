@@ -2,6 +2,24 @@
 
 <?= $this->section('styles') ?>
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<style>
+    .foto-now {
+        position: relative;
+        left: 16px;
+    }
+
+    @media screen and (max-width: 992px) {
+        .foto-now {
+            position: static;
+        }
+    }
+
+    @media screen and (max-width: 576px) {
+        .foto-now {
+            position: static;
+        }
+    }
+</style>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -63,17 +81,17 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-6 col-md-12 col-lg">
                                     <div class="form-group">
                                         <label for="foto" class="col-form-label">Foto Sekarang :</label>
-                                        <div class="float-right py-2 mb-4">
+                                        <div class="float-right py-2 mb-4 foto-now">
                                             <img src="<?= base_url('assets/img/produk') ?>/<?= $data_produk['gambar'] ?>" width="250px" height="250px" class="img-fluid img-thumbnail">
                                             <!-- <div class="invalid-feedback">
                                             </div> -->
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-6 col-md-12 col-lg">
                                     <div class="form-group">
                                         <label for="foto" class="col-form-label">Update Foto : </label>
                                         <div class="float-right py-2">
@@ -154,7 +172,7 @@
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-primary form-control" type="submit"><i class="fas fa-sync"></i> Update Produk </button>
+                    <button class="btn btn-primary form-control mt-3" type="submit"><i class="fas fa-sync"></i> Update Produk </button>
                 </form>
             </div>
         </div>

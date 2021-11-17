@@ -19,7 +19,6 @@
                         <th>No</th>
                         <th>Nama</th>
                         <th>Email</th>
-                        <th>Role</th>
                         <th>No. Handphone</th>
                         <th>Aksi</th>
                     </tr>
@@ -30,7 +29,6 @@
                         <td>1</td>
                         <td>Dede Inoen</td>
                         <td>dede@gmail.com</td>
-                        <td>Super Admin</td>
                         <td>0841245125</td>
                         <td>
                             <a href="/dashboard/admin/edit" class="btn btn-success"><i class="fas fa-edit"></i></a>  <!-- tambahin /id -->
@@ -41,7 +39,6 @@
                         <td>2</td>
                         <td>Dede Inoen</td>
                         <td>dede@gmail.com</td>
-                        <td>Admin</td>
                         <td>0841245125</td>
                         <td>
                             <a href="/dashboard/admin/edit" class="btn btn-success"><i class="fas fa-edit"></i></a>  <!-- tambahin /id -->
@@ -52,7 +49,6 @@
                         <td>3</td>
                         <td>Dede Inoen</td>
                         <td>dede@gmail.com</td>
-                        <td>Admin</td>
                         <td>0841245125</td>
                         <td>
                             <a href="/dashboard/admin/edit" class="btn btn-success"><i class="fas fa-edit"></i></a>  <!-- tambahin /id -->

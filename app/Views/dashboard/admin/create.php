@@ -41,15 +41,6 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="role" class="col-sm-2 col-form-label">Role</label>
-                        <div class="col-sm-10">
-                            <select name="role" id="role" class="form-control selectric">
-                                <option value="superadmin">Super Admin</option>
-                                <option value="admin">Admin</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
                         <label for="no_telp" class="col-sm-2 col-form-label">No. Handphone</label>
                         <div class="col-sm-10">
                             <input type="number" name="no_telp" id="no_telp" placeholder="Masukkan no handphone" class="form-control">

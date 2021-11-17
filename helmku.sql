@@ -7,6 +7,8 @@
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 7.3.28
 
+CREATE DATABASE helmku;
+USE helmku;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
