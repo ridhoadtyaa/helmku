@@ -1,49 +1,7 @@
 <?= $this->extend('templates/main/main-template') ?>
 
 <?= $this->section('styles') ?>
-<style>
-    .produk {
-        margin-top: 150px;
-        padding-bottom: 100px;
-    }
-
-    .price {
-        margin-top: -10px;
-    }
-
-    .kategori:focus {
-        border-color: #000;
-        box-shadow: inset 0 1px 1px #000, 0 0 8px #000;
-    }
-
-    .helm-img {
-        width: 100%;
-        transition: transform .2s;
-        z-index: -100;
-    }
-
-    .helm-img:hover {
-        transform: scale(1.02);
-    }
-
-    .timewarp {
-        background-color: #000;
-        position: relative;
-        top: -12px;
-    }
-
-    @media screen and (max-width: 576px) {
-        .produk {
-            margin-top: 50px;
-        }
-    }
-
-    @media screen and (max-width: 992px) {
-        .produk {
-            margin-top: 50px;
-        }
-    }
-</style>
+<link rel="stylesheet" href="/assets/css/pages/produk.css">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
