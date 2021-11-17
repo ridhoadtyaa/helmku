@@ -7,9 +7,9 @@
 	<div class="header"><a href="/" class="text-decoration-none">HELMKU</a></div>
 	<nav class="text-uppercase">
 		<ul class="d-flex justify-content-evenly m-0 p-0 list-unstyled">
-			<li><a href="#" class="text-decoration-none position-relative">Produk</a></li>
-			<li><a href="#" class="text-decoration-none position-relative">Tentang</a></li>
-			<li><a href="#" class="text-decoration-none position-relative">Bantuan</a></li>
+			<li><a href="/produk" class="text-decoration-none position-relative">Produk</a></li>
+			<li><a href="/tentang" class="text-decoration-none position-relative">Tentang</a></li>
+			<li><a href="/bantuan" class="text-decoration-none position-relative">Bantuan</a></li>
 		</ul>
 	</nav>
 	<div class="account d-flex justify-content-center align-items-center">

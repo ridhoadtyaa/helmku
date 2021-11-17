@@ -7,6 +7,11 @@
         padding-bottom: 100px;
     }
 
+    .form-select:focus {
+        border-color: #000;
+        box-shadow: inset 0 1px 1px #000, 0 0 8px #000;
+    }
+
     @media screen and (max-width: 576px) {
         .detail {
             margin-top: 50px;
@@ -38,8 +43,24 @@
                 <h5>Rp 300.000</h5>
                 <p class="mt-5"><Strong>Deskripsi</Strong> : </p>
                 <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit corporis, at rem beatae voluptates cumque nihil eaque quas tenetur eos blanditiis ullam, error expedita earum in quisquam id aliquid ad cum repudiandae necessitatibus! Sunt, similique voluptas necessitatibus cupiditate minus, quam eligendi ratione rerum iure commodi dignissimos tenetur distinctio repudiandae ea a id numquam corporis totam possimus dolore nihil? Quisquam officia ratione quae rerum delectus tempore accusamus, aspernatur in culpa id tenetur eligendi ducimus voluptatum. Aliquid, alias modi error vitae accusantium delectus ex aperiam sequi, quibusdam dolores ipsam quaerat a quos doloribus, atque harum autem ea praesentium nam beatae ipsum earum iste doloremque! Quam ratione<br>mollitia consequuntur cum obcaecati? Suscipit sed excepturi quae, ullam possimus nulla impedit voluptatem laboriosam fugiat magnam ipsam tempora? Aperiam, exercitationem fuga quisquam pariatur explicabo cupiditate ducimus iste facere laudantium cum sequi consequatur consequuntur eum cumque dolores et minima officiis, voluptate tenetur! Reprehenderit consequatur accusamus molestiae.</p>
-
-                <button class="btn btn-dark" onclick="addCart()"><i class='bx bxs-cart-add'></i> Keranjang</button>
+                
+                <div class="row">
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-6">
+                                <select class="form-select" aria-label="Default select example">
+                                    <option value="M">M, Stok : 4</option>
+                                    <option value="L">L, Stok : 5</option>
+                                    <option value="XL">XL, Stok : 5</option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <button class="btn btn-dark" onclick="addCart()"><i class='bx bxs-cart-add'></i> Keranjang</button>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
             </div>
        </div>
        </div>

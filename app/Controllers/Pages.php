@@ -29,4 +29,13 @@ class Pages extends BaseController
 
         return view('cart', $data);
     }
+
+    public function produk()
+    {
+        $data = [
+            'title' => 'Produk'
+        ];  
+
+        return view('produk', $data);
+    }
 }

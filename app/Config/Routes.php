@@ -35,6 +35,7 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Pages::index');
 $routes->get('/detail', 'Pages::detail');
 $routes->get('/keranjang', 'Pages::cart');
+$routes->get('/produk', 'Pages::produk');
 
 // Auth
 $routes->get('/login', 'Auth::login');
