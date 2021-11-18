@@ -27,10 +27,11 @@ class Pages extends BaseController
         $this->produkModel->select('data_kategori.nama AS nama_kategori');
         $this->produkModel->join('data_kategori', 'data_produk.kategori = data_kategori.id_kategori');
         $this->produkModel->where('url_slug', $slug);
-        $data['data_produk']    = $this->produkModel->get()->getResultArray()[0];
-        if(!$data['data_produk']){
+        $prod = $this->produkModel->get()->getResultArray();
+        if(!isset($prod[0])){
             return view('errors/errors-404');
         }
+        $data['data_produk'] = $prod[0];
         $data['title'] = $data['data_produk']['nama_produk'];
 
         return view('detail', $data);
