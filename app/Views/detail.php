@@ -33,16 +33,16 @@
        <div class="card-body py-5 pe-5">
        <div class="row">
             <div class="col-md-5 text-center mb-3">
-                <img src="/assets/img/produk/helm1.png" alt="" width="400" class="rounded img-thumbnail border-0">
+                <img src="<?= base_url('assets/img/produk/'.$data_produk['gambar']) ?>" alt="" width="400" class="rounded img-thumbnail border-0">
             </div>
             <div class="col-md-7">
-                <h3>Bogo Retro</h3>
+                <h3><?= $data_produk['nama_produk'] ?></h3>
                 <hr>
-                <p><strong>Kategori</strong> : Bogo </p>
+                <p><strong>Kategori</strong> : <?= $data_produk['nama_kategori'] ?></p>
                 <p><strong>Stok</strong> : 69 </p>
                 <h5>Rp 300.000</h5>
                 <p class="mt-5"><Strong>Deskripsi</Strong> : </p>
-                <p style="text-align: justify;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit corporis, at rem beatae voluptates cumque nihil eaque quas tenetur eos blanditiis ullam, error expedita earum in quisquam id aliquid ad cum repudiandae necessitatibus! Sunt, similique voluptas necessitatibus cupiditate minus, quam eligendi ratione rerum iure commodi dignissimos tenetur distinctio repudiandae ea a id numquam corporis totam possimus dolore nihil? Quisquam officia ratione quae rerum delectus tempore accusamus, aspernatur in culpa id tenetur eligendi ducimus voluptatum. Aliquid, alias modi error vitae accusantium delectus ex aperiam sequi, quibusdam dolores ipsam quaerat a quos doloribus, atque harum autem ea praesentium nam beatae ipsum earum iste doloremque! Quam ratione<br>mollitia consequuntur cum obcaecati? Suscipit sed excepturi quae, ullam possimus nulla impedit voluptatem laboriosam fugiat magnam ipsam tempora? Aperiam, exercitationem fuga quisquam pariatur explicabo cupiditate ducimus iste facere laudantium cum sequi consequatur consequuntur eum cumque dolores et minima officiis, voluptate tenetur! Reprehenderit consequatur accusamus molestiae.</p>
+                <p style="text-align: justify;"><?= $data_produk['deskripsi'] ?></p>
                 
                 <div class="row">
                     <div class="col-6">

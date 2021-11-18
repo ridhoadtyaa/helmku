@@ -33,7 +33,7 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 
 $routes->get('/', 'Pages::index');
-$routes->get('/detail', 'Pages::detail');
+$routes->get('detail/(:any)', 'Pages::detail/$1');
 $routes->get('/keranjang', 'Pages::cart');
 $routes->get('/produk', 'Pages::produk');
 $routes->get('/akun', 'Pages::akun');

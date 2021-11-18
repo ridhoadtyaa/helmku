@@ -55,60 +55,17 @@
             </div>
         </div>
         <div class="row text-center justify-content-center">
+            <?php foreach($data_produk as $pd) : ?>
             <div class="col-md-4 col-6">
                 <div class="card border-0">
                     <div class="card-body">
-                        <a href="/detail"><img src="/assets/img/produk/helm1.png" class="img-thumbnail border-0 helm-img"></a>
-                        <p>Black Bogo</p>
-                        <p class="price">Rp 300.000</p>
+                        <a href="<?= base_url('detail/'.$pd['data_produk']['url_slug']) ?>"><img src="<?= base_url('assets/img/produk/'.$pd['data_produk']['gambar']) ?>" class="img-thumbnail border-0 helm-img"></a>
+                        <p><?= $pd['data_produk']['nama'] ?></p>
+                        <p class="price"><?= format_rupiah($pd['data_stok'][0]['harga']) ?></p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-6">
-                <div class="card border-0">
-                    <div class="card-body">
-                        <a href="/detail"><img src="/assets/img/produk/helm1.png" class="img-thumbnail border-0 helm-img"></a>
-                        <p>Black Bogo</p>
-                        <p class="price">Rp 300.000</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-6">
-                <div class="card border-0">
-                    <div class="card-body">
-                        <a href="/detail"><img src="/assets/img/produk/helm1.png" class="img-thumbnail border-0 helm-img"></a>
-                        <p>Black Bogo</p>
-                        <p class="price">Rp 300.000</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-6">
-                <div class="card border-0">
-                    <div class="card-body">
-                        <a href="/detail"><img src="/assets/img/produk/helm1.png" class="img-thumbnail border-0 helm-img"></a>
-                        <p>Black Bogo</p>
-                        <p class="price">Rp 300.000</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-6">
-                <div class="card border-0">
-                    <div class="card-body">
-                        <a href="/detail"><img src="/assets/img/produk/helm1.png" class="img-thumbnail border-0 helm-img"></a>
-                        <p>Black Bogo</p>
-                        <p class="price">Rp 300.000</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-6">
-                <div class="card border-0">
-                    <div class="card-body">
-                        <a href="/detail"><img src="/assets/img/produk/helm1.png" class="img-thumbnail border-0 helm-img"></a>
-                        <p>Black Bogo</p>
-                        <p class="price">Rp 300.000</p>
-                    </div>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>
