@@ -30,7 +30,7 @@
 <section class="detail">
     <div class="container">
     <div class="card">
-       <div class="card-body">
+       <div class="card-body py-5 pe-5">
        <div class="row">
             <div class="col-md-5 text-center mb-3">
                 <img src="/assets/img/produk/helm1.png" alt="" width="400" class="rounded img-thumbnail border-0">
@@ -88,7 +88,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-        <button type="button" class="btn btn-primary">Keranjang</button>
+        <button type="button" class="btn btn-dark">Keranjang</button>
       </div>
     </div>
   </div>

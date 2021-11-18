@@ -6,23 +6,26 @@
     <h1><?= $title ?></h1>
     <div class="section-header-breadcrumb">
         <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-        <div class="breadcrumb-item">Produk</div>
+        <div class="breadcrumb-item">Kategori</div>
     </div>
     </div>
     <?= $this->include('templates/dashboard/partials/alert') ?>
     <div class="section-body">
         <div class="card">
             <div class="card-body">
-            <table id="tabel-produk" class="table table-striped table-bordered" style="width:100%">
+            <table id="tabel-kategori" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
+                        <th>No</th>
                         <th>Nama</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
+                  <?php $i = 1 ?>
                   <?php foreach($data_kategori as $kat) : ?>
                     <tr>
+                        <td><?= $i++ ?></td>
                         <td><?= $kat['nama'] ?></td>
                         <td>
                             <a href="<?= base_url('dashboard/kategori/edit-kategori/'.$kat['id_kategori']) ?>" class="btn btn-success"><i class="fas fa-edit"></i></a>  
@@ -67,7 +70,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
-        <form id="formDelete" action="<?= base_url() ?>" method="GET">  <!-- Tambahin /id -->
+        <form id="formDelete" action="<?= base_url() ?>">  <!-- Tambahin /id -->
             <button type="submit" class="btn btn-danger">Ya</button>
         </form>
       </div>
@@ -79,6 +82,7 @@
 <?= $this->section('javascript') ?>
 <script>
     $(document).ready(function() {
+        $('#tabel-kategori').DataTable();
         $('.deleteButton').on("click", function(){
           $('#formDelete').attr("action", "<?= base_url('dashboard/kategori/hapus-kategori') ?>/"+ $(this).data('id'));
         })

@@ -36,6 +36,7 @@ $routes->get('/', 'Pages::index');
 $routes->get('/detail', 'Pages::detail');
 $routes->get('/keranjang', 'Pages::cart');
 $routes->get('/produk', 'Pages::produk');
+$routes->get('/akun', 'Pages::akun');
 
 // Auth
 $routes->get('/login', 'Auth::login');
