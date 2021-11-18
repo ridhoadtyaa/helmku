@@ -38,4 +38,13 @@ class Pages extends BaseController
 
         return view('produk', $data);
     }
+
+    public function akun()
+    {
+        $data = [
+            'title' => 'Akun'
+        ];
+
+        return view('akun', $data);
+    }
 }

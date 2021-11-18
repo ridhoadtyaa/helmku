@@ -13,7 +13,7 @@
 		</ul>
 	</nav>
 	<div class="account d-flex justify-content-center align-items-center">
-		<a href="/user" style="color: black;"><i class='bx bx-user'></i></a>
+		<a href="/akun" style="color: black;"><i class='bx bx-user'></i></a>
 		<a href="/keranjang" class="cart position-relative" style="color: black;" data-totalitems="0"><i class='bx bx-shopping-bag'></i></a>
 	</div>
 </section>
