@@ -42,7 +42,7 @@
                 <p><strong>Stok</strong> : 69 </p>
                 <h5>Rp 300.000</h5>
                 <p class="mt-5"><Strong>Deskripsi</Strong> : </p>
-                <p style="text-align: justify;"><?= $data_produk['deskripsi'] ?></p>
+                <p class="text-justify"><?= $data_produk['deskripsi'] ?></p>
                 
                 <div class="row">
                     <div class="col-6">

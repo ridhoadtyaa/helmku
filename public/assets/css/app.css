@@ -12,6 +12,10 @@ body {
     width: 100%;
 }
 
+.container-section {
+    width: 100%;
+}
+
 .promotion-bar {
     font-size: .9rem;
     width: 100%;

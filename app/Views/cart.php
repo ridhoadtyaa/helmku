@@ -7,6 +7,10 @@
         padding-bottom: 100px;
     }
 
+    .keranjang-wrapper {
+        width: 74%;
+    }
+
     .keranjang .card img {
         width: 100px;
     }
@@ -26,13 +30,15 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-<section class="keranjang">
-    <div class="container">
-        <div class="no-cart text-center">
+<section class="keranjang d-flex justify-content-center">
+    <div class="keranjang-wrapper">
+        <!-- no cart -->
+        <div class="text-center">
             <img src="/assets/img/nocart.png" width="180" alt="">
             <h3 class="text-muted my-3">Keranjangmu masih kosong.</h3>
             <a href="/produk" class="btn btn-dark">Belanja</a>
         </div>
+        <!--  -->
     </div>
 </section>
 <?= $this->endSection() ?>
@@ -100,3 +106,11 @@
         </div>
     </div>
 </div> -->
+
+<!-- no cart -->
+<!-- <div class="text-center">
+    <img src="/assets/img/nocart.png" width="180" alt="">
+    <h3 class="text-muted my-3">Keranjangmu masih kosong.</h3>
+    <a href="/produk" class="btn btn-dark">Belanja</a>
+</div> -->
+<!--  -->
