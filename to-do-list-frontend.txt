@@ -1,2 +1,4 @@
 tentang
 bantuan
+
+Do, coba ubah tampilan login sama register buat member + halaman cart yang bukan kosong
