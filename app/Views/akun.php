@@ -31,10 +31,10 @@
         <div class="d-flex justify-content-between">
                 <div>
                     <h4 class="fw-bold">Akun saya</h4>
-                    <p>Selamat datang, Agung!</p>
+                    <p>Selamat datang, <?= $akun['nama'] ?>!</p>
                 </div>
                 <div>
-                    <button class="btn btn-dark"><i class='bx bx-log-out'></i> Keluar</button>
+                    <a href="<?= base_url('logout-member') ?>" class="btn btn-dark"><i class='bx bx-log-out'></i> Keluar</a>
                 </div>
             </div>
             <div class="row pt-5">

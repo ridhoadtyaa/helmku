@@ -36,17 +36,23 @@ $routes->setAutoRoute(true);
 
 $routes->get('/', 'Pages::index');
 $routes->get('detail/(:any)', 'Pages::detail/$1');
-$routes->get('/keranjang', 'Pages::cart');
+$routes->get('/keranjang', 'Pages::cart', ['filter' => 'userFilter']);
 $routes->get('/produk', 'Pages::produk');
-$routes->get('/akun', 'Pages::akun');
-$routes->get('/detail-order', 'Pages::detailOrder');
+$routes->get('/akun', 'Pages::akun', ['filter' => 'userFilter']);
+$routes->get('/detail-order', 'Pages::detailOrder', ['filter' => 'userFilter']);
 
-// Auth
-$routes->get('/login', 'Auth::login');
-$routes->get('/register', 'Auth::register');
+
+// Auth Member
+$routes->add('/login-member', 'Auth::login');
+$routes->add('/register-member', 'Auth::register');
+$routes->get('/logout-member', 'Auth::logout');
+
+// Auth Admin
+$routes->add('momod/login', 'Auth::loginAdmin');
+$routes->get('momod/logout', 'Auth::logoutAdmin');
 
 // Dashboard
-$routes->group('dashboard', function($routes){
+$routes->group('dashboard', ['filter' => 'adminFilter'], function($routes){
     $routes->get('/', 'Dashboard::index');
 
     $routes->get('produk', 'Dashboard\Produk::index');
