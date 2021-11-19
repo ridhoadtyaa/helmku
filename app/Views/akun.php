@@ -59,8 +59,7 @@
                                 <td>Menunggu pembayaran</td>
                                 <td>-</td>
                                 <td>
-                                    <a href="" class="badge rounded-pill bg-dark text-decoration-none text-white">Detail</a>
-                                    <a href="" class="badge rounded-pill bg-dark text-decoration-none text-white">Batal</a>
+                                    <a href="/detail-order" class="badge rounded-pill bg-dark text-decoration-none text-white">Detail</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -69,6 +68,7 @@
                 <div class="col-md-4">
                     <p class="text-muted">Alamat</p>
                     <hr>
+                    <!-- when sudah ada -->
                     <p class="py-3">Agung</p>
                     <p>Jl bangau no 26</p>
                     <p>Tangerang</p>
@@ -76,6 +76,8 @@
                     <p>Indonesia</p>
 
                     <button class="btn btn-dark mt-3">Edit Alamat</button>
+                    <!-- jika alamat blm ada -->
+                    <!-- <button class="btn btn-dark mt-3">Tambah Alamat</button> -->
                 </div>
             </div>
         </div>

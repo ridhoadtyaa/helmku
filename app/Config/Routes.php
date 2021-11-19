@@ -20,7 +20,9 @@ $routes->setDefaultNamespace('App\Controllers');
 $routes->setDefaultController('Pages');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
-$routes->set404Override();
+$routes->set404Override(function() {
+    return view('errors/errors-404.php');
+});
 $routes->setAutoRoute(true);
 
 /*
@@ -37,6 +39,7 @@ $routes->get('detail/(:any)', 'Pages::detail/$1');
 $routes->get('/keranjang', 'Pages::cart');
 $routes->get('/produk', 'Pages::produk');
 $routes->get('/akun', 'Pages::akun');
+$routes->get('/detail-order', 'Pages::detailOrder');
 
 // Auth
 $routes->get('/login', 'Auth::login');
@@ -49,7 +52,7 @@ $routes->group('dashboard', function($routes){
     $routes->get('produk', 'Dashboard\Produk::index');
     $routes->get('produk/tambah-produk', 'Dashboard\Produk::create');
     $routes->post('produk/tambah-produk/save', 'Dashboard\Produk::save');
-    $routes->get('produk/edit/(:any)', 'Dashboard\Produk::edit/$1'); // tambahin /kodeproduk
+    $routes->get('produk/edit/(:any)', 'Dashboard\Produk::edit/$1');
     $routes->post('produk/edit/save', 'Dashboard\Produk::editSave');
     $routes->get('produk/hapus-variasi/(:num)/(:num)', 'Dashboard\Produk::hapusVariasi/$1/$2');
     $routes->get('produk/hapus-produk/(:num)', 'Dashboard\Produk::hapusProduk/$1');

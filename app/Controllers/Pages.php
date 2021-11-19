@@ -52,7 +52,7 @@ class Pages extends BaseController
             'title'     => 'Produk',
         ];
         helper(['rupiah']);
-        // dd(format_rupiah(400000));
+
         $data['produks']     = $this->produkModel->paginate(5);
         $data['pager']       = $this->produkModel->pager;
         $data['data_produk'] = [];
@@ -82,5 +82,14 @@ class Pages extends BaseController
         ];
 
         return view('akun', $data);
+    }
+
+    public function detailOrder()
+    {
+        $data = [
+            'title' => 'Detail order'
+        ];
+
+        return view('detail-order', $data);
     }
 }
