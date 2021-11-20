@@ -1,55 +1,41 @@
 <?= $this->extend('templates/main/main-template') ?>
 
+<?= $this->section('styles') ?>
+<link rel="stylesheet" href="/assets/css/pages/auth-member.css">
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 <section class="section-pages">
     <div class="pages-wrapper">
-    <?= $this->include('templates/dashboard/partials/alert') ?>
-        <div class="card">
-            <div class="card-body py-5 pe-5">
-                <div class="row">
-                    <div class="col-md-5 text-center mb-3">
-                        <img src="<?= base_url('assets/img/logo/login.png') ?>" alt="" width="300" height="300" class="rounded img-thumbnail border-0">
-                    </div>
-                    <div class="col-md-7">
-                        <div class="py-4">
-                            <form method="POST" action="">
-                                <h3 class="card-title">Login Member</h3>
-                                <?= csrf_field() ?>
-                                <div class="form-group py-1">
-                                    <label>Email :</label>
-                                    <input type="text" name="email" class="form-control">
-                                </div>
-                                <div class="form-group mt-3">
-                                    <label>Password :</label>
-                                    <input type="password" name="password" class="form-control">
-                                </div>
-                                <div class="form-group mt-2">
-                                    <p class="text-muted">
-                                        Belum punya akun? <a href="<?= base_url('register-member') ?>">Daftar</a>
-                                    </p>
-                                </div>
-                                <div class="form-group mt-3">
-                                    <button type="submit" name="submit" class="btn btn-dark"><i class="bx bxs-log-in"></i> Login</button>
-                                </div>
-                            </form>
+        <h3 class="text-center title">Login Member</h3>
+        <p class="text-center">Selamat datang. Sebelum memesan, login terlebih dahulu.</p>
+        <form action="" method="post">
+            <?= csrf_field() ?>
+            <div class="row d-flex justify-content-center mt-3">
+                <div class="col-md-8">
+                    <div class="form__group field position-relative">
+                        <input type="email" class="form__field <?= $validation->hasError('email') ? 'is-invalid' : '' ?>" placeholder="Email" name="email" id='email'/>
+                        <label for="email" class="form__label">Email</label>
+                        <div class="invalid-feedback pt-1">
+                            <?= $validation->getError('email') ?>
                         </div>
                     </div>
                 </div>
+                <div class="col-md-8">
+                    <div class="form__group field position-relative">
+                        <input type="password" class="form__field <?= $validation->hasError('password') ? 'is-invalid' : '' ?>" placeholder="Password" name="password" id='password'/>
+                        <label for="password" class="form__label">Password</label>
+                        <div class="invalid-feedback pt-1">
+                            <?= $validation->getError('password') ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <button class="btn btn-dark d-block mt-4 " type="submit">LOGIN</button>
+                    <p class="text-center mt-3 text-muted">Belum mempunyai akun ? <a href="<?= base_url('register-member') ?>" class="text-decoration-none text-dark">Daftar</a></p>
+                </div>
             </div>
-        </div>
+        </form>  
     </div>
 </section>
-<?= $this->endSection() ?>
-
-<?= $this->section('javascript') ?>
-<script>
-const cart = document.querySelector('.cart');
-
-const addCart = () => {
-    let cartTotal = Number(cart.dataset.totalitems);
-    newCartTotal = cartTotal + 1
-    cart.setAttribute('data-totalitems', newCartTotal);
-    $('#cartModal').modal('show');
-}
-</script>
 <?= $this->endSection() ?>

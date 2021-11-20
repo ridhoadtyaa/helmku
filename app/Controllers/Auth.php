@@ -19,7 +19,10 @@ class Auth extends BaseController
         if(session()->isUserLogin){
             return redirect()->to('akun');
         }
-        $data['title'] = 'Login';
+        $data = [
+            'title' => 'Login member',
+            'validation' => \Config\Services::validation()
+        ];
         if($this->validate([
             'email'     => [
                 'rules'     => 'required',
@@ -56,7 +59,10 @@ class Auth extends BaseController
         if(session()->isUserLogin){
             return redirect()->to('akun');
         }
-        $data['title'] = 'Registrasi Akun';
+        $data = [
+            'title' => 'Registrasi Akun',
+            'validation' => \Config\Services::validation()
+        ];  
         if($this->validate([
             'nama'    => [
                 'rules'     => 'required',
