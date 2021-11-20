@@ -23,6 +23,17 @@ class Auth extends BaseController
             'title' => 'Login member',
             'validation' => \Config\Services::validation()
         ];
+        if(session()->isUserLogin){
+            return redirect()->to('akun');
+        }
+        return view('auth/login-member', $data);
+    }
+
+    public function loginPost()
+    {
+        if(session()->isUserLogin){
+            return redirect()->to('akun');
+        }
         if($this->validate([
             'email'     => [
                 'rules'     => 'required',
@@ -38,7 +49,8 @@ class Auth extends BaseController
                 if(password_verify($this->request->getPost('password'), $cek['password'])){
                     session()->set([
                         'isUserLogin'   => true,
-                        'userEmail'     => $this->request->getPost('email')
+                        'userEmail'     => $this->request->getPost('email'),
+                        'cartList'      => []
                     ]);
                     session()->setFlashdata('success', 'Sukses masuk ke dalam akun.');
                     return redirect()->to('akun');
@@ -50,8 +62,10 @@ class Auth extends BaseController
                 session()->setFlashdata('danger', 'Email atau Password tidak tepat.');
                 return redirect()->to('login-member');
             }
+        }else{
+            $data['validation'] = \Config\Services::validation();
+            return view('auth/login-member', $data);
         }
-        return view('auth/login-member', $data);
     }
 
     public function register()
@@ -62,7 +76,15 @@ class Auth extends BaseController
         $data = [
             'title' => 'Registrasi Akun',
             'validation' => \Config\Services::validation()
-        ];  
+        ]; 
+        return view('auth/register-member', $data);
+    }
+
+    public function registerPost()
+    {
+        if(session()->isUserLogin){
+            return redirect()->to('akun');
+        }
         if($this->validate([
             'nama'    => [
                 'rules'     => 'required',
@@ -90,7 +112,8 @@ class Auth extends BaseController
                     session()->setFlashdata('success', 'Sukses mendaftar akun, kamu akan dipindahkan ke halaman akun.');
                     session()->set([
                         'isUserLogin'   => true,
-                        'userEmail'     => $this->request->getPost('email')
+                        'userEmail'     => $this->request->getPost('email'),
+                        'cartList'      => []
                     ]);
                     return redirect()->to('akun');
                 }else{
@@ -98,15 +121,18 @@ class Auth extends BaseController
                     return redirect()->to('register-member');
                 }
             }
+        }else{
+            $data['validation'] = \Config\Services::validation();
+            return view('auth/register-member', $data);
         }
-        return view('auth/register-member', $data);
     }
 
     public function logout()
     {
         session()->remove([
             'isUserLogin',
-            'userEmail'
+            'userEmail',
+            'cartList'
         ]);
         return redirect()->to('login-member');
     }

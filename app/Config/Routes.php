@@ -37,6 +37,7 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Pages::index');
 $routes->get('detail/(:any)', 'Pages::detail/$1');
 $routes->get('/keranjang', 'Pages::cart', ['filter' => 'userFilter']);
+$routes->post('/tambah-keranjang', 'Pages::tambahCart');
 $routes->get('/produk', 'Pages::produk');
 $routes->get('/detail-order', 'Pages::detailOrder', ['filter' => 'userFilter']);
 $routes->get('/ubah-alamat', 'Pages::ubahAlamat', ['filter' => 'userFilter']);
@@ -45,9 +46,11 @@ $routes->get('/akun', 'Pages::akun', ['filter' => 'userFilter']);
 
 
 // Auth Member
-$routes->add('/login-member', 'Auth::login');
-$routes->add('/register-member', 'Auth::register');
+$routes->get('/login-member', 'Auth::login');
+$routes->post('/login-member-post', 'Auth::loginPost');
 $routes->get('/logout-member', 'Auth::logout');
+$routes->get('/register-member', 'Auth::register');
+$routes->post('/register-member-post', 'Auth::registerPost');
 
 // Auth Admin
 $routes->add('momod/login', 'Auth::loginAdmin');

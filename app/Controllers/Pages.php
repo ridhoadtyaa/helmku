@@ -13,7 +13,26 @@ class Pages extends BaseController
         $this->produkModel  = new Produk();
         $this->stokModel    = new Stok();
         $this->userModel    = new UserModel();
+        helper(['rupiah']);
     }
+
+    public function in_array_r($needle, $haystack, $strict = false) {
+        foreach ($haystack as $item) {
+            if (($strict ? $item === $needle : $item == $needle) || (is_array($item) && $this->in_array_r($needle, $item, $strict))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function searchUkuranIndex($ukuran, $array) {
+        foreach ($array as $key => $val) {
+            if ($val['ukuran'] === $ukuran) {
+                return $key;
+            }
+        }
+        return null;
+     }
 
     public function index()
     {
@@ -33,6 +52,7 @@ class Pages extends BaseController
         if(!isset($prod[0])){
             return view('errors/errors-404');
         }
+        $data['stok'] = $this->stokModel->where('id_produk', $prod[0]['id'])->findAll();
         $data['data_produk'] = $prod[0];
         $data['title'] = $data['data_produk']['nama_produk'];
 
@@ -48,12 +68,78 @@ class Pages extends BaseController
         return view('cart', $data);
     }
 
+    public function tambahCart()
+    {
+        if(!session()->isUserLogin){
+            return "need_login";
+        }else{
+            if($this->validate([
+                'idBarang' => 'required',
+                'quantity' => 'required',
+                'ukuran'   => 'required'
+            ])){
+                $cartList = session()->get('cartList');
+                $idBarang = $this->request->getPost('idBarang');
+                $quantity = $this->request->getPost('quantity');
+                $ukuran   = $this->request->getPost('ukuran');
+
+                $this->stokModel->select('*');
+                $this->stokModel->select('data_produk.*');
+                $this->stokModel->join('data_produk', 'data_stok_produk.id_produk = data_produk.id');
+                $this->stokModel->where('url_slug', $idBarang);
+                $this->stokModel->where('ukuran', $ukuran);
+                $stokInfo = $this->stokModel->get()->getResultArray()[0];
+                if($quantity > $stokInfo['stok']){
+                    return "4004";
+                }
+                if(count($cartList) > 0){
+                    if(isset($cartList[$idBarang])){
+                        if($this->in_array_r($ukuran, $cartList[$idBarang])){ // barang udah ada dan di update data quantitynya.
+                            $searchKey = $this->searchUkuranIndex($ukuran, $cartList[$idBarang]);
+                            if($cartList[$idBarang][$searchKey]['qty'] > $stokInfo['stok']){
+                                return "4005";
+                            }
+                            $cartList[$idBarang][$searchKey] = [
+                                'qty'       => $quantity + $cartList[$idBarang][$searchKey]['qty'],
+                                'ukuran'    => $ukuran
+                            ];
+                            session()->push('cartList', $cartList);
+                        }else{ // kalo belum ada push barang baru
+                            array_push($cartList[$idBarang], [
+                                'qty'       => $quantity,
+                                'ukuran'    => $ukuran
+                            ]);
+                            session()->push('cartList', $cartList);
+                        }
+                    }else{
+                        session()->push('cartList', [$idBarang => [
+                                [
+                                    'qty'       => $quantity,
+                                    'ukuran'    => $ukuran
+                                ]
+                            ]
+                        ]);
+                    }
+                }else{
+                    session()->push('cartList', [ $idBarang => [
+                        [
+                            'qty'       => $quantity,
+                            'ukuran'    => $ukuran
+                            ]
+                        ]
+                    ]);
+                }
+            }else{
+                return "400";
+            }
+        }
+    }
+
     public function produk()
     {
         $data = [
             'title'     => 'Produk',
         ];
-        helper(['rupiah']);
 
         $data['produks']     = $this->produkModel->paginate(5);
         $data['pager']       = $this->produkModel->pager;
@@ -82,7 +168,7 @@ class Pages extends BaseController
         $data = [
             'title' => 'Akun'
         ];
-        $data['akun'] = $this->userModel->where('email', session()->email)->first();
+        $data['akun'] = $this->userModel->where('email', session()->userEmail)->first();
         return view('akun', $data);
     }
 

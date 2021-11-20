@@ -1,6 +1,22 @@
 <?= $this->extend('templates/main/main-template') ?>
 
 <?= $this->section('content') ?>
+<?php 
+    if(count($stok) > 1){
+        $lowestPrice = $stok[0]['harga'];
+        $highestPrice = $lowestPrice;
+        for($i=1; $i <= count($stok) - 1; $i++){
+            if($stok[$i]['harga'] <= $lowestPrice){
+                $lowestPrice = $stok[$i]['harga'];
+            }
+            if($stok[$i]['harga'] >= $highestPrice){
+                $highestPrice = $stok[$i]['harga'];
+            }
+        }
+    }else{
+        $lowestPrice = $stok[0]['harga'];
+    }
+?>
 <section class="section-pages">
     <div class="pages-wrapper">
     <div class="card">
@@ -14,23 +30,39 @@
                 <hr>
                 <p><strong>Kategori</strong> : <?= $data_produk['nama_kategori'] ?></p>
                 <p><strong>Stok</strong> : 69 </p>
-                <h5>Rp 300.000</h5>
+                <h5><?= format_rupiah($lowestPrice)?><?= isset($highestPrice) ? $lowestPrice != $highestPrice ? ' - '.format_angka($highestPrice) : '' : '' ?></h5>
                 <p class="mt-5"><Strong>Deskripsi</Strong> : </p>
                 <p class="text-justify"><?= $data_produk['deskripsi'] ?></p>
                 
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-7 col-md-8">
                         <div class="row">
-                            <div class="col-6">
-                                <select class="form-select" aria-label="Default select example">
-                                    <option value="M">M, Stok : 4</option>
-                                    <option value="L">L, Stok : 5</option>
-                                    <option value="XL">XL, Stok : 5</option>
+                            <div class="col-md-6 col-sm-6 mb-2">
+                                <select class="form-select" id="ukuran" aria-label="Default select example">
+                                    <?php 
+                                        $stokS = 0; foreach($stok as $s) {
+                                            if($s['stok'] != 0){
+                                                echo "<option value=\"".$s['ukuran']."\" data-ukuran=\"".$s['ukuran']."\">".$s['ukuran'].", Stok : ".$s['stok']." | ".format_rupiah($s['harga'])."</option>";
+                                                $stokS += $s['stok'];
+                                            }else{
+                                                echo "<option value=\"".$s['ukuran']."\" data-ukuran=\"".$s['ukuran']."\" disabled=\"\">".$s['ukuran'].", Stok : ".$s['stok']." | ".format_rupiah($s['harga'])."</option>";
+                                            }
+                                        }
+                                    ?>
                                 </select>
                             </div>
-                            <div class="col-6">
-                                <button class="btn btn-dark" onclick="addCart()"><i class='bx bxs-cart-add'></i> Keranjang</button>
+                            <div class="col-md-4 col-sm-4 mb-3 col-lg-2">
+                                <input type="number" id="quantity" class="form-control text-center" value="1" min="1">
                             </div>
+                            <?php if($stokS > 0) { ?>
+                                <div class="col-md-6">
+                                    <button class="btn btn-dark" id="tambahKeranjang" data-idBarang="<?= $data_produk['url_slug'] ?>"><i class='bx bxs-cart-add'></i> Keranjang</button>
+                                </div>
+                            <?php } else { ?>
+                                <div class="col-md-6">
+                                    <a href="#" class="btn btn-outline-dark" disabled=""><i class='bx bxs-cart-add'></i> Stok Habis</a>
+                                </div>
+                            <?php } ?>
                         </div>
                     </div>
                     </div>
@@ -71,13 +103,33 @@
 
 <?= $this->section('javascript') ?>
 <script>
-const cart = document.querySelector('.cart');
-
-const addCart = () => {
-    let cartTotal = Number(cart.dataset.totalitems);
-    newCartTotal = cartTotal + 1
-    cart.setAttribute('data-totalitems', newCartTotal);
-    $('#cartModal').modal('show');
-}
+    const cart = document.querySelector('.cart');
+    $('#tambahKeranjang').on('click', function(){
+        let id_barang = $(this).attr('data-idBarang');
+        let qty = $('#quantity').val();
+        let size = $('#ukuran').val();
+        $.post('<?= base_url('tambah-keranjang') ?>', {
+            idBarang: id_barang, 
+            quantity: qty,
+            ukuran: size
+        }, function(data){
+            if(data == "need_login"){
+                window.location.href = '<?= base_url('login-member') ?>';
+            }else if(data == "400"){
+                alert(data);
+            }else if(data == "4004"){
+                alert("Kuantitas barang yang ingin dibeli melebihi stok, mohon dikurangi sesuai stok yang tersedia.");
+            }else if(data == "4005"){
+                alert("Kamu sudah menambahkan barang ini ke dalam keranjang.");
+            }else{
+                let cartTotal = Number(<?= count(session()->get('cartList')) ?>);
+                newCartTotal = cartTotal + Number(qty)
+                cart.setAttribute('data-totalitems', newCartTotal);
+                $('#cartModal').modal('show');
+            }
+        });
+    })
+    
 </script>
 <?= $this->endSection() ?>
+ 

@@ -9,7 +9,7 @@
     <div class="pages-wrapper">
         <h3 class="text-center title">Login Member</h3>
         <p class="text-center">Selamat datang. Sebelum memesan, login terlebih dahulu.</p>
-        <form action="" method="post">
+        <form action="<?= base_url('login-member-post') ?>" method="post">
             <?= csrf_field() ?>
             <div class="row d-flex justify-content-center mt-3">
                 <div class="col-md-8">
