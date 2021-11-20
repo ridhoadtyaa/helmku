@@ -34,7 +34,7 @@
                     <p>Selamat datang, Agung!</p>
                 </div>
                 <div>
-                    <button class="btn btn-dark"><i class='bx bx-log-out'></i> Keluar</button>
+                    <button class="btn btn-dark">Keluar <i class="fas fa-sign-out-alt"></i></button>
                 </div>
             </div>
             <div class="row pt-5">
@@ -70,12 +70,10 @@
                     <hr>
                     <!-- when sudah ada -->
                     <p class="py-3">Agung</p>
-                    <p>Jl bangau no 26</p>
-                    <p>Tangerang</p>
-                    <p>Banteng 15119</p>
-                    <p>Indonesia</p>
+                    <p>0812459124</p>
+                    <p>Jl bangau no 26, Kota, Kecamatan, Kode Pos</p>
 
-                    <button class="btn btn-dark mt-3">Edit Alamat</button>
+                    <a href="/ubah-alamat" class="btn btn-dark mt-3">Ubah Alamat</a>
                     <!-- jika alamat blm ada -->
                     <!-- <button class="btn btn-dark mt-3">Tambah Alamat</button> -->
                 </div>

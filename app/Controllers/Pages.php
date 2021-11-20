@@ -92,4 +92,13 @@ class Pages extends BaseController
 
         return view('detail-order', $data);
     }
+
+    public function ubahAlamat()
+    {
+        $data = [
+            'title' => 'Ubah Alamat'
+        ];
+
+        return view('ubah-alamat', $data);
+    }
 }

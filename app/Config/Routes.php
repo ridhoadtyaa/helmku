@@ -40,6 +40,7 @@ $routes->get('/keranjang', 'Pages::cart');
 $routes->get('/produk', 'Pages::produk');
 $routes->get('/akun', 'Pages::akun');
 $routes->get('/detail-order', 'Pages::detailOrder');
+$routes->get('/ubah-alamat', 'Pages::ubahAlamat');
 
 // Auth
 $routes->get('/login', 'Auth::login');
