@@ -1,37 +1,12 @@
 <?= $this->extend('templates/main/main-template') ?>
 
-<?= $this->section('styles') ?>
-<style>
-    .akun {
-        margin-top: 150px;
-        padding-bottom: 100px;
-    }
-
-    .akun-wrapper {
-        width: 74%;
-    }
-
-    @media screen and (max-width: 576px) {
-        .akun {
-            margin-top: 50px;
-        }
-    }
-
-    @media screen and (max-width: 992px) {
-        .akun {
-            margin-top: 50px;
-        }
-    }
-</style>
-<?= $this->endSection() ?>
-
 <?= $this->section('content') ?>
-<section class="akun d-flex justify-content-center">
-    <div class="akun-wrapper">
+<section class="section-pages">
+    <div class="pages-wrapper">
         <div class="d-flex justify-content-between">
                 <div>
                     <h4 class="fw-bold">Akun saya</h4>
-                    <p>Selamat datang, <?= $akun['nama'] ?>!</p>
+                    <p>Selamat datang, Danang!</p>
                 </div>
                 <div>
                     <a class="btn btn-dark" href="<?= base_url('logout-member') ?>">Keluar <i class="fas fa-sign-out-alt"></i></a>

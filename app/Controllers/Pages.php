@@ -95,6 +95,15 @@ class Pages extends BaseController
         return view('detail-order', $data);
     }
 
+    public function tambahAlamat()
+    {
+        $data = [
+            'title' => 'Tambah Alamat'
+        ];
+
+        return view('tambah-alamat', $data);
+    }
+
     public function ubahAlamat()
     {
         $data = [

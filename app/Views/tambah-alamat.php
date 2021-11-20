@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 <section class="section-pages">
     <div class="pages-wrapper">
-        <h4 class="mb-5 fw-bold">Ubah Alamat</h4>
+        <h4 class="mb-5 fw-bold">Tambah Alamat</h4>
         <form action="" method="post">
         <div class="row">
             <div class="col-md-6">
@@ -40,7 +40,7 @@
                     <input type="number" class="form-control" id="kodepos" name="kodepos">
                 </div>
             </div>
-            <button class="btn btn-dark mt-3">Simpan</button>
+            <button class="btn btn-dark mt-3">Tambah</button>
         </div>
         </form>
     </div>

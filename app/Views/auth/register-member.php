@@ -1,34 +1,8 @@
 <?= $this->extend('templates/main/main-template') ?>
 
-<?= $this->section('styles') ?>
-<style>
-    .detail {
-        margin-top: 150px;
-        padding-bottom: 100px;
-    }
-
-    .form-select:focus {
-        border-color: #000;
-        box-shadow: inset 0 1px 1px #000, 0 0 8px #000;
-    }
-
-    @media screen and (max-width: 576px) {
-        .detail {
-            margin-top: 50px;
-        }
-    }
-
-    @media screen and (max-width: 992px) {
-        .detail {
-            margin-top: 50px;
-        }
-    }
-</style>
-<?= $this->endSection() ?>
-
 <?= $this->section('content') ?>
-<section class="detail">
-    <div class="container">
+<section class="section-pages">
+    <div class="pages-wrapper">
         <div class="card">
             <div class="card-body py-5 pe-5">
                 <div class="row">

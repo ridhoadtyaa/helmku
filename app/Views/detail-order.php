@@ -2,36 +2,15 @@
 
 <?= $this->section('styles') ?>
 <style>
-    .detailOrder {
-        margin-top: 150px;
-        padding-bottom: 100px;
-    }
-
     .tanggal-beli {
         margin-top: -10px;
-    }
-
-    .detailOrder-wrapper {
-        width: 74%;
-    }
-
-    @media screen and (max-width: 576px) {
-        .detailOrder {
-            margin-top: 50px;
-        }
-    }
-
-    @media screen and (max-width: 992px) {
-        .detailOrder {
-            margin-top: 50px;
-        }
     }
 </style>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-<section class="detailOrder d-flex justify-content-center">
-    <div class="detailOrder-wrapper">
+<section class="section-pages">
+    <div class="pages-wrapper">
         <h4># Detail order 812488124</h4>
         <p class="text-muted">Menunggu pembayaran</p>
         <div class="row">
@@ -85,8 +64,8 @@
                                 <p>Alamat</p>
                             </div>
                             <div class="col-md-6 col-6">
-                                <p class="mt-3">SiCepat</p>
-                                <p>9012904014</p>
+                                <p class="mt-3">-</p>
+                                <p>-</p>
                                 <p>Jl Purwakarta 169, Jawa Barat, Bandung, 40291</p>
                             </div>
                         </div>

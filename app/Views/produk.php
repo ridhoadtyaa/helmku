@@ -5,8 +5,8 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-<section class="produk d-flex justify-content-center">
-    <div class="produk-wrapper">
+<section class="section-pages">
+    <div class="pages-wrapper">
         <div class="row mb-3">
             <div class="d-flex justify-content-between">
                 <h4>⚡ FLASH SALE</h4>

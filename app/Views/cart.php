@@ -2,36 +2,15 @@
 
 <?= $this->section('styles') ?>
 <style>
-    .keranjang {
-        margin-top: 150px;
-        padding-bottom: 100px;
-    }
-
-    .keranjang-wrapper {
-        width: 74%;
-    }
-
     .keranjang .card img {
         width: 100px;
-    }
-
-    @media screen and (max-width: 576px) {
-        .keranjang {
-            margin-top: 50px;
-        }
-    }
-
-    @media screen and (max-width: 992px) {
-        .keranjang {
-            margin-top: 50px;
-        }
     }
 </style>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-<section class="keranjang d-flex justify-content-center">
-    <div class="keranjang-wrapper">
+<section class="section-pages keranjang">
+    <div class="pages-wrapper">
         <!-- no cart -->
         <div class="text-center">
             <img src="/assets/img/nocart.png" width="180" alt="">

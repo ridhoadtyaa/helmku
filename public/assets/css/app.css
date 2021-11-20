@@ -214,7 +214,33 @@ footer {
     color: #000;
 }
 
+.form-control:focus {
+    border-color: #000;
+    box-shadow: inset 0 1px 1px #000, 0 0 8px #000;
+}
+
+.form-select:focus {
+    border-color: #000;
+    box-shadow: inset 0 1px 1px #000, 0 0 8px #000;
+}
+
+.section-pages {
+    display: flex;
+    justify-content: center;
+    margin-top: 150px;
+    padding-bottom: 100px;
+}
+
+.pages-wrapper {
+    width: 74%;
+}
+
+
 @media screen and (max-width: 992px) {
+    .section-pages {
+        margin-top: 50px;
+    }
+
     .promotion-bar, .navbar {
         position: static;
     }
@@ -250,6 +276,10 @@ footer {
 }
 
 @media screen and (max-width: 576px) {
+    .section-pages {
+        margin-top: 50px;
+    }
+
     .promotion-bar, .navbar {
         position: static;
     }

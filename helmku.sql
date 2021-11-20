@@ -6,7 +6,8 @@
 -- Generation Time: Nov 19, 2021 at 10:41 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 7.3.28
-
+CREATE DATABASE helmku;
+use helmku;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
