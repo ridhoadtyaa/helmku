@@ -3,12 +3,10 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 16, 2021 at 03:18 PM
+-- Generation Time: Nov 19, 2021 at 10:41 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 7.3.28
 
-CREATE DATABASE helmku;
-USE helmku;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -22,6 +20,27 @@ SET time_zone = "+00:00";
 --
 -- Database: `helmku`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `data_admin`
+--
+
+CREATE TABLE `data_admin` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(150) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(180) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `data_admin`
+--
+
+INSERT INTO `data_admin` (`id`, `nama`, `username`, `email`, `password`) VALUES
+(1, 'SuperAdmin', 'admin', 'admin@gmail.com', '$2y$10$GwcFaZlD28AT6Bqe6gjrPuZoG10zzxmA/brfnSJC3kmtcscB46lWe');
 
 -- --------------------------------------------------------
 
@@ -76,14 +95,23 @@ INSERT INTO `data_kategori` (`id_kategori`, `nama`) VALUES
 
 CREATE TABLE `data_pengguna` (
   `users_id` int(11) NOT NULL,
-  `role` int(11) NOT NULL,
   `nama` varchar(150) NOT NULL,
   `email` varchar(200) NOT NULL,
-  `alamat` text DEFAULT NULL,
+  `no_hp` varchar(20) DEFAULT NULL,
+  `alamat_jalan` text DEFAULT NULL,
+  `kecamatan` varchar(180) DEFAULT NULL,
+  `kelurahan` varchar(180) DEFAULT NULL,
   `password` text NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `data_pengguna`
+--
+
+INSERT INTO `data_pengguna` (`users_id`, `nama`, `email`, `no_hp`, `alamat_jalan`, `kecamatan`, `kelurahan`, `password`, `created_at`, `updated_at`) VALUES
+(1, 'Danang Kusuma', 'danang@gmail.com', NULL, NULL, NULL, NULL, '$2y$10$Rt2BnqdX3eVJqMCtGB7vJu/wrhQbY9oFC8PcwToM.KlAxbC3teP1a', '2021-11-20 04:21:52', '2021-11-20 04:21:52');
 
 -- --------------------------------------------------------
 
@@ -107,7 +135,9 @@ CREATE TABLE `data_produk` (
 --
 
 INSERT INTO `data_produk` (`id`, `nama`, `deskripsi`, `gambar`, `kategori`, `url_slug`, `created_at`, `updated_at`) VALUES
-(8, 'KYT', 'KYT Sport ', '1637072078_3534ee7278fc29178664.png', 3, 'KYT-6193bcce85c6c', '2021-11-16 21:14:38', '2021-11-16 21:15:53');
+(8, 'KYT', 'KYT Sport ', '1637072078_3534ee7278fc29178664.png', 3, 'KYT-6193bcce85c6c', '2021-11-16 21:14:38', '2021-11-19 02:59:14'),
+(9, 'Cargloss', '<p><u>Huahwhewhewhsh putangina&nbsp;</u></p>', '1637072539_09cc38022c04104e48a8.jpg', 4, 'Cargloss-6193be9b79259', '2021-11-16 21:22:19', '2021-11-20 02:29:25'),
+(10, 'Helm Bogo Classic Dewasa Kaca Datar SNI', 'ok', '1637093563_80d8a40e7ec8bbd5ca42.jfif', 4, 'Helm-Bogo-Classic-Dewasa-Kaca-Datar-SNI-619410bb172bf', '2021-11-17 03:12:43', '2021-11-17 03:13:39');
 
 -- --------------------------------------------------------
 
@@ -128,8 +158,11 @@ CREATE TABLE `data_stok_produk` (
 --
 
 INSERT INTO `data_stok_produk` (`id`, `id_produk`, `ukuran`, `stok`, `harga`) VALUES
-(12, 8, 'XL', 10, 800000),
-(13, 8, 'L', 10, 499999);
+(12, 8, 'XL', 1, 800000),
+(13, 8, 'L', 1, 499999),
+(14, 9, 'XL', 59, 800000),
+(15, 9, 'L', 10, 800000),
+(16, 10, 'XL', 10, 400000);
 
 -- --------------------------------------------------------
 
@@ -145,6 +178,8 @@ CREATE TABLE `data_transaksi` (
   `kd_bank` int(11) NOT NULL,
   `kuantitas` int(11) NOT NULL,
   `status` varchar(50) NOT NULL,
+  `no_resi` varchar(50) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
   `total_bayar` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -167,6 +202,12 @@ CREATE TABLE `migrations` (
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `data_admin`
+--
+ALTER TABLE `data_admin`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `data_bank`
@@ -228,6 +269,12 @@ ALTER TABLE `migrations`
 --
 
 --
+-- AUTO_INCREMENT for table `data_admin`
+--
+ALTER TABLE `data_admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `data_bank`
 --
 ALTER TABLE `data_bank`
@@ -243,19 +290,19 @@ ALTER TABLE `data_kategori`
 -- AUTO_INCREMENT for table `data_pengguna`
 --
 ALTER TABLE `data_pengguna`
-  MODIFY `users_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `users_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `data_produk`
 --
 ALTER TABLE `data_produk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `data_stok_produk`
 --
 ALTER TABLE `data_stok_produk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `data_transaksi`

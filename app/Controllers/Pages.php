@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Produk;
 use App\Models\Stok;
+use App\Models\UserModel;
 
 class Pages extends BaseController
 {
@@ -11,6 +12,7 @@ class Pages extends BaseController
     {
         $this->produkModel  = new Produk();
         $this->stokModel    = new Stok();
+        $this->userModel    = new UserModel();
     }
 
     public function index()
@@ -80,7 +82,7 @@ class Pages extends BaseController
         $data = [
             'title' => 'Akun'
         ];
-
+        $data['akun'] = $this->userModel->where('email', session()->email)->first();
         return view('akun', $data);
     }
 

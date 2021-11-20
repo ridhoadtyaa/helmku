@@ -3,29 +3,155 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\AdminModel;
+use App\Models\UserModel;
 
 class Auth extends BaseController
 {
+    public function __construct()
+    {
+        $this->adminModel   = new AdminModel();
+        $this->userModel    = new UserModel();
+    }
+
     public function login()
     {
+        if(session()->isUserLogin){
+            return redirect()->to('akun');
+        }
         $data['title'] = 'Login';
-        return view('auth/login', $data);
+        if($this->validate([
+            'email'     => [
+                'rules'     => 'required',
+                'errors'    => '{field} tidak boleh kosong'
+            ],
+            'password'  => [
+                'rules'     => 'required',
+                'errors'    => '{field} tidak boleh kosong'
+            ]
+        ])){
+            $cek = $this->userModel->where('email', $this->request->getPost('email'))->first();
+            if($cek){
+                if(password_verify($this->request->getPost('password'), $cek['password'])){
+                    session()->set([
+                        'isUserLogin'   => true,
+                        'userEmail'     => $this->request->getPost('email')
+                    ]);
+                    session()->setFlashdata('success', 'Sukses masuk ke dalam akun.');
+                    return redirect()->to('akun');
+                }else{
+                    session()->setFlashdata('danger', 'Email atau Password tidak tepat.');
+                    return redirect()->to('login-member');
+                }
+            }else{
+                session()->setFlashdata('danger', 'Email atau Password tidak tepat.');
+                return redirect()->to('login-member');
+            }
+        }
+        return view('auth/login-member', $data);
     }
 
     public function register()
     {
+        if(session()->isUserLogin){
+            return redirect()->to('akun');
+        }
         $data['title'] = 'Registrasi Akun';
         if($this->validate([
-            'first_name'    => [
+            'nama'    => [
                 'rules'     => 'required',
                 'errors'    => '{field} tidak boleh kosong'
             ],
-            'last_name'     => [
+            'email'   => [
+                'rules'     => 'required',
+                'errors'    => '{field} tidak boleh kosong & berupa email'
+            ],
+            'password'=> [
                 'rules'     => 'required',
                 'errors'    => '{field} tidak boleh kosong'
+            ]
+        ])){
+            $cek = $this->userModel->where('email', $this->request->getPost('email'))->first();
+            if($cek){
+                session()->setFlashdata('warning', 'Email sudah terdaftar!');
+                return redirect()->to('register-member')->withInput();
+            }else{
+                if($this->userModel->insert([
+                    'nama'      => $this->request->getPost('nama'),
+                    'email'     => $this->request->getPost('email'),
+                    'password'  => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT)
+                ])){
+                    session()->setFlashdata('success', 'Sukses mendaftar akun, kamu akan dipindahkan ke halaman akun.');
+                    session()->set([
+                        'isUserLogin'   => true,
+                        'userEmail'     => $this->request->getPost('email')
+                    ]);
+                    return redirect()->to('akun');
+                }else{
+                    session()->setFlashdata('danger', 'Gagal mendaftar akun, silahkan hubungi CS');
+                    return redirect()->to('register-member');
+                }
+            }
+        }
+        return view('auth/register-member', $data);
+    }
+
+    public function logout()
+    {
+        session()->remove([
+            'isUserLogin',
+            'userEmail'
+        ]);
+        return redirect()->to('login-member');
+    }
+
+    public function loginAdmin()
+    {
+        if(session()->isAdmin){
+            return redirect()->to('dashboard');
+            exit();
+        }
+
+        $data['title'] = 'Login';
+        if($this->validate([
+            'email'     => [
+                'rules'     => 'required',
+                'errors'    => '{field} harus di isi'
             ],
-            'email'    
-        ]))
-        return view('auth/register', $data);
+            'password'  => [
+                'rules'     => 'required',
+                'errors'    => '{field} harus di isi.'
+            ]
+        ])){
+            $cek = $this->adminModel->where('email', $this->request->getPost('email'))->first();
+            if($cek){
+                if(password_verify($this->request->getPost('password'), $cek['password'])){
+                    session()->set(
+                        [
+                            'isAdmin'   => true,
+                            'username'  => $cek['username'],
+                        ]
+                    );
+                    session()->setFlashdata('success', 'Sukses login, Selamat datang!');
+                    return redirect()->to('dashboard')->withInput();
+                }else{
+                    session()->setFlashdata('danger', 'Username atau Password tidak tepat.');
+                    return redirect()->to('momod/login')->withInput();
+                }
+            }else{
+                session()->setFlashdata('danger', 'Username atau Password tidak tepat.');
+                return redirect()->to('momod/login');
+            }
+        }
+        return view('auth/login-admin', $data);
+    }
+
+    public function logoutAdmin()
+    {
+        session()->remove([
+            'isAdmin',
+            'username'
+        ]);
+        return redirect()->to('momod/login');
     }
 }

@@ -1,5 +1,2 @@
-Add Login 
-Add Register
-Add Multi User
 Fix detail
 Pagination product
