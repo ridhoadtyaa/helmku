@@ -1,9 +1,2 @@
 tentang
 bantuan
-
-Do, coba ubah tampilan login sama register buat member + halaman cart yang bukan kosong
-oiya, kalo bisa sama dummy nav pager di halaman produk
-edit alamat
-page alamat
-
-edit alamat sama page alamat beda yak, edit adanya di akun aja, page alamat itu biar semisal belum isi alamat sama sekali maka di isi di halaman itu
