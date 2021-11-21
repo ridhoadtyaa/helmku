@@ -1,2 +1,3 @@
-Fix detail
+cart remove
+cart edit
 Pagination product
