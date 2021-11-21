@@ -19,7 +19,8 @@
 ?>
 <section class="section-pages">
     <div class="pages-wrapper">
-    <div class="card">
+    <a href="/produk" class="text-decoration-none text-dark"><i class="fas fa-arrow-left"></i> Kembali ke halaman produk</a>
+    <div class="card mt-3">
        <div class="card-body py-5 pe-5">
        <div class="row">
             <div class="col-md-5 text-center mb-3">
@@ -35,9 +36,9 @@
                 <p class="text-justify"><?= $data_produk['deskripsi'] ?></p>
                 
                 <div class="row">
-                    <div class="col-7 col-md-8">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6 mb-2">
+                    <div class="col-12">
+                        <div class="row mb-3">
+                            <div class="col-md-9 col-lg-6 col-sm-6 col-6">
                                 <select class="form-select" id="ukuran" aria-label="Default select example">
                                     <?php 
                                         $stokS = 0; foreach($stok as $s) {
@@ -51,9 +52,11 @@
                                     ?>
                                 </select>
                             </div>
-                            <div class="col-md-4 col-sm-4 mb-3 col-lg-2">
+                            <div class="col-md-3 col-lg-2 col-sm-3 col-3">
                                 <input type="number" id="quantity" class="form-control text-center" value="1" min="1">
                             </div>
+                        </div>
+                        <div class="row">
                             <?php if($stokS > 0) { ?>
                                 <div class="col-md-6">
                                     <button class="btn btn-dark" id="tambahKeranjang" data-idBarang="<?= $data_produk['url_slug'] ?>"><i class='bx bxs-cart-add'></i> Keranjang</button>
@@ -113,6 +116,7 @@
             quantity: qty,
             ukuran: size
         }, function(data){
+            console.log(data);
             if(data == "need_login"){
                 window.location.href = '<?= base_url('login-member') ?>';
             }else if(data == "400"){
