@@ -122,7 +122,7 @@
             }else if(data == "4005"){
                 alert("Kamu sudah menambahkan barang ini ke dalam keranjang.");
             }else{
-                let cartTotal = Number(<?= count(session()->get('cartList')) ?>);
+                let cartTotal = Number(<?= session()->has('cartList') ? count(session()->get('cartList')) : 0 ?>);
                 newCartTotal = cartTotal + Number(qty)
                 cart.setAttribute('data-totalitems', newCartTotal);
                 $('#cartModal').modal('show');
