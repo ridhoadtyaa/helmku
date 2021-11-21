@@ -42,11 +42,12 @@
                                 <select class="form-select" id="ukuran" aria-label="Default select example">
                                     <?php 
                                         $stokS = 0; foreach($stok as $s) {
+                                            $cartMsg = isset($s['in_cart']) ? $s['in_cart'] ? "[Dalam Keranjang]" : "" : "";
                                             if($s['stok'] != 0){
-                                                echo "<option value=\"".$s['ukuran']."\" data-ukuran=\"".$s['ukuran']."\">".$s['ukuran'].", Stok : ".$s['stok']." | ".format_rupiah($s['harga'])."</option>";
+                                                echo "<option value=\"".$s['ukuran']."\" data-ukuran=\"".$s['ukuran']."\">".$s['ukuran'].", Stok : ".$s['stok']." | ".format_rupiah($s['harga'])." ".$cartMsg."</option>";
                                                 $stokS += $s['stok'];
                                             }else{
-                                                echo "<option value=\"".$s['ukuran']."\" data-ukuran=\"".$s['ukuran']."\" disabled=\"\">".$s['ukuran'].", Stok : ".$s['stok']." | ".format_rupiah($s['harga'])."</option>";
+                                                echo "<option value=\"".$s['ukuran']."\" data-ukuran=\"".$s['ukuran']."\" disabled=\"\">".$s['ukuran'].", Stok : ".$s['stok']." | ".format_rupiah($s['harga'])." ".$cartMsg."</option>";
                                             }
                                         }
                                     ?>
@@ -83,7 +84,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Berhasil di tambahkan ke keranjang</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" aria-label="Close" onclick="location.reload();"></button>
       </div>
       <div class="modal-body">
         <div class="row">
@@ -91,13 +92,13 @@
                 <img src="/assets/img/produk/helm1.png" class="rounded img-thumbnail border-0">
             </div>
             <div class="col-md-8">
-                <h3>Bogo Retro</h3>
+                <h3><?= $data_produk['nama_produk'] ?></h3>
             </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-        <button type="button" class="btn btn-dark">Keranjang</button>
+        <button type="button" class="btn btn-secondary" onclick="location.reload();">Tutup</button>
+        <a href="<?= base_url('keranjang') ?>" class="btn btn-dark">Keranjang</a>
       </div>
     </div>
   </div>
@@ -121,6 +122,8 @@
                 window.location.href = '<?= base_url('login-member') ?>';
             }else if(data == "400"){
                 alert(data);
+            }else if(data == "0000"){
+                alert("Barang tidak ditemukan!");
             }else if(data == "4004"){
                 alert("Kuantitas barang yang ingin dibeli melebihi stok, mohon dikurangi sesuai stok yang tersedia.");
             }else if(data == "4005"){

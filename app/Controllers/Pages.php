@@ -53,6 +53,20 @@ class Pages extends BaseController
             return view('errors/errors-404');
         }
         $data['stok'] = $this->stokModel->where('id_produk', $prod[0]['id'])->findAll();
+        if(session()->has('cartList') && count(session()->get('cartList')) > 0 && isset(session()->get('cartList')[$slug])) {
+            $cartList = session()->cartList;
+            $i = 0;
+            foreach($data['stok'] as $s){
+                if($this->in_array_r($s['ukuran'], $cartList[$slug])){
+                    $searchKey = $this->searchUkuranIndex($s['ukuran'], $cartList[$slug]);
+                    $data['stok'][$i]['stok'] -= $cartList[$slug][$searchKey]['qty'];
+                    $data['stok'][$i]['in_cart'] = true;
+                }else{
+                    $data['stok'][$i]['in_cart'] = false;
+                }
+                $i++;
+            }
+        }
         $data['data_produk'] = $prod[0];
         $data['title'] = $data['data_produk']['nama_produk'];
 
@@ -64,7 +78,38 @@ class Pages extends BaseController
         $data = [
             'title' => 'Keranjang'
         ];
-
+        $cartList = session()->cartList;
+        $data['cartList'] = [];
+        $data['cartList_sold'] = [];
+        $data['cartCount'] = 0;
+        $data['cartCountSold'] = 0;
+        $i = 0;
+        foreach($cartList as $key => $value){
+            $data['cartList'][$key] = [];
+            $data['cartList_sold'][$key] = [];
+            foreach($value as $v){
+                $this->stokModel->select('*');
+                $this->stokModel->select('data_produk.*');
+                $this->stokModel->join('data_produk', 'data_stok_produk.id_produk = data_produk.id');
+                $this->stokModel->where('url_slug', $key);
+                $this->stokModel->where('ukuran', $v['ukuran']);
+                $stokInfo = $this->stokModel->get()->getResultArray()[0];
+                $newV = array_merge($v, [
+                    'nama_barang' => $stokInfo['nama'],
+                    'gambar'      => $stokInfo['gambar'],
+                    'harga'       => $stokInfo['harga']
+                ]);
+                if($v['qty'] <= $stokInfo['stok']){
+                    $data['cartCount'] += 1;
+                    array_push($data['cartList'][$key], $newV);
+                }else{
+                    $data['cartCountSold'] += 1;
+                    array_push($data['cartList_sold'][$key], $newV);
+                }
+                $i++;
+            }
+            $i = 0;
+        }
         return view('cart', $data);
     }
 
@@ -88,7 +133,11 @@ class Pages extends BaseController
                 $this->stokModel->join('data_produk', 'data_stok_produk.id_produk = data_produk.id');
                 $this->stokModel->where('url_slug', $idBarang);
                 $this->stokModel->where('ukuran', $ukuran);
-                $stokInfo = $this->stokModel->get()->getResultArray()[0];
+                $stokInfo = $this->stokModel->get()->getResultArray();
+                if(!$stokInfo){
+                    return "0000";
+                }
+                $stokInfo = $stokInfo[0];
                 if($quantity > $stokInfo['stok']){
                     return "4004";
                 }

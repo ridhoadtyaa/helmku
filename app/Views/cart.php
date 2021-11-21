@@ -8,7 +8,12 @@
 
     .produkOrder {
         overflow-y: scroll;
-        height: 400px;
+        <?= $cartCount > 2 ? "height: 400px;" : "height: 200px;"; ?>
+    }
+
+    .produkSold {
+        overflow-y: scroll;
+        <?= $cartCountSold > 2 ? "height: 400px;" : "height: 200px;"; ?>
     }
 
     /* .produkOrder::-webkit-scrollbar {
@@ -35,75 +40,57 @@
         <!--  -->
         <div class="row">
             <div class="col-md-6 mb-3 y">
-                <div class="card">
-                    <div class="card-body produkOrder">
-                        <div class="row">
-                            <div class="col-md-3 col-sm-3 col-3">
-                                <img src="/assets/img/produk/helm1.png" class="img-thumbnail rounded border-0">
-                            </div>
-                            <div class="col-md-5 col-sm-5 col-5">
-                                <p>Bogo Retro x1</p>
-                                <p>L</p>
-                                <i class='bx bx-trash'></i>
-                            </div>
-                            <div class="col-md-4 col-sm-4 col-4">
-                                <p>Rp 300.000</p>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-3 col-sm-3 col-3">
-                                <img src="/assets/img/produk/helm1.png" class="img-thumbnail rounded border-0">
-                            </div>
-                            <div class="col-md-5 col-sm-5 col-5">
-                                <p>Bogo Retro x1</p>
-                                <p>L</p>
-                                <i class='bx bx-trash'></i>
-                            </div>
-                            <div class="col-md-4 col-sm-4 col-4">
-                                <p>Rp 300.000</p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <h4 class="cart-title px-3 mt-3"><i class="bx bxs-cart"></i> Daftar Item</h4>
+                            <div class="card-body produkOrder">
+                                <?php 
+                                    foreach($cartList as $key => $val): 
+                                        foreach($val as $v):
+                                ?>
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-3 col-3">
+                                        <img src="<?= base_url('assets/img/produk/'.$v['gambar']) ?>" class="img-thumbnail rounded border-0">
+                                    </div>
+                                    <div class="col-md-5 col-sm-5 col-5">
+                                        <p><?= $v['nama_barang'] ?></p>
+                                        <p>Variasi : <?= $v['ukuran'] ?></p>
+                                        <i class='bx bx-trash'></i>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-4">
+                                        <p>x<?= $v['qty'] ?></p>
+                                        <p><?= format_rupiah($v['harga']*$v['qty']) ?></p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <?php endforeach; endforeach; ?>
                             </div>
                         </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-3 col-sm-3 col-3">
-                                <img src="/assets/img/produk/helm1.png" class="img-thumbnail rounded border-0">
-                            </div>
-                            <div class="col-md-5 col-sm-5 col-5">
-                                <p>Bogo Retro x1</p>
-                                <p>L</p>
-                                <i class='bx bx-trash'></i>
-                            </div>
-                            <div class="col-md-4 col-sm-4 col-4">
-                                <p>Rp 300.000</p>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-3 col-sm-3 col-3">
-                                <img src="/assets/img/produk/helm1.png" class="img-thumbnail rounded border-0">
-                            </div>
-                            <div class="col-md-5 col-sm-5 col-5">
-                                <p>Bogo Retro x1</p>
-                                <p>L</p>
-                                <i class='bx bx-trash'></i>
-                            </div>
-                            <div class="col-md-4 col-sm-4 col-4">
-                                <p>Rp 300.000</p>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-3 col-sm-3 col-3">
-                                <img src="/assets/img/produk/helm1.png" class="img-thumbnail rounded border-0">
-                            </div>
-                            <div class="col-md-5 col-sm-5 col-5">
-                                <p>Bogo Retro x1</p>
-                                <p>L</p>
-                                <i class='bx bx-trash'></i>
-                            </div>
-                            <div class="col-md-4 col-sm-4 col-4">
-                                <p>Rp 300.000</p>
+                    </div>
+                    <div class="col-md-12 mt-3">
+                        <div class="card">
+                            <h4 class="cart-title px-3 mt-3"><i class="bx bxs-x-circle"></i> Produk Habis</h4>
+                            <div class="card-body produkSold">
+                                <?php 
+                                    foreach($cartList_sold as $key => $val): 
+                                        foreach($val as $v):
+                                ?>
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-3 col-3">
+                                        <img src="<?= base_url('assets/img/produk/'.$v['gambar']) ?>" class="img-thumbnail rounded border-0">
+                                    </div>
+                                    <div class="col-md-5 col-sm-5 col-5">
+                                        <p><?= $v['nama_barang'] ?> x<?= $v['qty'] ?></p>
+                                        <p><?= $v['ukuran'] ?></p>
+                                        <i class='bx bx-trash'></i>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-4">
+                                        <p>Rp 300.000</p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <?php endforeach; endforeach; ?>
                             </div>
                         </div>
                     </div>
@@ -113,7 +100,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="justify-content-between d-flex">
-                            <h3>Total</h3>
+                            <h3># Total</h3>
                             <h4>Rp 300.000</h4>
                         </div>
                         <div class="justify-content-end d-flex">
@@ -129,7 +116,7 @@
 
 <!-- Kalo ada barang  -->
 <div class="row">
-    <div class="col-md-6  mb-3">
+    <div class="col-md-6 mb-3">
         <div class="card">
             <div class="card-body">
                 <div class="row">
