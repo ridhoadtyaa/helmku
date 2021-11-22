@@ -19,7 +19,7 @@
 ?>
 <section class="section-pages">
     <div class="pages-wrapper">
-    <a href="/produk" class="text-decoration-none text-dark"><i class="fas fa-arrow-left"></i> Kembali ke halaman produk</a>
+    <a href="/produk" class="text-decoration-none text-dark"><i class="fas fa-chevron-left"></i> Kembali ke halaman produk</a>
     <div class="card mt-3">
        <div class="card-body py-5 pe-5">
        <div class="row">
