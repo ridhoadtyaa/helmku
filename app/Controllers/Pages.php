@@ -113,6 +113,10 @@ class Pages extends BaseController
         return view('cart', $data);
     }
 
+    public function removeFromCart($slug, $varian)
+    {
+        //
+    }
     public function tambahCart()
     {
         if(!session()->isUserLogin){

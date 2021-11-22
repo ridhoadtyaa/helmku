@@ -34,15 +34,19 @@
 <section class="section-pages keranjang">
     <div class="pages-wrapper">
         <!-- no cart -->
-        <!-- <div class="text-center">
+        <?php if($cartCount < 1 and $cartCountSold < 1): ?>
+        <div class="text-center">
             <img src="/assets/img/nocart.png" width="180" alt="">
             <h3 class="text-muted my-3">Keranjangmu masih kosong.</h3>
             <a href="/produk" class="btn btn-dark">Belanja</a>
-        </div> -->
+        </div>
+        <?php endif ?>
         <!--  -->
+        <?php if ($cartCount > 0 or $cartCountSold > 0): ?>
         <div class="row">
             <div class="col-md-6 mb-3 y">
                 <div class="row">
+                    <?php if ($cartCount > 0) : ?>
                     <div class="col-md-12">
                         <div class="card">
                             <h4 class="cart-title px-3 mt-3"><i class="bx bxs-cart"></i> Daftar Item</h4>
@@ -72,6 +76,7 @@
                             </div>
                         </div>
                     </div>
+                    <?php endif ?>
                     <?php if ($cartCountSold > 0) : ?>
                     <div class="col-md-12 mt-3">
                         <div class="card">
@@ -87,11 +92,12 @@
                                     </div>
                                     <div class="col-md-5 col-sm-5 col-5">
                                         <p><?= $v['nama_barang'] ?> x<?= $v['qty'] ?></p>
-                                        <p><?= $v['ukuran'] ?></p>
+                                        <p>Variasi : <?= $v['ukuran'] ?></p>
                                         <i class='bx bx-trash'></i>
                                     </div>
                                     <div class="col-md-4 col-sm-4 col-4">
-                                        <p>Rp 300.000</p>
+                                        <p>x<?= $v['qty'] ?></p>
+                                        <p><?= format_rupiah($v['harga']*$v['qty']) ?></p>
                                     </div>
                                 </div>
                                 <hr>
@@ -116,6 +122,7 @@
                 </div>
             </div>
         </div>
+        <?php endif; ?>
     </div>
 </section>
 <?= $this->endSection() ?>
