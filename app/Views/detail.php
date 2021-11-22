@@ -30,7 +30,7 @@
                 <h3><?= $data_produk['nama_produk'] ?></h3>
                 <hr>
                 <p><strong>Kategori</strong> : <?= $data_produk['nama_kategori'] ?></p>
-                <p><strong>Stok</strong> : 69 </p>
+                <!-- <p><strong>Stok</strong> : 69 </p> -->
                 <h5><?= format_rupiah($lowestPrice)?><?= isset($highestPrice) ? $lowestPrice != $highestPrice ? ' - '.format_angka($highestPrice) : '' : '' ?></h5>
                 <p class="mt-5"><Strong>Deskripsi</Strong> : </p>
                 <p class="text-justify"><?= $data_produk['deskripsi'] ?></p>

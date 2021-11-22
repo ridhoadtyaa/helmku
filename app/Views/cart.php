@@ -16,15 +16,17 @@
         <?= $cartCountSold > 2 ? "height: 400px;" : "height: 200px;"; ?>
     }
 
-    /* .produkOrder::-webkit-scrollbar {
+    ::-webkit-scrollbar {
+        background-color: black;
+    }
+    ::-webkit-scrollbar-track {
         background-color: white;
     }
-
-    .produkOrder::-webkit-scrollbar-thumb {
+    ::-webkit-scrollbar-thumb {
         background-color: #000;
         border-radius: 20px;
         border: 3px solid white;
-    } */
+    } 
 </style>
 <?= $this->endSection() ?>
 
@@ -46,8 +48,10 @@
                             <h4 class="cart-title px-3 mt-3"><i class="bx bxs-cart"></i> Daftar Item</h4>
                             <div class="card-body produkOrder">
                                 <?php 
+                                    $harga = 0; 
                                     foreach($cartList as $key => $val): 
                                         foreach($val as $v):
+                                            $harga += $v['harga']*$v['qty'];
                                 ?>
                                 <div class="row">
                                     <div class="col-md-3 col-sm-3 col-3">
@@ -68,11 +72,12 @@
                             </div>
                         </div>
                     </div>
+                    <?php if ($cartCountSold > 0) : ?>
                     <div class="col-md-12 mt-3">
                         <div class="card">
                             <h4 class="cart-title px-3 mt-3"><i class="bx bxs-x-circle"></i> Produk Habis</h4>
                             <div class="card-body produkSold">
-                                <?php 
+                                <?php
                                     foreach($cartList_sold as $key => $val): 
                                         foreach($val as $v):
                                 ?>
@@ -94,6 +99,7 @@
                             </div>
                         </div>
                     </div>
+                    <?php endif ?>
                 </div>
             </div>
             <div class="col-md-6">
@@ -101,10 +107,10 @@
                     <div class="card-body">
                         <div class="justify-content-between d-flex">
                             <h3># Total</h3>
-                            <h4>Rp 300.000</h4>
+                            <h4><?= format_rupiah($harga) ?></h4>
                         </div>
                         <div class="justify-content-end d-flex">
-                            <button class="btn btn-dark mt-2">Beli</button>
+                            <button class="btn btn-dark mt-2"><i class="bx bx-money"></i> Check Out</button>
                         </div>
                     </div>
                 </div>
