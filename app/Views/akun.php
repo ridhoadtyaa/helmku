@@ -15,7 +15,7 @@
             </div>
             <div class="row pt-5">
                 <div class="col-md-8 mb-5">
-                    <p class="text-muted"><i class="fas fa-tasks"></i> Orderan Saya</p>
+                    <p class="text-muted"><i class="fas fa-tasks"></i> Order List</p>
                     <hr>
                     <!-- Kalo blm ada pesanan -->
                     <!-- <p class="py-3">Anda belum melakukan pemesanan apa pun</p> -->
@@ -23,8 +23,9 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">No. Orderan</th>
+                                <th scope="col">No. Order</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Tanggal</th>
                                 <th scope="col">No. Resi</th>
                                 <th>Aksi</th>
                             </tr>
@@ -34,6 +35,7 @@
                             <tr>
                                 <th scope="row"># <?= $d['kode_trx'] ?></th>
                                 <td><?= $d['status'] ?></td>
+                                <td><?= date('d/m/Y', strtotime($d['created_at'])) ?></td>
                                 <td><?= !$d['no_resi'] ? '-' : $d['no_resi'] ?></td>
                                 <td>
                                     <a href="<?= base_url('detail-order/'.$d['kode_trx']) ?>" class="badge rounded-pill bg-dark text-decoration-none text-white">Detail</a>
