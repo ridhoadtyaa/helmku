@@ -39,6 +39,7 @@ $routes->get('detail/(:any)', 'Pages::detail/$1');
 $routes->get('/keranjang', 'Pages::cart', ['filter' => 'userFilter']);
 $routes->post('/tambah-keranjang', 'Pages::tambahCart');
 $routes->get('/produk', 'Pages::produk');
+$routes->get('/tentang', 'Pages::tentang');
 $routes->get('/detail-order', 'Pages::detailOrder', ['filter' => 'userFilter']);
 $routes->get('/ubah-alamat', 'Pages::ubahAlamat', ['filter' => 'userFilter']);
 $routes->get('/tambah-alamat', 'Pages::tambahAlamat', ['filter' => 'userFilter']);

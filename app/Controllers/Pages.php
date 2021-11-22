@@ -260,4 +260,11 @@ class Pages extends BaseController
 
         return view('ubah-alamat', $data);
     }
+
+    public function tentang()
+    {
+        $data['title'] = 'Tentang Kami';
+
+        return view('tentang', $data);
+    }
 }
