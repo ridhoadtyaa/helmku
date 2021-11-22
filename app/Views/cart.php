@@ -33,6 +33,7 @@
 <?= $this->section('content') ?>
 <section class="section-pages keranjang">
     <div class="pages-wrapper">
+        <?= $this->include('templates/dashboard/partials/alert') ?>
         <!-- no cart -->
         <?php if($cartCount < 1 and $cartCountSold < 1): ?>
         <div class="text-center">
@@ -64,7 +65,7 @@
                                     <div class="col-md-5 col-sm-5 col-5">
                                         <p><?= $v['nama_barang'] ?></p>
                                         <p>Variasi : <?= $v['ukuran'] ?></p>
-                                        <i class='bx bx-trash'></i>
+                                        <i type="button" idBarang="<?= $key ?>" variasi="<?= $v['ukuran'] ?>" class='removeFromCart bx bx-trash'></i>
                                     </div>
                                     <div class="col-md-4 col-sm-4 col-4">
                                         <p>x<?= $v['qty'] ?></p>
@@ -116,7 +117,10 @@
                             <h4><?= format_rupiah($harga) ?></h4>
                         </div>
                         <div class="justify-content-end d-flex">
-                            <a href="<?= base_url('checkout') ?>" class="btn btn-dark mt-2"><i class="bx bx-money"></i> Check Out</a>
+                            <form method="POST" action="<?= base_url('checkout') ?>">
+                                <?= csrf_field() ?>
+                                <button type="submit" class="btn btn-dark mt-2"><i class="bx bx-money"></i> Check Out</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -191,6 +195,25 @@
     </div>
 </div>
 
+<?= $this->section('javascript') ?>
+<script>
+    $('.removeFromCart').on('click', function(){
+        let idBarang = $(this).attr('idBarang');
+        let variasi = $(this).attr('variasi');
+        $.post('<?= base_url('remove-keranjang') ?>', {
+            idBarang: idBarang,
+            variasi: variasi
+        }, function(data){
+            if(data == "need_login"){
+                window.location.href = '<?= base_url('login-member') ?>';
+            }else if(data == "ok" || data == "okk"){
+                alert('Berhasil menghapus barang dari keranjang');
+                window.location.href = '<?= base_url('keranjang') ?>';
+            }
+        });
+    })
+</script>
+<?= $this->endSection() ?>
 <!-- no cart -->
 <!-- <div class="text-center">
     <img src="/assets/img/nocart.png" width="180" alt="">

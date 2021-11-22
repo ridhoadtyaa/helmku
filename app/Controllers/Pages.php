@@ -4,15 +4,17 @@ namespace App\Controllers;
 
 use App\Models\Produk;
 use App\Models\Stok;
+use App\Models\TransaksiModel;
 use App\Models\UserModel;
 
 class Pages extends BaseController
 {
     public function __construct()
     {
-        $this->produkModel  = new Produk();
-        $this->stokModel    = new Stok();
-        $this->userModel    = new UserModel();
+        $this->produkModel      = new Produk();
+        $this->stokModel        = new Stok();
+        $this->userModel        = new UserModel();
+        $this->transaksiModel   = new TransaksiModel();
         helper(['rupiah']);
     }
 
@@ -124,8 +126,30 @@ class Pages extends BaseController
         ])){
             $idBarang = $this->request->getPost('idBarang');
             $variasi = $this->request->getPost('variasi');
+            $cartList = session()->get('cartList');
+            if(isset($cartList[$idBarang])){
+                if($this->in_array_r($variasi, $cartList[$idBarang])){
+                    $searchKey = $this->searchUkuranIndex($variasi, $cartList[$idBarang]);
+                    if(count($cartList[$idBarang]) > 1){
+                        unset($cartList[$idBarang][$searchKey]);
+                    }else{
+                        unset($cartList[$idBarang]);
+                    }
+                    session()->set('cartList', $cartList);
+                    return "ok";
+                }else{
+                    unset($cartList[$idBarang]);
+                    session()->push($cartList);
+                    return "ok";
+                }
+            }else{
+                return "okk";
+            }
+        }else{
+            return "400";
         }
     }
+
     public function tambahCart()
     {
         if(!session()->isUserLogin){
@@ -197,10 +221,86 @@ class Pages extends BaseController
         }
     }
 
+    public function checkout()
+    {
+        if($this->request->getPost()){
+            $cartList = session()->get('cartList');
+            if(count($cartList) < 1){
+                session()->setFlashdata('danger', 'Gagal Checkout karena tidak ada barang didalam keranjang.');
+                return redirect()->to('keranjang');
+            }else{
+                $produkKosong = 0;
+                $produkFixCart = [];
+                $generateTrxID = "HLM".strtoupper(uniqid());
+                foreach($cartList as $key => $val){
+                    foreach($val as $v){
+                        $this->stokModel->select('*');
+                        $this->stokModel->select('data_produk.*');
+                        $this->stokModel->join('data_produk', 'data_stok_produk.id_produk = data_produk.id');
+                        $this->stokModel->where('url_slug', $key);
+                        $this->stokModel->where('ukuran', $v['ukuran']);
+                        $stokInfo = $this->stokModel->get()->getResultArray();
+                        if(!$stokInfo){
+                            if(isset($cartList[$key])){
+                                if($this->in_array_r($v['ukuran'], $cartList[$key])){
+                                    $searchKey = $this->searchUkuranIndex($v['ukuran'], $cartList[$key]);
+                                    if(count($cartList[$key]) > 1){
+                                        unset($cartList[$key][$searchKey]);
+                                    }else{
+                                        unset($cartList[$key]);
+                                    }
+                                    session()->set('cartList', $cartList);
+                                }else{
+                                    unset($cartList[$key]);
+                                    session()->set('cartList', $cartList);
+                                }
+                            }
+                            $produkKosong = 1;
+                        }else{
+                            array_push($produkFixCart, [
+                                'kode_trx'      => $generateTrxID,
+                                'id_buyer'      => session()->userid,
+                                'nama_produk'   => $stokInfo[0]['nama'],
+                                'variasi'       => $v['ukuran'],
+                                'kuantitas'     => $v['qty'],
+                                'status'        => 'Menunggu Pembayaran',
+                                'harga'         => $stokInfo[0]['harga'],
+                                'alamat_jalan'  => $this->userModel->where('users_id', session()->userid)->first()['alamat_jalan']
+                            ]);
+                        }
+                    }
+                }
+                if($produkKosong > 0){
+                    session()->setFlashdata('danger', 'Gagal Checkout karena beberapa barang tidak tersedia saat ini, mohon coba kembali.');
+                    return redirect()->to('keranjang');
+                }else{
+                    $cek = $this->userModel->where('email', session()->userEmail)->first();
+                    if(!$cek['no_hp'] || !$cek['alamat_jalan'] || !$cek['kecamatan'] || !$cek['kelurahan']){
+                        $data = [
+                            'title' => 'Tambah Alamat'
+                        ];
+                        $data['user_data'] = $this->userModel->where('email', session()->userEmail)->first();
+                        session()->setFlashdata('danger', 'Jika kamu ingin melakukan Checkout, harap isi alamat terlebih dahulu!');
+                        return view('tambah-alamat', $data);
+                    }else{
+                        // dd($produkFixCart);
+                        if($this->transaksiModel->insertBatch($produkFixCart)){
+                            session()->set('cartList', []);
+                            session()->setFlashdata('success', 'Sukses melakukan checkout produk, harap melakukan pembayaran sebelum terjadi pembatalan otomatis 1x24 jam');
+                            return redirect()->to('detail-order/'.$generateTrxID);
+                        }else{
+                            session()->setFlashdata('danger', 'Gagal melakukan checkout');
+                            return redirect()->to('akun');
+                        }
+                    }
+                }
+            }
+        }
+    }
     public function produk()
     {
         $data = [
-            'title'     => 'Produk',
+            'title' => 'Produk',
         ];
 
         $data['produks']     = $this->produkModel->paginate(5);
@@ -231,24 +331,73 @@ class Pages extends BaseController
             'title' => 'Akun'
         ];
         $data['akun'] = $this->userModel->where('email', session()->userEmail)->first();
+        $this->transaksiModel->select('*');
+        $this->transaksiModel->selectMin('id');
+        $this->transaksiModel->groupBy('kode_trx');
+        $this->transaksiModel->where('id_buyer', session()->userid);
+        $data['data_trx'] = $this->transaksiModel->findAll();
         return view('akun', $data);
     }
 
-    public function detailOrder()
+    public function detailOrder($kode_trx = false)
     {
         $data = [
             'title' => 'Detail order'
         ];
 
+        $data['data_trx'] = $this->transaksiModel->where('kode_trx', $kode_trx)->findAll();
+        if(!$data['data_trx']){
+            return view('errors/errors-404');
+        }
         return view('detail-order', $data);
     }
 
+    public function cancelOrder()
+    {
+        if($this->validate([
+            'kode_trx' => 'required'
+        ])){
+            if(!$this->transaksiModel->where('kode_trx', $this->request->getPost('kode_trx'))->first()){
+                session()->setFlashdata('danger', 'Data transaksi tidak ditemukan');
+                return redirect()->to('akun');
+            }
+            if($this->transaksiModel->set('status', 'Dibatalkan')->where('kode_trx', $this->request->getPost('kode_trx'))->update()){
+                session()->setFlashdata('success', 'Sukses membatalkan pesanan');
+            }else{
+                session()->setFlashdata('danger', 'Gagal membatalkan pesanan');
+            }
+            return redirect()->to('detail-order/'.$this->request->getPost('kode_trx'));
+        }
+    }
     public function tambahAlamat()
     {
         $data = [
             'title' => 'Tambah Alamat'
         ];
-
+        $data['user_data'] = $this->userModel->where('email', session()->userEmail)->first();
+        if($this->validate([
+            'namaPenerima'  => 'required',
+            'noHp'          => 'required|integer',
+            'kota'          => 'required',
+            'kecamatan'     => 'required',
+            'kelurahan'     => 'required',
+            'alamatLengkap' => 'required'
+        ])){
+            if($this->userModel->where('email', session()->userEmail)->update(session()->userid, [
+                'nama'          => $this->request->getPost('namaPenerima'),
+                'no_hp'         => $this->request->getPost('noHp'),
+                'kota'          => $this->request->getPost('kota'),
+                'alamat_jalan'  => $this->request->getPost('alamatLengkap'),
+                'kecamatan'     => $this->request->getPost('kecamatan'),
+                'kelurahan'     => $this->request->getPost('kelurahan')
+            ])){
+                session()->setFlashdata('success', 'Sukses menambahkan alamat');
+                return redirect()->to('akun');
+            }else{
+                session()->setFlashdata('danger', 'Gagal menambahkan alamat');
+                return redirect()->to('tambah-alamat');
+            }
+        }
         return view('tambah-alamat', $data);
     }
 

@@ -3,6 +3,7 @@
 <?= $this->section('content') ?>
 <section class="section-pages">
     <div class="pages-wrapper">
+    <?= $this->include('templates/dashboard/partials/alert') ?>
         <div class="d-flex justify-content-between">
                 <div>
                     <h4 class="fw-bold">Akun saya</h4>
@@ -29,14 +30,16 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php foreach($data_trx as $d): ?>
                             <tr>
-                                <th scope="row">19129409</th>
-                                <td>Menunggu pembayaran</td>
-                                <td>-</td>
+                                <th scope="row"># <?= $d['kode_trx'] ?></th>
+                                <td><?= $d['status'] ?></td>
+                                <td><?= !$d['no_resi'] ? '-' : $d['no_resi'] ?></td>
                                 <td>
-                                    <a href="/detail-order" class="badge rounded-pill bg-dark text-decoration-none text-white">Detail</a>
+                                    <a href="<?= base_url('detail-order/'.$d['kode_trx']) ?>" class="badge rounded-pill bg-dark text-decoration-none text-white">Detail</a>
                                 </td>
                             </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
@@ -45,9 +48,9 @@
                     <hr>
                     <?php if($akun['alamat_jalan'] != NULL) { ?>
                     <!-- when sudah ada -->
-                    <p class="py-3">Agung</p>
-                    <p>0812459124</p>
-                    <p>Jl bangau no 26, Kota, Kecamatan, Kode Pos</p>
+                    <p class="py-3"><?= $akun['nama'] ?></p>
+                    <p><?= $akun['no_hp'] ?></p>
+                    <p><?= $akun['alamat_jalan'] ?></p>
 
                     <a href="/ubah-alamat" class="btn btn-dark mt-3">Ubah Alamat</a>
                     <?php } else { ?>

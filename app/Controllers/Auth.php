@@ -48,6 +48,7 @@ class Auth extends BaseController
             if($cek){
                 if(password_verify($this->request->getPost('password'), $cek['password'])){
                     session()->set([
+                        'userid'        => $cek['users_id'],
                         'isUserLogin'   => true,
                         'userEmail'     => $this->request->getPost('email'),
                         'cartList'      => []
@@ -111,6 +112,7 @@ class Auth extends BaseController
                 ])){
                     session()->setFlashdata('success', 'Sukses mendaftar akun, kamu akan dipindahkan ke halaman akun.');
                     session()->set([
+                        'userid'        => $this->userModel->insertID(),
                         'isUserLogin'   => true,
                         'userEmail'     => $this->request->getPost('email'),
                         'cartList'      => []

@@ -11,12 +11,16 @@
 <?= $this->section('content') ?>
 <section class="section-pages">
     <div class="pages-wrapper">
-        <h4># Detail order 812488124</h4>
-        <p class="text-muted">Menunggu pembayaran</p>
+        <div class="py-3 align-right">
+            <a href="/akun" class="text-decoration-none text-dark"><i class="fas fa-chevron-left"></i> Kembali</a>
+        </div>
+        <?= $this->include('templates/dashboard/partials/alert') ?>
+        <h4>Detail Order #<?= $data_trx[0]['kode_trx'] ?></h4>
+        <p class="text-muted"><?= $data_trx[0]['status'] ?></p>
         <div class="row">
             <div class="col-md-6 d-flex justify-content-between tanggal-beli">
                 <p class="text-muted">Tanggal Pembelian</p>
-                <p>1 November 2021, 09:00:12</p>
+                <p><?= date("d F Y H:i:s", strtotime($data_trx[0]['created_at'])) ?> WIB</p>
             </div>
         </div>
         <div class="row">
@@ -27,28 +31,23 @@
                             <th scope="col">No</th>
                             <th scope="col">Produk</th>
                             <th scope="col">Jumlah</th>
-                            <th scope="col">Ukuran</th>
+                            <th scope="col">Variasi</th>
                             <th scope="col">Total Harga</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <?php $i = 1; $harga = 0; foreach($data_trx as $d): ?>
                         <tr>
-                            <th scope="row">1</th>
-                            <td>KYT Black</td>
-                            <td>1</td>
-                            <td>M</td>
-                            <td>Rp. 499.999</td>
+                            <th scope="row"><?= $i ?></th>
+                            <td><?= $d['nama_produk'] ?></td>
+                            <td><?= $d['kuantitas'] ?></td>
+                            <td><?= $d['variasi'] ?></td>
+                            <td><?= format_rupiah($d['harga']) ?></td>
                         </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>KYT Black</td>
-                            <td>1</td>
-                            <td>L</td>
-                            <td>Rp. 499.999</td>
-                        </tr>
+                        <?php $i++; $harga += $d['harga']; endforeach; ?>
                         <tr>
                             <td colspan="4" class="text-center">Total Bayar</td>
-                            <td>Rp. 69696969</td>
+                            <td><?= format_rupiah($harga) ?></td>
                         </tr>
                     </tbody>
                 </table>
@@ -66,7 +65,7 @@
                             <div class="col-md-6 col-6">
                                 <p class="mt-3">-</p>
                                 <p>-</p>
-                                <p>Jl Purwakarta 169, Jawa Barat, Bandung, 40291</p>
+                                <p><?= $data_trx[0]['alamat_jalan'] ?></p>
                             </div>
                         </div>
                     </div>
@@ -74,8 +73,10 @@
             </div>
         </div>
         <div class="mt-3">
+            <?php if($data_trx[0]['status'] != 'Dibatalkan'): ?>
             <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#bayarModal">Bayar</button> <!-- kalo dah bayar jadiin btn-secondary aja -->
             <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#batalModal">Batalkan</button>  
+            <?php endif; ?>
         </div>
     </div>
 </section>
@@ -124,8 +125,11 @@
         <p>Yakin ingin membatalkan pesanan ?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
-        <button type="button" class="btn btn-dark">Batalkan</button>
+        <form method="POST" action="<?= base_url('cancel-order') ?>">
+            <input type="hidden" name="kode_trx" value="<?= $data_trx[0]['kode_trx'] ?>">
+            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Tidak</button>
+            <button type="submit" class="btn btn-danger">Batalkan</button>
+        </form>
       </div>
     </div>
   </div>
