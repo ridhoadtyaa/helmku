@@ -74,8 +74,8 @@
             </div>
         </div>
         <div class="mt-3">
-            <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#bayarModal">Bayar</button>
-            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#batalModal">Batalkan</button>  <!-- kalo dah bayar jadiin btn-secondary aja -->
+            <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#bayarModal">Bayar</button> <!-- kalo dah bayar jadiin btn-secondary aja -->
+            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#batalModal">Batalkan</button>  
         </div>
     </div>
 </section>
@@ -89,13 +89,13 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>Foto bukti transfer harus terlihat jelas</p>
-        <div class="row mt-4">
-            <div class="col-md-6">
+          <div class="row">
+              <div class="col-md-6">
+                <p>Foto bukti transfer harus terlihat jelas</p>
                 <label for="formFile" class="form-label">Masukkan bukti transfer</label>
                 <input class="form-control" type="file" id="formFile">
             </div>
-            <div class="col-md-6 mt-3">
+            <div class="col-md-6">
                 <ul class="list-group">
                     <li class="list-group-item bg-dark text-white" aria-current="true">Bank Tujuan Transfer</li>
                     <li class="list-group-item"><strong>BCA</strong> 9012401421</li>
