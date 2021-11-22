@@ -43,6 +43,7 @@ $routes->get('/detail-order', 'Pages::detailOrder', ['filter' => 'userFilter']);
 $routes->get('/ubah-alamat', 'Pages::ubahAlamat', ['filter' => 'userFilter']);
 $routes->get('/tambah-alamat', 'Pages::tambahAlamat', ['filter' => 'userFilter']);
 $routes->get('/akun', 'Pages::akun', ['filter' => 'userFilter']);
+$routes->get('/checkout', 'Pages::checkout', ['filter' => 'userFilter']);
 
 
 // Auth Member

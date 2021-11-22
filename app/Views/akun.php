@@ -52,7 +52,7 @@
                     <a href="/ubah-alamat" class="btn btn-dark mt-3">Ubah Alamat</a>
                     <?php } else { ?>
                         <!-- jika alamat blm ada -->
-                        <button class="btn btn-dark mt-3"><i class="bx bxs-map"></i> Tambah Alamat</button>
+                        <a href="/tambah-alamat" class="btn btn-dark mt-3"><i class="bx bxs-map"></i> Tambah Alamat</a>
                     <?php } ?>
                 </div>
             </div>

@@ -225,6 +225,13 @@ class Pages extends BaseController
         return view('produk', $data);
     }
 
+    public function checkout()
+    {
+        $data['title'] = 'Checkout';
+
+        return view('/checkout', $data);
+    }
+
     public function akun()
     {
         $data = [

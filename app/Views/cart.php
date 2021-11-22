@@ -16,13 +16,13 @@
         <?= $cartCountSold > 2 ? "height: 400px;" : "height: 200px;"; ?>
     }
 
-    ::-webkit-scrollbar {
-        background-color: black;
+    .produkOrder::-webkit-scrollbar {
+        width: 12px;
     }
-    ::-webkit-scrollbar-track {
+    .produkOrder::-webkit-scrollbar-track {
         background-color: white;
     }
-    ::-webkit-scrollbar-thumb {
+    .produkOrder::-webkit-scrollbar-thumb {
         background-color: #000;
         border-radius: 20px;
         border: 3px solid white;
@@ -116,7 +116,7 @@
                             <h4><?= format_rupiah($harga) ?></h4>
                         </div>
                         <div class="justify-content-end d-flex">
-                            <button class="btn btn-dark mt-2"><i class="bx bx-money"></i> Check Out</button>
+                            <a href="<?= base_url('checkout') ?>" class="btn btn-dark mt-2"><i class="bx bx-money"></i> Check Out</a>
                         </div>
                     </div>
                 </div>
