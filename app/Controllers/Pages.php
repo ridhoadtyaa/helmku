@@ -113,9 +113,18 @@ class Pages extends BaseController
         return view('cart', $data);
     }
 
-    public function removeFromCart($slug, $varian)
+    public function removeFromCart()
     {
-        //
+        if(!session()->isUserLogin){
+            return "need_login";
+        }
+        if($this->validate([
+            'idBarang'  => 'required',
+            'variasi'    => 'required'
+        ])){
+            $idBarang = $this->request->getPost('idBarang');
+            $variasi = $this->request->getPost('variasi');
+        }
     }
     public function tambahCart()
     {
