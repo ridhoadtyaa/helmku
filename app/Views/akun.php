@@ -52,7 +52,7 @@
                     <!-- when sudah ada -->
                     <p class="py-3"><?= $akun['nama'] ?></p>
                     <p><?= $akun['no_hp'] ?></p>
-                    <p><?= $akun['alamat_jalan'] ?></p>
+                    <p><?= $akun['alamat_jalan'] ?>, <?= $akun['kelurahan'] ?>, <?= $akun['kecamatan'] ?>, <?= $akun['kota'] ?></p>
 
                     <a href="/ubah-alamat" class="btn btn-dark mt-3">Ubah Alamat</a>
                     <?php } else { ?>

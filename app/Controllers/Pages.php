@@ -391,6 +391,30 @@ class Pages extends BaseController
         $data = [
             'title' => 'Ubah Alamat'
         ];
+        $data['user_data'] = $this->userModel->where('email', session()->userEmail)->first();
+        if($this->validate([
+            'namaPenerima'  => 'required',
+            'noHp'          => 'required|integer',
+            'kota'          => 'required',
+            'kecamatan'     => 'required',
+            'kelurahan'     => 'required',
+            'alamatLengkap' => 'required'
+        ])){
+            if($this->userModel->where('email', session()->userEmail)->update(session()->userid, [
+                'nama'          => $this->request->getPost('namaPenerima'),
+                'no_hp'         => $this->request->getPost('noHp'),
+                'kota'          => $this->request->getPost('kota'),
+                'alamat_jalan'  => $this->request->getPost('alamatLengkap'),
+                'kecamatan'     => $this->request->getPost('kecamatan'),
+                'kelurahan'     => $this->request->getPost('kelurahan')
+            ])){
+                session()->setFlashdata('success', 'Sukses mengubah alamat');
+                return redirect()->to('akun');
+            }else{
+                session()->setFlashdata('danger', 'Gagal mengubah alamat');
+                return redirect()->to('ubah-alamat');
+            }
+        }
 
         return view('ubah-alamat', $data);
     }
