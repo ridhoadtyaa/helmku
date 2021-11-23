@@ -320,7 +320,7 @@ class Pages extends BaseController
         $this->transaksiModel->selectMin('id');
         $this->transaksiModel->groupBy('kode_trx');
         $this->transaksiModel->where('id_buyer', session()->userid);
-        $data['data_trx'] = $this->transaksiModel->findAll();
+        $data['data_trx'] = $this->transaksiModel->orderBy('id', 'DESC')->findAll();
         return view('akun', $data);
     }
 
@@ -354,6 +354,36 @@ class Pages extends BaseController
             return redirect()->to('detail-order/'.$this->request->getPost('kode_trx'));
         }
     }
+
+    public function bayar($kode_trx)
+    {
+        if(!$this->validate([
+			'bukti_bayar' => [
+				'rules' => 'uploaded[bukti_bayar]|max_size[bukti_bayar,2048]|mime_in[bukti_bayar,image/png,image/jpeg,image/jpg]|is_image[bukti_bayar]',
+				'errors' => [
+                    'uploaded' => 'Bukti transfer wajib di upload',
+					'max_size' => 'Ukuran gambar terlalu besar, max 2MB',
+					'is_image' => 'Yang anda pilih bukan gambar',
+					'mime_in' => 'Yang anda pilih bukan gambar'
+				]
+			],
+		])) {
+			return redirect()->back();
+		}
+
+        $buktiBayar = $this->request->getFile('bukti_bayar');
+        $namaFile = $buktiBayar->getRandomName();
+        $buktiBayar->move('assets/img/bukti-bayar', $namaFile);
+
+        $this->transaksiModel->set('bukti_bayar', $namaFile);
+        $this->transaksiModel->set('status', 'Sudah membayar');
+        $this->transaksiModel->where('kode_trx', $kode_trx);
+        $this->transaksiModel->update();
+
+        session()->setFlashdata('success', 'Pembayaran telah berhasil, terimakasih.');
+		return redirect()->back();
+    }
+
     public function tambahAlamat()
     {
         $data = [

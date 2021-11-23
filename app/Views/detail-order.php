@@ -73,8 +73,8 @@
             </div>
         </div>
         <div class="mt-3">
-            <?php if($data_trx[0]['status'] != 'Dibatalkan'): ?>
-            <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#bayarModal">Bayar</button> <!-- kalo dah bayar jadiin btn-secondary aja -->
+            <?php if($data_trx[0]['status'] != 'Dibatalkan' && $data_trx[0]['status'] != 'Sudah membayar'): ?>
+            <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#bayarModal">Bayar</button> 
             <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#batalModal">Batalkan</button>  
             <?php endif; ?>
         </div>
@@ -82,6 +82,7 @@
 </section>
 
 <!-- Bayar Modal -->
+<?php foreach($data_trx as $d) : ?>
 <div class="modal fade" id="bayarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
@@ -90,11 +91,12 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+          <form action="/detail-order/bayar/<?= $d['kode_trx'] ?>" method="post" enctype="multipart/form-data">
           <div class="row">
               <div class="col-md-6">
                 <p>Foto bukti transfer harus terlihat jelas</p>
-                <label for="formFile" class="form-label">Masukkan bukti transfer</label>
-                <input class="form-control" type="file" id="formFile">
+                <label for="bukti_bayar" class="form-label">Masukkan bukti transfer</label>
+                <input class="form-control" type="file" id="bukti_bayar" name="bukti_bayar">
             </div>
             <div class="col-md-6">
                 <ul class="list-group">
@@ -107,11 +109,13 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-dark">Bayar</button>
+        <button type="submit" class="btn btn-dark">Bayar</button>
+        </form>
       </div>
     </div>
   </div>
 </div>
+<?php endforeach; ?>
 
 <!-- Batal Modal -->
 <div class="modal fade" id="batalModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

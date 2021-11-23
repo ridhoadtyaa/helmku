@@ -43,6 +43,7 @@ $routes->get('/produk', 'Pages::produk');
 $routes->get('/tentang', 'Pages::tentang');
 $routes->post('/checkout', 'Pages::checkout', ['filter' => 'userFilter']);
 $routes->get('detail-order/(:any)', 'Pages::detailOrder/$1', ['filter' => 'userFilter']);
+$routes->post('detail-order/bayar/(:any)', 'Pages::bayar/$1', ['filter' => 'userFilter']);
 $routes->post('cancel-order', 'Pages::cancelOrder', ['filter' => 'userFilter']);
 $routes->add('/ubah-alamat', 'Pages::ubahAlamat', ['filter' => 'userFilter']);
 $routes->add('/tambah-alamat', 'Pages::tambahAlamat', ['filter' => 'userFilter']);
@@ -84,11 +85,12 @@ $routes->group('dashboard', ['filter' => 'adminFilter'], function($routes){
     $routes->get('data-transaksi/selesai', 'Dashboard\Transaksi::selesai');
 
     $routes->get('admin', 'Dashboard\Admin::index');
-    $routes->get('admin/edit', 'Dashboard\Admin::edit'); // tambahin /id
+    $routes->get('admin/edit', 'Dashboard\Admin::edit');
     $routes->delete('admin', 'Dashboard\Admin::delete');
     $routes->get('admin/tambah-admin', 'Dashboard\Admin::create');
-    $routes->get('admin/edit-profile', 'Dashboard\Admin::edit_profile'); // tambahin /id dari session
-    $routes->get('admin/ubah-password', 'Dashboard\Admin::password'); // tambahin /id dari session
+    $routes->get('admin/edit-profile', 'Dashboard\Admin::edit_profile'); 
+    $routes->post('admin/edit-profile', 'Dashboard\Admin::update_profile'); 
+    $routes->get('admin/ubah-password', 'Dashboard\Admin::password'); 
 
     $routes->get('laporan-penjualan', 'Dashboard\LaporanPenjualan::index');
 
