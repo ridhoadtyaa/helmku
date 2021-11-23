@@ -44,7 +44,7 @@ $routes->get('/tentang', 'Pages::tentang');
 $routes->post('/checkout', 'Pages::checkout', ['filter' => 'userFilter']);
 $routes->get('detail-order/(:any)', 'Pages::detailOrder/$1', ['filter' => 'userFilter']);
 $routes->post('cancel-order', 'Pages::cancelOrder', ['filter' => 'userFilter']);
-$routes->get('/ubah-alamat', 'Pages::ubahAlamat', ['filter' => 'userFilter']);
+$routes->add('/ubah-alamat', 'Pages::ubahAlamat', ['filter' => 'userFilter']);
 $routes->add('/tambah-alamat', 'Pages::tambahAlamat', ['filter' => 'userFilter']);
 $routes->get('/akun', 'Pages::akun', ['filter' => 'userFilter']);
 
