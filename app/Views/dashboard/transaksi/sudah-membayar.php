@@ -18,6 +18,7 @@
                     <tr>
                         <th>No. Pesanan</th>
                         <th>Tanggal Order</th>
+                        <th>Tanggal Pembayaran</th>
                         <th>Nama</th>
                         <th>Detail Pesanan</th>
                         <th>Bukti Transfer</th>
@@ -27,8 +28,9 @@
                 <tbody>
                     <?php foreach($transaksi as $t) : ?>
                       <tr>
-                        <td><?= $t['kode_trx'] ?></td>
+                        <td>#<b><?= $t['kode_trx'] ?></b></td>
                         <td><?= date('d F Y H:i:s', strtotime($t['tgl_pesan'])) ?></td>
+                        <td><?= date('d F Y H:i:s', strtotime($t['tgl_pembayaran'])) ?></td>
                         <td><?= $t['nama'] ?></td>
                         <td><button class="btn btn-primary" data-toggle="modal" data-target="#keranjangModal<?= $t['kode_trx'] ?>"><i class="fas fa-shopping-bag"></i></i></button></td>
                         <td><button class="btn btn-primary" data-toggle="modal" data-target="#buktiModal<?= $t['kode_trx'] ?>"><i class="fas fa-image"></i></button></td>
