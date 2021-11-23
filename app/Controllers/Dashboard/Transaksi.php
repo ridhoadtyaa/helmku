@@ -22,9 +22,16 @@ class Transaksi extends BaseController
 
     public function sudah_membayar()
     {
+        $this->transaksiModel->select('*, data_transaksi.alamat_jalan AS alamat_pengiriman, data_transaksi.created_at AS tgl_pesan, data_transaksi.updated_at AS tgl_pembayaran');
+        $this->transaksiModel->selectMin('id');
+        $this->transaksiModel->groupBy('kode_trx');
+        $this->transaksiModel->select('data_pengguna.*');
+        $this->transaksiModel->join('data_pengguna', 'id_buyer = data_pengguna.users_id');
+        $this->transaksiModel->where('status', 'Sudah Membayar');
+        $this->transaksiModel->orderBy('tgl_pembayaran', 'DESC');
         $data = [
             'title' => 'Data Transaksi Sudah Membayar',
-            'transaksi' => $this->transaksiModel->where('status', 'Sudah membayar')->orderBy('id', 'DESC')->findAll()
+            'transaksi' => $this->transaksiModel->get()->getResultArray()
         ];  
 
         return view('dashboard/transaksi/sudah-membayar', $data);

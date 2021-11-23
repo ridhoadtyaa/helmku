@@ -376,12 +376,12 @@ class Pages extends BaseController
         $buktiBayar->move('assets/img/bukti-bayar', $namaFile);
 
         $this->transaksiModel->set('bukti_bayar', $namaFile);
-        $this->transaksiModel->set('status', 'Sudah membayar');
+        $this->transaksiModel->set('status', 'Sudah Membayar');
         $this->transaksiModel->where('kode_trx', $kode_trx);
         $this->transaksiModel->update();
 
         session()->setFlashdata('success', 'Pembayaran telah berhasil, terimakasih.');
-		return redirect()->back();
+		return redirect()->to('detail-order/'.$kode_trx);
     }
 
     public function tambahAlamat()

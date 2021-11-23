@@ -28,8 +28,8 @@
                     <?php foreach($transaksi as $t) : ?>
                       <tr>
                         <td><?= $t['kode_trx'] ?></td>
-                        <td><?= date('d F Y H:i:s', strtotime($t['created_at'])) ?></td>
-                        <td><?= $t['id_buyer'] ?></td>
+                        <td><?= date('d F Y H:i:s', strtotime($t['tgl_pesan'])) ?></td>
+                        <td><?= $t['nama'] ?></td>
                         <td><button class="btn btn-primary" data-toggle="modal" data-target="#keranjangModal<?= $t['kode_trx'] ?>"><i class="fas fa-shopping-bag"></i></i></button></td>
                         <td><button class="btn btn-primary" data-toggle="modal" data-target="#buktiModal<?= $t['kode_trx'] ?>"><i class="fas fa-image"></i></button></td>
                         <td>
@@ -116,12 +116,12 @@
         </button>
       </div>
       <div class="modal-body text-center">
-        <img src="/assets/img/bukti-bayar/<?= $t['bukti_bayar'] ?>">
+        <img src="/assets/img/bukti-bayar/<?= $t['bukti_bayar'] ?>" class="img-fluid">
       </div>
     </div>
   </div>
 </div>
-<?php endforeach; ?>
+<?php endforeach ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('javascript') ?>
