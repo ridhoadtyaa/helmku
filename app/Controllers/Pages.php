@@ -36,6 +36,16 @@ class Pages extends BaseController
         return null;
      }
 
+    public function searchStokBySlugAndVariasi($slug, $variasi)
+    {
+        $this->stokModel->select('*');
+        $this->stokModel->select('data_produk.*');
+        $this->stokModel->join('data_produk', 'data_stok_produk.id_produk = data_produk.id');
+        $this->stokModel->where('url_slug', $slug);
+        $this->stokModel->where('ukuran', $variasi);
+        return $this->stokModel->get()->getResultArray();
+    }
+
     public function index()
     {
         $data = [
@@ -90,12 +100,7 @@ class Pages extends BaseController
             $data['cartList'][$key] = [];
             $data['cartList_sold'][$key] = [];
             foreach($value as $v){
-                $this->stokModel->select('*');
-                $this->stokModel->select('data_produk.*');
-                $this->stokModel->join('data_produk', 'data_stok_produk.id_produk = data_produk.id');
-                $this->stokModel->where('url_slug', $key);
-                $this->stokModel->where('ukuran', $v['ukuran']);
-                $stokInfo = $this->stokModel->get()->getResultArray()[0];
+                $stokInfo = $this->searchStokBySlugAndVariasi($key, $v['ukuran'])[0];
                 $newV = array_merge($v, [
                     'nama_barang' => $stokInfo['nama'],
                     'gambar'      => $stokInfo['gambar'],
@@ -164,13 +169,7 @@ class Pages extends BaseController
                 $idBarang = $this->request->getPost('idBarang');
                 $quantity = $this->request->getPost('quantity');
                 $ukuran   = $this->request->getPost('ukuran');
-
-                $this->stokModel->select('*');
-                $this->stokModel->select('data_produk.*');
-                $this->stokModel->join('data_produk', 'data_stok_produk.id_produk = data_produk.id');
-                $this->stokModel->where('url_slug', $idBarang);
-                $this->stokModel->where('ukuran', $ukuran);
-                $stokInfo = $this->stokModel->get()->getResultArray();
+                $stokInfo = $this->searchStokBySlugAndVariasi($idBarang, $ukuran);
                 if(!$stokInfo){
                     return "0000";
                 }
@@ -198,22 +197,16 @@ class Pages extends BaseController
                             session()->push('cartList', $cartList);
                         }
                     }else{
-                        session()->push('cartList', [$idBarang => [
-                                [
-                                    'qty'       => $quantity,
-                                    'ukuran'    => $ukuran
-                                ]
-                            ]
-                        ]);
-                    }
-                }else{
-                    session()->push('cartList', [ $idBarang => [
-                        [
+                        session()->push('cartList', [$idBarang => [[
                             'qty'       => $quantity,
                             'ukuran'    => $ukuran
-                            ]
-                        ]
-                    ]);
+                        ]]]);
+                    }
+                }else{
+                    session()->push('cartList', [$idBarang => [[
+                        'qty'       => $quantity,
+                        'ukuran'    => $ukuran
+                    ]]]);
                 }
             }else{
                 return "400";
@@ -234,12 +227,7 @@ class Pages extends BaseController
                 $generateTrxID = "HLM".strtoupper(uniqid());
                 foreach($cartList as $key => $val){
                     foreach($val as $v){
-                        $this->stokModel->select('*');
-                        $this->stokModel->select('data_produk.*');
-                        $this->stokModel->join('data_produk', 'data_stok_produk.id_produk = data_produk.id');
-                        $this->stokModel->where('url_slug', $key);
-                        $this->stokModel->where('ukuran', $v['ukuran']);
-                        $stokInfo = $this->stokModel->get()->getResultArray();
+                        $stokInfo = $this->searchStokBySlugAndVariasi($key, $v['ukuran']);
                         if(!$stokInfo){
                             if(isset($cartList[$key])){
                                 if($this->in_array_r($v['ukuran'], $cartList[$key])){
@@ -283,7 +271,6 @@ class Pages extends BaseController
                         session()->setFlashdata('danger', 'Jika kamu ingin melakukan Checkout, harap isi alamat terlebih dahulu!');
                         return view('tambah-alamat', $data);
                     }else{
-                        // dd($produkFixCart);
                         if($this->transaksiModel->insertBatch($produkFixCart)){
                             session()->set('cartList', []);
                             session()->setFlashdata('success', 'Sukses melakukan checkout produk, harap melakukan pembayaran sebelum terjadi pembatalan otomatis 1x24 jam');
