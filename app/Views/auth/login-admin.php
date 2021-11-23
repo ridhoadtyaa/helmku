@@ -10,8 +10,8 @@
               <img src="/assets/img/logo/logo.png" alt="logo" width="100" class="shadow-light rounded-circle">
             </div>
 
-            <div class="card card-primary">
-              <div class="card-header"><h4>Login</h4></div>
+            <div class="card card-dark">
+              <div class="card-header"><h4 class="text-dark">Login</h4></div>
               
               <?= $this->include('templates/dashboard/partials/alert') ?>
 
@@ -28,11 +28,6 @@
                   <div class="form-group">
                     <div class="d-block">
                     	<label for="password" class="control-label">Password</label>
-                      <div class="float-right">
-                        <a href="auth-forgot-password.html" class="text-small">
-                          Forgot Password?
-                        </a>
-                      </div>
                     </div>
                     <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
                     <div class="invalid-feedback">
@@ -48,7 +43,7 @@
                   </div>
 
                   <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                    <button type="submit" class="btn btn-dark btn-lg btn-block" tabindex="4">
                       Login
                     </button>
                   </div>
@@ -56,9 +51,6 @@
                 </div>
             </div>
               </div>
-            </div>
-            <div class="mt-3 text-muted text-center">
-              Belum mempunyai akun ? <a href="/register">Daftar</a>
             </div>
             <div class="simple-footer">
               Copyright &copy; HelmKu 2021

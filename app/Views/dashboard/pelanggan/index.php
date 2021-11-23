@@ -10,6 +10,8 @@
     </div>
     </div>
 
+    <?= $this->include('templates/dashboard/partials/alert') ?>
+
     <div class="section-body">
         <div class="card">
             <div class="card-body">
@@ -24,37 +26,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- yang login lg login gausah -->
+                    <?php $i = 1 ?>
+                    <?php foreach($pelanggan as $p) : ?>
                     <tr>
-                        <td>1</td>
-                        <td>Dede Inoen</td>
-                        <td>dede@gmail.com</td>
-                        <td>0841245125</td>
+                        <td><?= $i++ ?></td>
+                        <td><?= $p['nama'] ?></td>
+                        <td><?= $p['email'] ?></td>
+                        <td><?= $p['no_hp'] ?? '-' ?></td>
                         <td>
-                            <a href="/dashboard/admin/edit" class="btn btn-success"><i class="fas fa-edit"></i></a>  <!-- tambahin /id -->
-                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button> 
+                            <a href="/dashboard/data-pelanggan/edit/<?= $p['users_id'] ?>" class="btn btn-success"><i class="fas fa-edit"></i></a>  <!-- tambahin /id -->
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal<?= $p['users_id'] ?>"><i class="fas fa-trash-alt"></i></button> 
                         </td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Dede Inoen</td>
-                        <td>dede@gmail.com</td>
-                        <td>0841245125</td>
-                        <td>
-                            <a href="/dashboard/admin/edit" class="btn btn-success"><i class="fas fa-edit"></i></a>  <!-- tambahin /id -->
-                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Dede Inoen</td>
-                        <td>dede@gmail.com</td>
-                        <td>0841245125</td>
-                        <td>
-                            <a href="/dashboard/admin/edit" class="btn btn-success"><i class="fas fa-edit"></i></a>  <!-- tambahin /id -->
-                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
-                        </td>
-                    </tr>
+                    <?php endforeach; ?>
                 </tfoot>
             </table>
             </div>
@@ -63,7 +47,8 @@
 </section>
 
 <!-- delete Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<?php foreach($pelanggan as $p) : ?>
+<div class="modal fade" id="deleteModal<?= $p['users_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -76,7 +61,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
-        <form action="/dashboard/admin/" method="post">  <!-- Tambahin /id -->
+        <form action="/dashboard/data-pelanggan/<?= $p['users_id'] ?>" method="post"> 
             <input type="hidden" name="_method" value="DELETE">
             <button type="submit" class="btn btn-danger">Ya</button>
         </form>
@@ -84,6 +69,7 @@
     </div>
   </div>
 </div>
+<?php endforeach; ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('javascript') ?>

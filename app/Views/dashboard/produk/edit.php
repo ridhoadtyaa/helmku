@@ -81,7 +81,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-6 col-md-12 col-lg">
+                                <div class="col-sm-12 col-md-12 col-lg">
                                     <div class="form-group">
                                         <label for="foto" class="col-form-label">Foto Sekarang :</label>
                                         <div class="float-right py-2 mb-4 foto-now">
@@ -91,7 +91,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 col-md-12 col-lg">
+                                <div class="col-sm-12 col-md-12 col-lg mb-2">
                                     <div class="form-group">
                                         <label for="foto" class="col-form-label">Update Foto : </label>
                                         <div class="float-right py-2">

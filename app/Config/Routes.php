@@ -93,6 +93,9 @@ $routes->group('dashboard', ['filter' => 'adminFilter'], function($routes){
     $routes->get('laporan-penjualan', 'Dashboard\LaporanPenjualan::index');
 
     $routes->get('data-pelanggan', 'Dashboard\Pelanggan::index');
+    $routes->get('data-pelanggan/edit/(:num)', 'Dashboard\Pelanggan::edit/$1');
+    $routes->post('data-pelanggan/edit/(:num)', 'Dashboard\Pelanggan::update/$1');
+    $routes->delete('data-pelanggan/(:num)', 'Dashboard\Pelanggan::delete/$1');
 });
 
 /*

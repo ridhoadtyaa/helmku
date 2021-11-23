@@ -110,7 +110,7 @@ class Auth extends BaseController
                     'email'     => $this->request->getPost('email'),
                     'password'  => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT)
                 ])){
-                    session()->setFlashdata('success', 'Sukses mendaftar akun, kamu akan dipindahkan ke halaman akun.');
+                    session()->setFlashdata('success', 'Sukses mendaftar akun, selamat datang!');
                     session()->set([
                         'userid'        => $this->userModel->insertID(),
                         'isUserLogin'   => true,

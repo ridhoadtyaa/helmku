@@ -1,4 +1,4 @@
-<?php if(isset($validation)) : ?>
+<?php if(isset($validation) && count($validation->getErrors()) >= 1) : ?>
     <div class="alert alert-danger" role="alert">
         <?= $validation->listErrors() ?>
     </div>
