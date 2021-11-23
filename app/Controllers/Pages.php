@@ -314,9 +314,7 @@ class Pages extends BaseController
 
     public function akun()
     {
-        $data = [
-            'title' => 'Akun'
-        ];
+        $data['title'] = "Akun";
         $data['akun'] = $this->userModel->where('email', session()->userEmail)->first();
         $this->transaksiModel->select('*');
         $this->transaksiModel->selectMin('id');
