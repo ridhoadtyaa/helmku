@@ -11,27 +11,33 @@ class Transaksi extends BaseController
     {
         $this->transaksiModel = new TransaksiModel();
     }
-    public function belum_membayar()
-    {
-        $data = [
-            'title' => 'Data Transaksi Belum Membayar'
-        ];  
-
-        return view('dashboard/transaksi/belum-membayar', $data);
-    }
-
-    public function sudah_membayar()
+    
+    public function getAllTransactionByStatus($status = 'Menunggu Pembayaran')
     {
         $this->transaksiModel->select('*, data_transaksi.alamat_jalan AS alamat_pengiriman, data_transaksi.created_at AS tgl_pesan, data_transaksi.updated_at AS tgl_pembayaran');
         $this->transaksiModel->selectMin('id');
         $this->transaksiModel->groupBy('kode_trx');
         $this->transaksiModel->select('data_pengguna.*');
         $this->transaksiModel->join('data_pengguna', 'id_buyer = data_pengguna.users_id');
-        $this->transaksiModel->where('status', 'Sudah Membayar');
+        $this->transaksiModel->where('status', $status);
         $this->transaksiModel->orderBy('tgl_pembayaran', 'DESC');
+        return $this->transaksiModel->get()->getResultArray();
+    }
+
+    public function belum_membayar()
+    {
+        $data = [
+            'title'     => 'Data Transaksi Belum Membayar',
+            'transaksi' => $this->getAllTransactionByStatus('Menunggu Pembayaran')
+        ];  
+        return view('dashboard/transaksi/belum-membayar', $data);
+    }
+
+    public function sudah_membayar()
+    {
         $data = [
             'title' => 'Data Transaksi Sudah Membayar',
-            'transaksi' => $this->transaksiModel->get()->getResultArray()
+            'transaksi' => $this->getAllTransactionByStatus('Sudah Membayar')
         ];  
 
         return view('dashboard/transaksi/sudah-membayar', $data);

@@ -24,27 +24,15 @@
                     </tr>
                 </thead>
                 <tbody>
+                  <?php foreach($transaksi as $trx): ?>
                     <tr>
-                        <td>124124891</td>
-                        <td>10:09:00 12 Maret 2021</td>
-                        <td>Dede Inoen</td>
+                        <td>#<b><?= $trx['kode_trx'] ?></b></td>
+                        <td><?= date('d F Y H:i:s', strtotime($trx['tgl_pesan'])) ?></td>
+                        <td><?= $trx['nama'] ?></td>
                         <td><button class="btn btn-primary" data-toggle="modal" data-target="#keranjangModal"><i class="fas fa-shopping-bag"></i></i></button></td>
                         <td><button class="btn btn-danger" title="Batalkan"><i class="fas fa-times"></i></button></td>
                     </tr>
-                    <tr>
-                        <td>124124891</td>
-                        <td>10:09:00 12 Maret 2021</td>
-                        <td>Dede Inoen</td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#keranjangModal"><i class="fas fa-shopping-bag"></i></i></button></td>
-                        <td><button class="btn btn-danger" title="Batalkan"><i class="fas fa-times"></i></button></td>
-                    </tr>
-                    <tr>
-                        <td>124124891</td>
-                        <td>10:09:00 12 Maret 2021</td>
-                        <td>Dede Inoen</td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#keranjangModal"><i class="fas fa-shopping-bag"></i></i></button></td>
-                        <td><button class="btn btn-danger" title="Batalkan"><i class="fas fa-times"></i></button></td>
-                    </tr>
+                  <?php endforeach ?>
                 </tfoot>
             </table>
             </div>
