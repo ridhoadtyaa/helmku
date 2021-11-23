@@ -25,39 +25,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>124124891</td>
-                        <td>10:09:00 12 Maret 2021</td>
-                        <td>Dede Inoen</td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#keranjangModal"><i class="fas fa-shopping-bag"></i></i></button></td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#buktiModal"><i class="fas fa-image"></i></button></td>
+                    <?php foreach($transaksi as $t) : ?>
+                      <tr>
+                        <td><?= $t['kode_trx'] ?></td>
+                        <td><?= date('d F Y H:i:s', strtotime($t['created_at'])) ?></td>
+                        <td><?= $t['id_buyer'] ?></td>
+                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#keranjangModal<?= $t['kode_trx'] ?>"><i class="fas fa-shopping-bag"></i></i></button></td>
+                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#buktiModal<?= $t['kode_trx'] ?>"><i class="fas fa-image"></i></button></td>
                         <td>
                             <button class="btn btn-success" title="Valid"><i class="fas fa-check"></i></button>
                             <button class="btn btn-danger" title="Tidak Valid / Batalkan"><i class="fas fa-times"></i></button>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>124124891</td>
-                        <td>10:09:00 12 Maret 2021</td>
-                        <td>Dede Inoen</td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#keranjangModal"><i class="fas fa-shopping-bag"></i></i></button></td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#buktiModal"><i class="fas fa-image"></i></button></td>
-                        <td>
-                            <button class="btn btn-success" title="Valid"><i class="fas fa-check"></i></button>
-                            <button class="btn btn-danger" title="Tidak Valid / Batalkan"><i class="fas fa-times"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>124124891</td>
-                        <td>10:09:00 12 Maret 2021</td>
-                        <td>Dede Inoen</td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#keranjangModal"><i class="fas fa-shopping-bag"></i></i></button></td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#buktiModal"><i class="fas fa-image"></i></button></td>
-                        <td>
-                            <button class="btn btn-success" title="Valid"><i class="fas fa-check"></i></button>
-                            <button class="btn btn-danger" title="Tidak Valid / Batalkan"><i class="fas fa-times"></i></button>
-                        </td>
-                    </tr>
+                      </tr>
+                    <?php endforeach; ?>
                 </tfoot>
             </table>
             </div>
@@ -66,7 +46,8 @@
 </section>
 
 <!-- keranjang Modal -->
-<div class="modal fade" id="keranjangModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<?php foreach($transaksi as $t) : ?>
+<div class="modal fade" id="keranjangModal<?= $t['kode_trx'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -77,15 +58,14 @@
       </div>
       <div class="modal-body">
       <ul class="list-group mb-3">
-        <li class="list-group-item"><strong>Alamat : </strong>Jl. bangau no 23 Tangerang</li>
-        <li class="list-group-item"><strong>Kurir : </strong>SiCepat</li>
+        <li class="list-group-item"><strong>Alamat : </strong><?= $t['alamat_jalan'] ?></li>
       </ul>
       <table class="table">
         <thead>
             <tr>
             <th scope="col">No</th>
-            <th scope="col">Kode</th>
-            <th scope="col">Nama Produk</th>
+            <th scope="col">Produk</th>
+            <th scope="col">Variasi</th>
             <th scope="col">Jumlah</th>
             <th scope="col">Harga</th>
             </tr>
@@ -123,9 +103,11 @@
     </div>
   </div>
 </div>
+<?php endforeach; ?>
 
 <!-- bukti Modal -->
-<div class="modal fade" id="buktiModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<?php foreach($transaksi as $t) : ?>
+<div class="modal fade" id="buktiModal<?= $t['kode_trx'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -134,11 +116,12 @@
         </button>
       </div>
       <div class="modal-body text-center">
-        <img src="/assets/img/bukti-transfer/transfer.jpg">
+        <img src="/assets/img/bukti-bayar/<?= $t['bukti_bayar'] ?>">
       </div>
     </div>
   </div>
 </div>
+<?php endforeach; ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('javascript') ?>

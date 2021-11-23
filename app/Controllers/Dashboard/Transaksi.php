@@ -3,9 +3,14 @@
 namespace App\Controllers\Dashboard;
 
 use App\Controllers\BaseController;
+use App\Models\TransaksiModel;
 
 class Transaksi extends BaseController
 {
+    public function __construct()
+    {
+        $this->transaksiModel = new TransaksiModel();
+    }
     public function belum_membayar()
     {
         $data = [
@@ -18,7 +23,8 @@ class Transaksi extends BaseController
     public function sudah_membayar()
     {
         $data = [
-            'title' => 'Data Transaksi Sudah Membayar'
+            'title' => 'Data Transaksi Sudah Membayar',
+            'transaksi' => $this->transaksiModel->where('status', 'Sudah membayar')->orderBy('id', 'DESC')->findAll()
         ];  
 
         return view('dashboard/transaksi/sudah-membayar', $data);
