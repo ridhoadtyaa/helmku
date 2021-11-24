@@ -83,7 +83,9 @@ $routes->group('dashboard', ['filter' => 'adminFilter'], function($routes){
     $routes->post('data-transaksi/valid/(:any)', 'Dashboard\Transaksi::validTransaction/$1');
     $routes->post('data-transaksi/tidak-valid/(:any)', 'Dashboard\Transaksi::notValidTransaction/$1');
     $routes->get('data-transaksi/terverifikasi', 'Dashboard\Transaksi::terverifikasi');
+    $routes->post('data-transaksi/shipSave/(:any)', 'Dashboard\Transaksi::shipSave/$1');
     $routes->get('data-transaksi/dikirim', 'Dashboard\Transaksi::dikirim');
+    $routes->post('data-transaksi/selesai/(:any)', 'Dashboard\Transaksi::transaksiSelesai/$1');
     $routes->get('data-transaksi/selesai', 'Dashboard\Transaksi::selesai');
 
     $routes->get('admin', 'Dashboard\Admin::index');

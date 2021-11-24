@@ -34,10 +34,10 @@
                         <td><?= date('d F Y H:i:s', strtotime($t['tgl_pesan'])) ?></td>
                         <td><?= date('d F Y H:i:s', strtotime($t['tgl_pembayaran'])) ?></td>
                         <td><?= $t['nama'] ?></td>
-                        <td><button class="btnBag btn btn-primary" data-alamatJalan="<?= $t['alamat_jalan'] ?>" data-items="<?= base64_encode(json_encode($t['items'])) ?>"><i class="fas fa-shopping-bag"></i></i></button></td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#buktiModal<?= $t['kode_trx'] ?>"><i class="fas fa-image"></i></button></td>
+                        <td><button class="btnBag btn btn-primary" data-alamat="<?= $t['alamat_jalan'] ?>" data-items="<?= base64_encode(json_encode($t['items'])) ?>"><i class="fas fa-shopping-bag"></i></i></button></td>
+                        <td><button class="btnBukti btn btn-primary" data-gambar="<?= $t['bukti_bayar'] ?>"><i class="fas fa-image"></i></button></td>
                         <td>
-                            <button class="btn btn-success validButton" data-kodetrx="<?= $t['kode_trx'] ?>" data-toggle="modal" data-target="#validModal<?= $t['kode_trx'] ?>" title="Valid"><i class="fas fa-check"></i></button>
+                            <button class="btnValid btn btn-success validButton" data-kodetrx="<?= $t['kode_trx'] ?>" title="Valid"><i class="fas fa-check"></i></button>
                             <button class="btnDel btn btn-danger" data-url="<?= base_url('dashboard/data-transaksi/tidak-valid/'.$t['kode_trx']) ?>" title="Batalkan"><i class="fas fa-times"></i></button>
                         </td>
                       </tr>
@@ -82,8 +82,7 @@
 </div>
 
 <!-- bukti Modal -->
-<?php foreach($transaksi as $t) : ?>
-<div class="modal fade" id="buktiModal<?= $t['kode_trx'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="buktiModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -92,16 +91,14 @@
         </button>
       </div>
       <div class="modal-body text-center">
-        <img src="/assets/img/bukti-bayar/<?= $t['bukti_bayar'] ?>" class="img-fluid">
+        <img id="buktiBayarSrc" class="img-fluid">
       </div>
     </div>
   </div>
 </div>
-<?php endforeach; ?>
 
 <!-- validModal -->
-<?php foreach($transaksi as $t) : ?>
-<div class="modal fade" id="validModal<?= $t['kode_trx'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="validModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-sm">
     <div class="modal-content">
       <div class="modal-header">
@@ -113,14 +110,13 @@
         Transaksi dinyatakan valid ? 
       </div>
       <div class="modal-footer">
-        <form action="/dashboard/data-transaksi/valid/<?= $t['kode_trx'] ?>" method="post">
+        <form id="formActionValid" method="post">
           <button type="submit" class="btn btn-primary">Ya</button>
         </form>
       </div>
     </div>
   </div>
 </div>
-<?php endforeach; ?>
 
 <!-- tidak valid Modal -->
 <div class="modal fade" id="batalModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -167,12 +163,21 @@
 <script>
     $(document).ready(function() {
         $('#tabel-transaksi').DataTable();
+        $('.btnBukti').on('click', function(){
+          $('#buktiBayarSrc').attr("src", "<?= base_url('assets/img/bukti-bayar') ?>/" + $(this).data('gambar'));
+          $('#buktiModal').modal('show');
+        });
+        $('.btnValid').on('click', function(){
+          $('#formActionValid').attr("action", "<?= base_url('dashboard/data-transaksi/valid') ?>/" + $(this).data('kodetrx'));
+          $('#validModal').modal('show');
+        });
         $('.btnDel').on('click', function(){
           $('#formBatalModal').attr('action', $(this).data('url'));
           $('#batalModal').modal('show');
         });
         $('.btnBag').on('click', function(){
           $('#dataPesanan').empty();
+          $('#alamatJalan').empty();
           let items = $.parseJSON(atob($(this).data('items')));
           let harga = 0; let jmlItem = 0;
           $.each(items, function(key, val){
@@ -195,6 +200,7 @@
                 <td>Rp ${harga}</td>
             </tr>
           `);
+          $('#alamatJalan').append($(this).data('alamat'));
           $('#keranjangModal').modal('show');
         })
     } );

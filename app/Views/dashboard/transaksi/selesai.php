@@ -3,12 +3,14 @@
 <?= $this->section('content') ?>
 <section class="section">
     <div class="section-header">
-    <h1>Data Transaksi Selesai</h1>
+    <h1><?= $title ?></h1>
     <div class="section-header-breadcrumb">
         <div class="breadcrumb-item active"><a href="/dashboard">Dashboard</a></div>
-        <div class="breadcrumb-item">Data Transaksi Selesai</div>
+        <div class="breadcrumb-item"><?= $title ?></div>
     </div>
     </div>
+
+    <?= $this->include('templates/dashboard/partials/alert') ?>
 
     <div class="section-body">
         <div class="card">
@@ -18,33 +20,23 @@
                     <tr>
                         <th>No. Pesanan</th>
                         <th>Tanggal Order</th>
+                        <th>Tanggal Selesai</th>
                         <th>Nama</th>
                         <th>Detail Pesanan</th>
-                        <th>Waktu Selesai</th>
+                        <th>Bukti Transfer</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>124124891</td>
-                        <td>10:09:00 12 Maret 2021</td>
-                        <td>Dede Inoen</td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#keranjangModal"><i class="fas fa-shopping-bag"></i></i></button></td>
-                        <td>12:30:00 14 Maret 2021</td>
-                    </tr>
-                    <tr>
-                        <td>124124891</td>
-                        <td>10:09:00 12 Maret 2021</td>
-                        <td>Dede Inoen</td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#keranjangModal"><i class="fas fa-shopping-bag"></i></i></button></td>
-                        <td>12:30:00 14 Maret 2021</td>
-                    </tr>
-                    <tr>
-                        <td>124124891</td>
-                        <td>10:09:00 12 Maret 2021</td>
-                        <td>Dede Inoen</td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#keranjangModal"><i class="fas fa-shopping-bag"></i></i></button></td>
-                        <td>12:30:00 14 Maret 2021</td>
-                    </tr>
+                    <?php foreach($transaksi as $t) : ?>
+                      <tr>
+                        <td>#<b><?= $t['kode_trx'] ?></b></td>
+                        <td><?= date('d F Y H:i:s', strtotime($t['tgl_pesan'])) ?></td>
+                        <td><?= date('d F Y H:i:s', strtotime($t['tgl_pembayaran'])) ?></td>
+                        <td><?= $t['nama'] ?></td>
+                        <td><button class="btnBag btn btn-primary" data-alamat="<?= $t['alamat_jalan'] ?>" data-pengiriman="<?= $t['kurir'].' - '.$t['no_resi'] ?>" data-items="<?= base64_encode(json_encode($t['items'])) ?>"><i class="fas fa-shopping-bag"></i></i></button></td>
+                        <td><button class="btnBukti btn btn-primary" data-gambar="<?= $t['bukti_bayar'] ?>"><i class="fas fa-image"></i></button></td>
+                      </tr>
+                    <?php endforeach; ?>
                 </tfoot>
             </table>
             </div>
@@ -64,46 +56,20 @@
       </div>
       <div class="modal-body">
       <ul class="list-group mb-3">
-        <li class="list-group-item"><strong>Alamat : </strong>Jl. bangau no 23 Tangerang</li>
-        <li class="list-group-item"><strong>Kurir : </strong>SiCepat</li>
+        <li class="list-group-item"><strong>Alamat : </strong><j id="alamatJalan"></j></li>
+        <li class="list-group-item"><strong>Pengiriman : </strong><j id="pengiriman"></j></li>
       </ul>
       <table class="table">
         <thead>
             <tr>
             <th scope="col">No</th>
-            <th scope="col">Kode</th>
-            <th scope="col">Nama Produk</th>
+            <th scope="col">Produk</th>
+            <th scope="col">Variasi</th>
             <th scope="col">Jumlah</th>
             <th scope="col">Harga</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>1241-4125-1555-1525</td>
-                <td>Bogo</td>
-                <td>1</td>
-                <td>Rp 200.000</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>1241-4125-1555-1525</td>
-                <td>Bogo</td>
-                <td>1</td>
-                <td>Rp 200.000</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>1241-4125-1555-1525</td>
-                <td>Bogo</td>
-                <td>1</td>
-                <td>Rp 200.000</td>
-            </tr>
-            <tr>
-                <td colspan="3" class="text-center">Jumlah</td>
-                <td>3</td>
-                <td>Rp 600.000</td>
-            </tr>
+        <tbody id="dataPesanan">
         </tbody>
         </table>
       </div>
@@ -121,17 +87,53 @@
         </button>
       </div>
       <div class="modal-body text-center">
-        <img src="/assets/img/bukti-transfer/transfer.jpg">
+        <img id="buktiBayarSrc" class="img-fluid">
       </div>
     </div>
   </div>
 </div>
+
+
 <?= $this->endSection() ?>
 
 <?= $this->section('javascript') ?>
 <script>
     $(document).ready(function() {
         $('#tabel-transaksi').DataTable();
+        $('.btnBukti').on('click', function(){
+          $('#buktiBayarSrc').attr("src", "<?= base_url('assets/img/bukti-bayar') ?>/" + $(this).data('gambar'));
+          $('#buktiModal').modal('show');
+        });
+        $('.btnBag').on('click', function(){
+          $('#dataPesanan').empty();
+          $('#alamatJalan').empty();
+          $('#pengiriman').empty();
+          let items = $.parseJSON(atob($(this).data('items')));
+          let harga = 0; let jmlItem = 0;
+          $.each(items, function(key, val){
+            $('#dataPesanan').append(`
+            <tr>
+                <th scope="row"></th>
+                <td>${val['nama_produk']}</td>
+                <td>${val['variasi']}</td>
+                <td>${val['kuantitas']}</td>
+                <td>${val['harga']}</td>
+            </tr>
+            `);
+            harga += Number(val['harga']);
+            jmlItem += Number(val['kuantitas']);
+          });
+          $('#dataPesanan').append(`
+            <tr>
+                <td colspan="3" class="text-center">Total</td>
+                <td>${jmlItem}</td>
+                <td>Rp ${harga}</td>
+            </tr>
+          `);
+          $('#alamatJalan').append($(this).data('alamat'));
+          $('#pengiriman').append($(this).data('pengiriman'));
+          $('#keranjangModal').modal('show');
+        })
     } );
 </script>
 <?= $this->endSection() ?>
