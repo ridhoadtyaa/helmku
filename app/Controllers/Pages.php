@@ -391,12 +391,43 @@ class Pages extends BaseController
         ];
         $data['user_data'] = $this->userModel->where('email', session()->userEmail)->first();
         if($this->validate([
-            'namaPenerima'  => 'required',
-            'noHp'          => 'required|integer',
-            'kota'          => 'required',
-            'kecamatan'     => 'required',
-            'kelurahan'     => 'required',
-            'alamatLengkap' => 'required'
+            'namaPenerima'  => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Nama penerima wajib diisi'
+                ]
+            ],
+            'noHp'         =>  [
+                'rules' => 'required|integer',
+                'errors' => [
+                    'required' => 'No. Handphone wajib diisi',
+                    'integer' => 'Hanya boleh berisi angka'
+                ]
+            ],
+            'kota'          =>  [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kota wajib diisi'
+                ]
+            ],
+            'kecamatan'     =>  [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kecamantan wajib diisi'
+                ]
+            ],
+            'kelurahan'     =>  [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kelurahan wajib diisi'
+                ]
+            ],
+            'alamatLengkap' =>  [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Alamat Lengkap wajib diisi'
+                ]
+            ],
         ])){
             if($this->userModel->where('email', session()->userEmail)->update(session()->userid, [
                 'nama'          => $this->request->getPost('namaPenerima'),
@@ -423,12 +454,43 @@ class Pages extends BaseController
         ];
         $data['user_data'] = $this->userModel->where('email', session()->userEmail)->first();
         if($this->validate([
-            'namaPenerima'  => 'required',
-            'noHp'          => 'required|integer',
-            'kota'          => 'required',
-            'kecamatan'     => 'required',
-            'kelurahan'     => 'required',
-            'alamatLengkap' => 'required'
+            'namaPenerima'  => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Nama penerima wajib diisi'
+                ]
+            ],
+            'noHp'         =>  [
+                'rules' => 'required|integer',
+                'errors' => [
+                    'required' => 'No. Handphone wajib diisi',
+                    'integer' => 'Hanya boleh berisi angka'
+                ]
+            ],
+            'kota'          =>  [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kota wajib diisi'
+                ]
+            ],
+            'kecamatan'     =>  [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kecamantan wajib diisi'
+                ]
+            ],
+            'kelurahan'     =>  [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kelurahan wajib diisi'
+                ]
+            ],
+            'alamatLengkap' =>  [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Alamat Lengkap wajib diisi'
+                ]
+            ],
         ])){
             if($this->userModel->where('email', session()->userEmail)->update(session()->userid, [
                 'nama'          => $this->request->getPost('namaPenerima'),

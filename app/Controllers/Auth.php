@@ -36,12 +36,17 @@ class Auth extends BaseController
         }
         if($this->validate([
             'email'     => [
-                'rules'     => 'required',
-                'errors'    => '{field} tidak boleh kosong'
+                'rules'     => 'required|valid_email',
+                'errors'    => [
+                    'required' => '{field} tidak boleh kosong',
+                    'valid_email' => '{field} yang anda masukkan tidak valid'
+                ]
             ],
             'password'  => [
                 'rules'     => 'required',
-                'errors'    => '{field} tidak boleh kosong'
+                'errors'    => [
+                    'required' => '{field} tidak boleh kosong'
+                ]
             ]
         ])){
             $cek = $this->userModel->where('email', $this->request->getPost('email'))->first();
@@ -87,17 +92,24 @@ class Auth extends BaseController
             return redirect()->to('akun');
         }
         if($this->validate([
-            'nama'    => [
+            'nama'     => [
                 'rules'     => 'required',
-                'errors'    => '{field} tidak boleh kosong'
+                'errors'    => [
+                    'required' => '{field} tidak boleh kosong',
+                ]
             ],
-            'email'   => [
-                'rules'     => 'required',
-                'errors'    => '{field} tidak boleh kosong & berupa email'
+            'email'     => [
+                'rules'     => 'required|valid_email',
+                'errors'    => [
+                    'required' => '{field} tidak boleh kosong',
+                    'valid_email' => '{field} yang anda masukkan tidak valid'
+                ]
             ],
-            'password'=> [
+            'password'  => [
                 'rules'     => 'required',
-                'errors'    => '{field} tidak boleh kosong'
+                'errors'    => [
+                    'required' => '{field} tidak boleh kosong'
+                ]
             ]
         ])){
             $cek = $this->userModel->where('email', $this->request->getPost('email'))->first();
@@ -149,12 +161,17 @@ class Auth extends BaseController
         $data['title'] = 'Login';
         if($this->validate([
             'email'     => [
-                'rules'     => 'required',
-                'errors'    => '{field} harus di isi'
+                'rules'     => 'required|valid_email',
+                'errors'    => [
+                    'required' => '{field} tidak boleh kosong',
+                    'valid_email' => '{field} yang anda masukkan tidak valid'
+                ]
             ],
             'password'  => [
                 'rules'     => 'required',
-                'errors'    => '{field} harus di isi.'
+                'errors'    => [
+                    'required' => '{field} tidak boleh kosong'
+                ]
             ]
         ])){
             $cek = $this->adminModel->where('email', $this->request->getPost('email'))->first();
