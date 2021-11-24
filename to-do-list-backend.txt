@@ -1,3 +1,2 @@
-cart remove
-buy feature
-Pagination product
+laporan penjualan
+statistic
