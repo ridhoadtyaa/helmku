@@ -91,6 +91,7 @@ $routes->group('dashboard', ['filter' => 'adminFilter'], function($routes){
     $routes->get('admin/edit-profile', 'Dashboard\Admin::edit_profile'); 
     $routes->post('admin/edit-profile', 'Dashboard\Admin::update_profile'); 
     $routes->get('admin/ubah-password', 'Dashboard\Admin::password'); 
+    $routes->post('admin/ubah-password', 'Dashboard\Admin::postNewPassword');
 
     $routes->get('laporan-penjualan', 'Dashboard\LaporanPenjualan::index');
 

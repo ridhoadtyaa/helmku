@@ -186,11 +186,11 @@ class Auth extends BaseController
                     session()->setFlashdata('success', 'Sukses login, Selamat datang!');
                     return redirect()->to('dashboard')->withInput();
                 }else{
-                    session()->setFlashdata('danger', 'Username atau Password tidak tepat.');
+                    session()->setFlashdata('danger', 'Email atau Password tidak tepat.');
                     return redirect()->to('momod/login')->withInput();
                 }
             }else{
-                session()->setFlashdata('danger', 'Username atau Password tidak tepat.');
+                session()->setFlashdata('danger', 'Email atau Password tidak tepat.');
                 return redirect()->to('momod/login');
             }
         }

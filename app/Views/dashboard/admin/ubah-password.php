@@ -10,18 +10,12 @@
     </div>
     </div>
 
-    <div class="row">
-        <div class="col-12">
-            <div class="alert alert-success" role="alert">
-                Password berhasil di ubah
-            </div>
-        </div>
-    </div>
+    <?= $this->include('templates/dashboard/partials/alert') ?>
 
     <div class="section-body">
         <div class="card">
             <div class="card-body">
-                <form action="/dashboard/admin/password" method="post">
+                <form action="/dashboard/admin/ubah-password" method="post">
                     <?= csrf_field() ?>
                     <div class="form-group row">
                         <label for="oldPassword" class="col-sm-2 col-form-label">Password lama</label>

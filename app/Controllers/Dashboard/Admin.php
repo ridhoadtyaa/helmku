@@ -98,9 +98,51 @@ class Admin extends BaseController
     public function password()
     {
         $data = [
-            'title' => 'Ubah Password'
+            'title' => 'Ubah Password',
+            'validation' => \Config\Services::validation(),
         ];
 
         return view('dashboard/admin/ubah-password', $data);
+    }
+
+    public function postNewPassword()
+    {
+        if(!$this->validate([
+            'oldPassword' => [
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'Password lama wajib diisi',
+				]
+			],
+            'newPassword' => [
+				'rules' => 'required|min_length[3]',
+				'errors' => [
+					'required' => 'Password baru wajib diisi',
+					'min_length' => 'Password baru harus berisi minimal 3 huruf/angka',
+				]
+			],
+            'confPassword' => [
+				'rules' => 'required|matches[newPassword]',
+				'errors' => [
+					'required' => 'Konfirmasi password wajib diisi',
+                    'matches' => 'Konfirmasi password tidak sesuai dengan password baru'
+				]
+			],
+        ])) {
+            return redirect()->to('/dashboard/admin/ubah-password')->withInput();
+        }
+
+        $cek = $this->adminModel->where('username', session('username'))->first();
+        if(password_verify($this->request->getPost('oldPassword'), $cek['password'])) {
+            $this->adminModel->set('password', password_hash($this->request->getPost('newPassword'), PASSWORD_DEFAULT));
+            $this->adminModel->where('username', $cek['username']);
+            $this->adminModel->update();
+
+            session()->setFlashdata('success', 'Password telah berhasil diubah.');
+            return redirect()->to('/dashboard/admin/ubah-password');
+        } else {
+            session()->setFlashdata('danger', 'Password lama yang anda masukkan tidak sesuai.');
+            return redirect()->to('/dashboard/admin/ubah-password');
+        }
     }
 }
