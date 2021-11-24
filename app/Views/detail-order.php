@@ -63,8 +63,8 @@
                                 <p>Alamat</p>
                             </div>
                             <div class="col-md-6 col-6">
-                                <p class="mt-3">-</p>
-                                <p>-</p>
+                                <p class="mt-3"><?= $data_trx[0]['status'] == 'Sedang dikirim' ? $data_trx[0]['kurir'] : '-' ?></p>
+                                <p><?= $data_trx[0]['status'] == 'Sedang dikirim' ? $data_trx[0]['no_resi'] : '-' ?></p>
                                 <p><?= $data_trx[0]['alamat_jalan'] ?></p>
                             </div>
                         </div>
@@ -73,7 +73,7 @@
             </div>
         </div>
         <div class="mt-3">
-            <?php if(!preg_match("/Dibatalkan/i", $data_trx[0]['status']) && $data_trx[0]['status'] != 'Sudah membayar'): ?>
+            <?php if(preg_match("/Menunggu Pembayaran/i", $data_trx[0]['status'])): ?>
             <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#bayarModal">Bayar</button> 
             <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#batalModal">Batalkan</button>  
             <?php endif; ?>
@@ -81,8 +81,8 @@
     </div>
 </section>
 
+<?php if(preg_match("/Menunggu Pembayaran/i", $data_trx[0]['status'])): ?>
 <!-- Bayar Modal -->
-<?php foreach($data_trx as $d) : ?>
 <div class="modal fade" id="bayarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
@@ -91,7 +91,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-          <form action="/detail-order/bayar/<?= $d['kode_trx'] ?>" method="post" enctype="multipart/form-data">
+          <form action="/detail-order/bayar/<?= $data_trx[0]['kode_trx'] ?>" method="post" enctype="multipart/form-data">
           <div class="row">
               <div class="col-md-6">
                 <p>Foto bukti transfer harus terlihat jelas</p>
@@ -115,7 +115,6 @@
     </div>
   </div>
 </div>
-<?php endforeach; ?>
 
 <!-- Batal Modal -->
 <div class="modal fade" id="batalModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -138,4 +137,5 @@
     </div>
   </div>
 </div>
+<?php endif ?>
 <?= $this->endSection() ?>
