@@ -94,6 +94,7 @@
 <script>
     $(document).ready(function() {
         $('#table-order').DataTable({
+            "order": [[2, "desc"]],
             lengthMenu: [5, 10, 20],
         });
     } );

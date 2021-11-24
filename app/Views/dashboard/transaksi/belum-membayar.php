@@ -31,8 +31,8 @@
                         <td>#<b><?= $trx['kode_trx'] ?></b></td>
                         <td><?= date('d F Y H:i:s', strtotime($trx['tgl_pesan'])) ?></td>
                         <td><?= $trx['nama'] ?></td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#keranjangModal<?= $trx['kode_trx'] ?>"><i class="fas fa-shopping-bag"></i></i></button></td>
-                        <td><button class="btn btn-danger" data-toggle="modal" data-target="#batalModal<?= $trx['kode_trx'] ?>" title="Batalkan"><i class="fas fa-times"></i></button></td>
+                        <td><button class="btnBag btn btn-primary" data-alamatJalan="<?= $trx['alamat_jalan'] ?>" data-items="<?= base64_encode(json_encode($trx['items'])) ?>"><i class="fas fa-shopping-bag"></i></i></button></td>
+                        <td><button class="btnDel btn btn-danger" data-url="<?= base_url('dashboard/data-transaksi/tidak-valid/'.$trx['kode_trx']) ?>" title="Batalkan"><i class="fas fa-times"></i></button></td>
                     </tr>
                   <?php endforeach ?>
                 </tfoot>
@@ -43,9 +43,7 @@
 </section>
 
 <!-- keranjang Modal -->
-<?php $i = 1 ?>
-<?php foreach($transaksi as $trx): ?>
-<div class="modal fade" id="keranjangModal<?= $trx['kode_trx'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="keranjangModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -56,7 +54,7 @@
       </div>
       <div class="modal-body">
       <ul class="list-group mb-3">
-        <li class="list-group-item"><strong>Alamat : </strong><?= $trx['alamat_jalan'] ?></li>
+        <li class="list-group-item"><strong>Alamat : </strong><p id="alamatJalan"></p></li>
       </ul>
       <table class="table">
         <thead>
@@ -68,30 +66,17 @@
             <th scope="col">Harga</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <th scope="row"><?= $i++ ?></th>
-                <td><?= $trx['nama_produk'] ?></td>
-                <td><?= $trx['variasi'] ?></td>
-                <td><?= $trx['kuantitas'] ?></td>
-                <td><?= $trx['harga'] ?></td>
-            </tr>
-            <tr>
-                <td colspan="3" class="text-center">Total</td>
-                <td>3</td>
-                <td>Rp 600.000</td>
-            </tr>
+        <tbody id="dataPesanan">
         </tbody>
         </table>
       </div>
     </div>
   </div>
 </div>
-<?php endforeach ?>
 
 <!-- batal Modal -->
-<?php foreach($transaksi as $trx): ?>
-<div class="modal fade" id="batalModal<?= $trx['kode_trx'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+<div class="modal fade" id="batalModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -100,7 +85,7 @@
         </button>
       </div>
       <div class="modal-body">
-      <form action="/dashboard/data-transaksi/tidak-valid/<?= $trx['kode_trx'] ?>" method="post">
+      <form id="formBatalModal" method="post">
         <p>Alasan dibatalkan : </p>
         <div class="form-check">
           <input class="form-check-input" type="radio" name="alasan" id="stokKosong" value="Stok Kosong">
@@ -128,13 +113,43 @@
     </div>
   </div>
 </div>
-<?php endforeach ?>
+
 <?= $this->endSection() ?>
 
 <?= $this->section('javascript') ?>
 <script>
     $(document).ready(function() {
         $('#tabel-transaksi').DataTable();
+        $('.btnDel').on('click', function(){
+          $('#formBatalModal').attr('action', $(this).data('url'));
+          $('#batalModal').modal('show');
+        });
+        $('.btnBag').on('click', function(){
+          $('#dataPesanan').empty();
+          let items = $.parseJSON(atob($(this).data('items')));
+          let harga = 0; let jmlItem = 0;
+          $.each(items, function(key, val){
+            $('#dataPesanan').append(`
+            <tr>
+                <th scope="row"></th>
+                <td>${val['nama_produk']}</td>
+                <td>${val['variasi']}</td>
+                <td>${val['kuantitas']}</td>
+                <td>${val['harga']}</td>
+            </tr>
+            `);
+            harga += Number(val['harga']);
+            jmlItem += Number(val['kuantitas']);
+          });
+          $('#dataPesanan').append(`
+            <tr>
+                <td colspan="3" class="text-center">Total</td>
+                <td>${jmlItem}</td>
+                <td>Rp ${harga}</td>
+            </tr>
+          `);
+          $('#keranjangModal').modal('show');
+        })
     } );
 </script>
 <?= $this->endSection() ?>

@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 col-lg-7">
+            <div class="col-md-12 col-lg-6">
                 <table class="table table-bordered mt-4">
                     <thead>
                         <tr>
@@ -52,7 +52,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-md-12 col-lg-5 mt-4">
+            <div class="col-md-12 col-lg-6 mt-4">
                 <div class="card">
                     <div class="card-body">
                         <h5>Info Pengiriman</h5>
@@ -73,7 +73,7 @@
             </div>
         </div>
         <div class="mt-3">
-            <?php if($data_trx[0]['status'] == 'Menunggu Pembayaran') : ?>
+            <?php if(!preg_match("/Dibatalkan/i", $data_trx[0]['status']) && $data_trx[0]['status'] != 'Sudah membayar'): ?>
             <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#bayarModal">Bayar</button> 
             <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#batalModal">Batalkan</button>  
             <?php endif; ?>

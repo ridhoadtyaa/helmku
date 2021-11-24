@@ -320,7 +320,8 @@ class Pages extends BaseController
         $this->transaksiModel->selectMin('id');
         $this->transaksiModel->groupBy('kode_trx');
         $this->transaksiModel->where('id_buyer', session()->userid);
-        $data['data_trx'] = $this->transaksiModel->orderBy('id', 'DESC')->findAll();
+        // $this->transaksiModel->orderBy('created_at', 'ASC');
+        $data['data_trx'] = $this->transaksiModel->orderBy('created_at', 'ASC')->findAll();
         return view('akun', $data);
     }
 

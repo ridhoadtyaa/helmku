@@ -28,9 +28,16 @@ class Transaksi extends BaseController
     {
         // dd($this->transaksiModel->where('kode_trx', 'HLM619DC17B84691')->findAll());
         $data = [
-            'title'     => 'Data Transaksi Belum Membayar',
-            'transaksi' => $this->getAllTransactionByStatus('Menunggu Pembayaran')
-        ];  
+            'title' => 'Data Transaksi Belum Membayar',
+        ];
+        $data['transaksi'] = [];
+        $allData = $this->getAllTransactionByStatus('Menunggu Pembayaran');
+        $i = 0;
+        foreach($allData as $d){
+            $data['transaksi'][$i++] = array_merge(
+                $d, ['items' => $this->transaksiModel->select('nama_produk, variasi, kuantitas, harga')->where('kode_trx', $d['kode_trx'])->findAll()]
+            );
+        }  
     
         return view('dashboard/transaksi/belum-membayar', $data);
     }
@@ -39,9 +46,16 @@ class Transaksi extends BaseController
     {
         $data = [
             'title' => 'Data Transaksi Sudah Membayar',
-            'transaksi' => $this->getAllTransactionByStatus('Sudah Membayar'),
             'validation' => \Config\Services::validation()
         ];  
+        $data['transaksi'] = [];
+        $allData = $this->getAllTransactionByStatus('Sudah Membayar');
+        $i = 0;
+        foreach($allData as $d){
+            $data['transaksi'][$i++] = array_merge(
+                $d, ['items' => $this->transaksiModel->select('nama_produk, variasi, kuantitas, harga')->where('kode_trx', $d['kode_trx'])->findAll()]
+            );
+        }  
 
         return view('dashboard/transaksi/sudah-membayar', $data);
     }
@@ -51,7 +65,6 @@ class Transaksi extends BaseController
         $this->transaksiModel->set('status', 'Terverifikasi');
         $this->transaksiModel->where('kode_trx', $kode_trx);
         $this->transaksiModel->update();
-
         session()->setFlashdata('success', 'Transaksi berhasil terverifikasi');
 		return redirect()->to('/dashboard/data-transaksi/sudah-membayar');
     }
@@ -66,7 +79,7 @@ class Transaksi extends BaseController
                 ]
             ]
         ])) {
-            return redirect()->to('/dashboard/data-transaksi/sudah-membayar')->withInput();
+            return redirect()->back()->withInput();
         }
         
         $this->transaksiModel->set('status', 'Dibatalkan - ' . $this->request->getPost('alasan'));
