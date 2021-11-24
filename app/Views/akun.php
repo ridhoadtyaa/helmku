@@ -1,5 +1,22 @@
 <?= $this->extend('templates/main/main-template') ?>
 
+<?= $this->section('styles') ?>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
+<style>
+    .page-item.active .page-link {
+        background-color: #000;
+        border: 1px solid black;
+        color: white;
+    }
+
+    @media (max-width: 620px) { 
+        .table-order {
+            overflow-x: auto;
+        }
+     }
+</style>
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 <section class="section-pages">
     <div class="pages-wrapper">
@@ -14,14 +31,14 @@
                 </div>
             </div>
             <div class="row pt-5">
-                <div class="col-md-8 mb-5">
-                    <p class="text-muted"><i class="fas fa-tasks"></i> Order List</p>
+                <div class="col-md-9 mb-5">
+                    <p class="text-muted"><i class="fas fa-tasks"></i> Daftar pesanan</p>
                     <hr>
-                    <div class="overflow-auto">
-                        <table class="table">
+                    <div class="table-order">
+                        <table id="table-order" class="table" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th scope="col">No. Order</th>
+                                    <th scope="col">No. Pesanan</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Tanggal</th>
                                     <th scope="col">No. Resi</th>
@@ -50,7 +67,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <p class="text-muted"><i class="fas fa-map-marked-alt"></i> Alamat</p>
                     <hr>
                     <?php if($akun['alamat_jalan'] != NULL) { ?>
@@ -69,4 +86,16 @@
         </div>
     </div>
 </section>
+<?= $this->endSection() ?>
+
+<?= $this->section('javascript') ?>
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#table-order').DataTable({
+            lengthMenu: [5, 10, 20],
+        });
+    } );
+</script>
 <?= $this->endSection() ?>
