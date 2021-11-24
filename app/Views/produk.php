@@ -30,29 +30,10 @@
             </div>
             <?php endforeach; ?>
         </div>
+        <?= $pager->links('produk_pagers', 'produk_pagers') ?>
     </div>
 </section>
 <?= $this->endSection() ?>
 
 <?= $this->section('javascript') ?>
-<script>
-const countDownDate = new Date("Jan 5, 2022 15:37:25").getTime();
-const x = setInterval(() => {
-
-  const now = new Date().getTime();
-    
-  const distance = countDownDate - now;
-    
-  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    
-  document.getElementById("flashTime").innerHTML = `${hours} : ${minutes} : ${seconds}`;
-    
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("flashTime").innerHTML = "EXPIRED";
-  }
-}, 1000);
-</script>
 <?= $this->endSection() ?>

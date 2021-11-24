@@ -291,7 +291,7 @@ class Pages extends BaseController
             'title' => 'Produk',
         ];
 
-        $data['produks']     = $this->produkModel->paginate(5);
+        $data['produks']     = $this->produkModel->paginate(5, 'produk_pagers');
         $data['pager']       = $this->produkModel->pager;
         $data['data_produk'] = [];
         $i = 0;

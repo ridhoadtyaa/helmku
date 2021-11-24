@@ -1,19 +1,44 @@
 .price {
-    margin-top: -10px;
+  margin-top: -10px;
 }
 
 .helm-img {
-    width: 100%;
-    transition: transform .2s;
-    z-index: -100;
+  width: 100%;
+  transition: transform 0.2s;
+  z-index: -100;
 }
 
 .helm-img:hover {
-    transform: scale(1.02);
+  transform: scale(1.02);
 }
 
 .timewarp {
-    background-color: #000;
-    position: relative;
-    top: -12px;
+  background-color: #000;
+  position: relative;
+  top: -12px;
+}
+
+.pagination > li > a {
+  background-color: white;
+  color: #5a4181;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover {
+  color: black;
+  background-color: #eee;
+  border-color: #ddd;
+}
+
+.pagination > .active > a {
+  color: white;
+  background-color: black !important;
+  border: solid 1px black !important;
+}
+
+.pagination > .active > a:hover {
+  background-color: black !important;
+  border: solid 1px black;
 }
