@@ -24,27 +24,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>124124891</td>
-                        <td>10:09:00 12 Maret 2021</td>
-                        <td>Dede Inoen</td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#keranjangModal"><i class="fas fa-shopping-bag"></i></i></button></td>
-                        <td><button class="btn btn-success" data-toggle="modal" data-target="#resiModal"><i class="fas fa-motorcycle"></i></i></i></button></td>
-                    </tr>
-                    <tr>
-                        <td>124124891</td>
-                        <td>10:09:00 12 Maret 2021</td>
-                        <td>Dede Inoen</td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#keranjangModal"><i class="fas fa-shopping-bag"></i></i></button></td>
-                        <td><button class="btn btn-success" data-toggle="modal" data-target="#resiModal"><i class="fas fa-motorcycle"></i></i></i></button></td>
-                    </tr>
-                    <tr>
-                        <td>124124891</td>
-                        <td>10:09:00 12 Maret 2021</td>
-                        <td>Dede Inoen</td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#keranjangModal"><i class="fas fa-shopping-bag"></i></i></button></td>
-                        <td><button class="btn btn-success" data-toggle="modal" data-target="#resiModal"><i class="fas fa-motorcycle"></i></i></i></button></td>
-                    </tr>
+                    <?php foreach($transaksi as $t) : ?>
+                      <tr>
+                          <td><?= $t['kode_trx'] ?></td>
+                          <td><?= date('d F Y H:i:s', strtotime($t['tgl_pesan'])) ?></td>
+                          <td><?= $t['nama'] ?></td>
+                          <td><button class="btn btn-primary" data-toggle="modal" data-target="#keranjangModal"><i class="fas fa-shopping-bag"></i></i></button></td>
+                          <td><button class="btn btn-success" data-toggle="modal" data-target="#resiModal"><i class="fas fa-motorcycle"></i></i></i></button></td>
+                      </tr>
+                    <?php endforeach; ?>
                 </tfoot>
             </table>
             </div>

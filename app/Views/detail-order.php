@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 col-lg-6">
+            <div class="col-md-12 col-lg-7">
                 <table class="table table-bordered mt-4">
                     <thead>
                         <tr>
@@ -52,7 +52,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-md-12 col-lg-6 mt-4">
+            <div class="col-md-12 col-lg-5 mt-4">
                 <div class="card">
                     <div class="card-body">
                         <h5>Info Pengiriman</h5>
