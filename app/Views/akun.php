@@ -9,7 +9,11 @@
         color: white;
     }
 
+<<<<<<< HEAD
     @media (max-width: 620px) { 
+=======
+    @media (max-width: 576px) { 
+>>>>>>> 95a6021070610e11e59a22b4a382cc7574607748
         .table-order {
             overflow-x: auto;
         }
