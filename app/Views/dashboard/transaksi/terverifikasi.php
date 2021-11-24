@@ -60,7 +60,7 @@
       </div>
       <div class="modal-body">
       <ul class="list-group mb-3">
-        <li class="list-group-item"><strong>Alamat : </strong><p id="alamatJalan"></p></li>
+        <li class="list-group-item"><strong>Alamat : </strong><j id="alamatJalan"></j></li>
       </ul>
       <table class="table">
         <thead>
