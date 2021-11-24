@@ -7,43 +7,6 @@
 <?= $this->section('content') ?>
 <section class="section-pages">
     <div class="pages-wrapper">
-        <div class="row mb-3">
-            <div class="d-flex justify-content-between">
-                <h4>⚡ FLASH SALE</h4>
-                <div class="timewarp rounded text-white pt-3 pb-1 px-3">
-                    <h4 id="flashTime">00:00:00</h4>
-                </div>
-            </div>
-            <div class="row text-center justify-content-center">
-                <div class="col-md-4 col-6">
-                    <div class="card border-0">
-                        <div class="card-body">
-                            <a href="/detail"><img src="/assets/img/produk/helm1.png" class="img-thumbnail border-0 helm-img"></a>
-                            <p>Black Bogo</p>
-                            <p class="price"><s>Rp 300.000</s> Rp 250.000</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-6">
-                    <div class="card border-0">
-                        <div class="card-body">
-                            <a href="/detail"><img src="/assets/img/produk/helm1.png" class="img-thumbnail border-0 helm-img"></a>
-                            <p>Black Bogo</p>
-                            <p class="price"><s>Rp 300.000</s> Rp 250.000</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-6">
-                    <div class="card border-0">
-                        <div class="card-body">
-                            <a href="/detail"><img src="/assets/img/produk/helm1.png" class="img-thumbnail border-0 helm-img"></a>
-                            <p>Black Bogo</p>
-                            <p class="price"><s>Rp 300.000</s> Rp 250.000</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="row">
             <h4 class="my-3">Produk HELMKU</h4>
             <div class="col-md-4">

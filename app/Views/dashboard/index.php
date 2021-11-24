@@ -9,14 +9,14 @@
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
             <div class="card card-statistic-1">
             <div class="card-icon bg-primary">
-                <i class="far fa-user"></i>
+                <i class="far fa-bookmark"></i>
             </div>
             <div class="card-wrap">
                 <div class="card-header">
-                <h4>Total Admin</h4>
+                <h4>Menunggu Pembayaran</h4>
                 </div>
                 <div class="card-body">
-                10
+                <?= $count['menunggu'] ?>
                 </div>
             </div>
             </div>
@@ -24,14 +24,14 @@
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
             <div class="card card-statistic-1">
             <div class="card-icon bg-danger">
-                <i class="far fa-newspaper"></i>
+                <i class="far fa-credit-card"></i>
             </div>
             <div class="card-wrap">
                 <div class="card-header">
-                <h4>News</h4>
+                <h4>Sudah Membayar</h4>
                 </div>
                 <div class="card-body">
-                42
+                    <?= $count['sudah_membayar'] ?>
                 </div>
             </div>
             </div>
@@ -39,14 +39,14 @@
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
             <div class="card card-statistic-1">
             <div class="card-icon bg-warning">
-                <i class="far fa-file"></i>
+                <i class="far fa-paper-plane"></i>
             </div>
             <div class="card-wrap">
                 <div class="card-header">
-                <h4>Reports</h4>
+                <h4>Sedang dikirim</h4>
                 </div>
                 <div class="card-body">
-                1,201
+                <?= $count['sedang_dikirim'] ?>
                 </div>
             </div>
             </div>
@@ -54,14 +54,14 @@
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
             <div class="card card-statistic-1">
             <div class="card-icon bg-success">
-                <i class="fas fa-circle"></i>
+                <i class="fas fa-calendar-check"></i>
             </div>
             <div class="card-wrap">
                 <div class="card-header">
-                <h4>Online Users</h4>
+                <h4>Transaksi Selesai</h4>
                 </div>
                 <div class="card-body">
-                47
+                <?= $count['selesai'] ?>
                 </div>
             </div>
             </div>
@@ -83,42 +83,20 @@
         <div class="col-lg-4 col-md-12 col-12 col-sm-12">
             <div class="card">
             <div class="card-header">
-                <h4>Recent Activities</h4>
+                <h4>Recent Orders</h4>
             </div>
             <div class="card-body">
                 <ul class="list-unstyled list-unstyled-border">
-                <li class="media">
-                    <img class="mr-3 rounded-circle" width="50" src="../assets/img/avatar/avatar-1.png" alt="avatar">
-                    <div class="media-body">
-                    <div class="float-right text-primary">Now</div>
-                    <div class="media-title">Farhan A Mujib</div>
-                    <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
-                    </div>
-                </li>
-                <li class="media">
-                    <img class="mr-3 rounded-circle" width="50" src="../assets/img/avatar/avatar-2.png" alt="avatar">
-                    <div class="media-body">
-                    <div class="float-right">12m</div>
-                    <div class="media-title">Ujang Maman</div>
-                    <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
-                    </div>
-                </li>
-                <li class="media">
-                    <img class="mr-3 rounded-circle" width="50" src="../assets/img/avatar/avatar-3.png" alt="avatar">
-                    <div class="media-body">
-                    <div class="float-right">17m</div>
-                    <div class="media-title">Rizal Fakhri</div>
-                    <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
-                    </div>
-                </li>
-                <li class="media">
-                    <img class="mr-3 rounded-circle" width="50" src="../assets/img/avatar/avatar-4.png" alt="avatar">
-                    <div class="media-body">
-                    <div class="float-right">21m</div>
-                    <div class="media-title">Alfa Zulkarnain</div>
-                    <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
-                    </div>
-                </li>
+                    <?php $rnd = [1,2,3,4]; foreach($recent_orders as $order): ?>
+                    <li class="media">
+                        <img class="mr-3 rounded-circle" width="50" src="../assets/img/avatar/avatar-<?= $rnd[array_rand($rnd)] ?>.png" alt="avatar">
+                        <div class="media-body">
+                        <div class="float-right text-primary"><?= date('d/m/Y H:i:s', strtotime($order['tgl_pesan'])) ?></div>
+                        <div class="media-title"><?= $order['nama'] ?></div>
+                        <span class="text-small text-muted">Kode TRX : <?= $order['kode_trx'] ?></span>
+                        </div>
+                    </li>
+                    <?php endforeach ?>
                 </ul>
             </div>
         </div>

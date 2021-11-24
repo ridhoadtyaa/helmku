@@ -51,6 +51,7 @@ class Pages extends BaseController
         $data = [
             'title' => 'Home'
         ];
+        $data['produk'] = $this->produkModel->orderBy('id', 'RANDOM')->limit(3)->get()->getResultArray();
         return view('home', $data);
     }
 

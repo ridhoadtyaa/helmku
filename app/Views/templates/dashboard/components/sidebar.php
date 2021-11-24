@@ -51,15 +51,6 @@ $uri3 = $uri[3] ?? '';
 
             <li class="<?= $uri1 == 'data-pelanggan' ? 'active' : '' ?>"><a class="nav-link" href="/dashboard/data-pelanggan"><i class="fas fa-users"></i> <span>Data Pelanggan</span></a></li>
 
-            <li class="menu-header">Admin</li>
-
-            <li class="nav-item dropdown <?= ($uri1 == 'admin') ? 'active' : '' ?>">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-users-cog"></i> <span>Admin</span></a>
-                <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="/dashboard/admin">Daftar Admin</a></li>
-                    <li><a class="nav-link" href="/dashboard/admin/tambah-admin">Tambah Admin</a></li>
-                </ul>
-            </li>
         </ul>
     </aside>
 </div>

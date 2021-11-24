@@ -1,153 +1,154 @@
 .hero {
-    height: 630px;
-    background-color: #EEE;
-    background: url("/assets/img/hero.png");
-    background-size: cover;
-    margin-top: 126px;
+  height: 630px;
+  background-color: #eee;
+  background: url("/assets/img/hero.png");
+  background-size: cover;
+  margin-top: 126px;
 }
 
 .featured-products {
-    margin-bottom: 3em;
-    margin-top: 2em;
+  margin-bottom: 3em;
+  margin-top: 2em;
 }
 
 .featured-products h2 {
-    font-weight: 600;
-    letter-spacing: .5em;
-    font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.5em;
+  font-size: 1.5rem;
 }
 
 .card-wrapper {
-    display: flex;
-    width: 80%;
+  display: flex;
+  width: 80%;
 }
 
 .card {
-    margin: 1em;
-    width: 50%;
+  margin: 1em;
+  width: 50%;
 }
 
 .card-img {
-    width: 100%;
-    transition: transform .2s;
-    z-index: -100;
+  width: 100%;
+  transition: transform 0.2s;
+  z-index: -100;
 }
 
-.card-img:hover, .helm-img:hover {
-    transform: scale(1.02);
+.card-img:hover,
+.helm-img:hover {
+  transform: scale(1.02);
 }
 
 .card-title {
-    letter-spacing: .1rem;
-    margin-bottom: 1em;
-    font-size: 1rem;
+  letter-spacing: 0.1rem;
+  margin-bottom: 1em;
+  font-size: 1rem;
 }
 
 .card-button {
-    border: 1px solid #000;
-    outline: none;
-    margin: 0 1em;
-    padding: .3em 1em;
-    box-shadow: 2px 2px #000;
-    font-size: .8rem;
-    font-family: 'Jost', sans-serif;
+  border: 1px solid #000;
+  outline: none;
+  margin: 0 1em;
+  padding: 0.3em 1em;
+  box-shadow: 2px 2px #000;
+  font-size: 0.8rem;
+  font-family: "Jost", sans-serif;
 }
 
 .card-button:hover {
-    background-color: navy;
-    color: #FFF;
+  background-color: navy;
+  color: #fff;
 }
 
 .helm-wrapper {
-    width: 100%;
-    padding: 0 5em 3em 5em;
-    margin-bottom: 4em;
+  width: 94%;
+  padding: 0em 0em 8em 10em;
+  margin-bottom: 4em;
 }
 
 .helm-header {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
 .helm-text {
-    margin: 0 2em;
-    line-height: 2.3rem;
+  margin: 0 2em;
+  line-height: 2.3rem;
 }
 
 .helm-img {
-    width: 50%;
-    transition: transform .2s;
+  width: 50%;
+  transition: transform 0.2s;
 }
 
 .helm-read-more {
-    display: none;
-    font-weight: 600;
-    cursor: pointer;
+  display: none;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1400px) {
-    .helm {
-        display: flex;
-        justify-content: center;
-    }
+  .helm {
+    display: flex;
+    justify-content: center;
+  }
 
-    .helm-img {
-        width: 100%;
-    }
-    
-    .helm-text {
-        text-align: center;
-    }
+  .helm-img {
+    width: 100%;
+  }
 
-    .helm-header {
-        font-size: 1.9rem;
-    }
-    
-    .helm-wrapper {
-        flex-direction: column;
-        width: 100%;
-    }
+  .helm-text {
+    text-align: center;
+  }
 
-    .helm-read-more {
-        display: block;
-    }
+  .helm-header {
+    font-size: 1.9rem;
+  }
 
-    .helm-extra-text {
-        display: none;
-    }
+  .helm-wrapper {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .helm-read-more {
+    display: block;
+  }
+
+  .helm-extra-text {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 992px) {
-    .hero {
-        height: 400px;
-        margin: 0;
-    }
-    
-    .card {
-        width: 100%;
-    }
+  .hero {
+    height: 400px;
+    margin: 0;
+  }
+
+  .card {
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 576px) {
-    .hero {
-        height: 250px;
-        margin: 0;
-    }
-    
-    .featured-products h2 {
-        font-size: 1.3rem;
-        letter-spacing: .3em;
-    }
-    
-    .card-wrapper {
-        display: block;
-    }
-    
-    .card {
-        width: 100%;
-        margin: 1em 0;
-    }
-    
-    .helm-wrapper {
-        padding: 0 0 3em 0;
-    }
+  .hero {
+    height: 250px;
+    margin: 0;
+  }
+
+  .featured-products h2 {
+    font-size: 1.3rem;
+    letter-spacing: 0.3em;
+  }
+
+  .card-wrapper {
+    display: block;
+  }
+
+  .card {
+    width: 100%;
+    margin: 1em 0;
+  }
+
+  .helm-wrapper {
+    padding: 0 0 3em 0;
+  }
 }
