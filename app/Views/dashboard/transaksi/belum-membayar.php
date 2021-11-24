@@ -10,6 +10,8 @@
     </div>
     </div>
 
+    <?= $this->include('templates/dashboard/partials/alert') ?>
+
     <div class="section-body">
         <div class="card">
             <div class="card-body">
@@ -29,8 +31,8 @@
                         <td>#<b><?= $trx['kode_trx'] ?></b></td>
                         <td><?= date('d F Y H:i:s', strtotime($trx['tgl_pesan'])) ?></td>
                         <td><?= $trx['nama'] ?></td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#keranjangModal"><i class="fas fa-shopping-bag"></i></i></button></td>
-                        <td><button class="btn btn-danger" title="Batalkan"><i class="fas fa-times"></i></button></td>
+                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#keranjangModal<?= $trx['kode_trx'] ?>"><i class="fas fa-shopping-bag"></i></i></button></td>
+                        <td><button class="btn btn-danger" data-toggle="modal" data-target="#batalModal<?= $trx['kode_trx'] ?>" title="Batalkan"><i class="fas fa-times"></i></button></td>
                     </tr>
                   <?php endforeach ?>
                 </tfoot>
@@ -41,7 +43,9 @@
 </section>
 
 <!-- keranjang Modal -->
-<div class="modal fade" id="keranjangModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<?php $i = 1 ?>
+<?php foreach($transaksi as $trx): ?>
+<div class="modal fade" id="keranjangModal<?= $trx['kode_trx'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -52,43 +56,28 @@
       </div>
       <div class="modal-body">
       <ul class="list-group mb-3">
-        <li class="list-group-item"><strong>Alamat : </strong>Jl. bangau no 23 Tangerang</li>
-        <li class="list-group-item"><strong>Kurir : </strong>SiCepat</li>
+        <li class="list-group-item"><strong>Alamat : </strong><?= $trx['alamat_jalan'] ?></li>
       </ul>
       <table class="table">
         <thead>
             <tr>
             <th scope="col">No</th>
-            <th scope="col">Kode</th>
-            <th scope="col">Nama Produk</th>
+            <th scope="col">Produk</th>
+            <th scope="col">Variasi</th>
             <th scope="col">Jumlah</th>
             <th scope="col">Harga</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <th scope="row">1</th>
-                <td>1241-4125-1555-1525</td>
-                <td>Bogo</td>
-                <td>1</td>
-                <td>Rp 200.000</td>
+                <th scope="row"><?= $i++ ?></th>
+                <td><?= $trx['nama_produk'] ?></td>
+                <td><?= $trx['variasi'] ?></td>
+                <td><?= $trx['kuantitas'] ?></td>
+                <td><?= $trx['harga'] ?></td>
             </tr>
             <tr>
-                <th scope="row">2</th>
-                <td>1241-4125-1555-1525</td>
-                <td>Bogo</td>
-                <td>1</td>
-                <td>Rp 200.000</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>1241-4125-1555-1525</td>
-                <td>Bogo</td>
-                <td>1</td>
-                <td>Rp 200.000</td>
-            </tr>
-            <tr>
-                <td colspan="3" class="text-center">Jumlah</td>
+                <td colspan="3" class="text-center">Total</td>
                 <td>3</td>
                 <td>Rp 600.000</td>
             </tr>
@@ -98,9 +87,11 @@
     </div>
   </div>
 </div>
+<?php endforeach ?>
 
-<!-- bukti Modal -->
-<div class="modal fade" id="buktiModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- batal Modal -->
+<?php foreach($transaksi as $trx): ?>
+<div class="modal fade" id="batalModal<?= $trx['kode_trx'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -108,12 +99,36 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body text-center">
-        <img src="/assets/img/bukti-transfer/transfer.jpg">
+      <div class="modal-body">
+      <form action="/dashboard/data-transaksi/tidak-valid/<?= $trx['kode_trx'] ?>" method="post">
+        <p>Alasan dibatalkan : </p>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="alasan" id="stokKosong" value="Stok Kosong">
+          <label class="form-check-label" for="stokKosong">
+            Stok Kosong
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="alasan" id="spam" value="Spam">
+          <label class="form-check-label" for="spam">
+            Spam
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="alasan" id="aktivitasTidakWajar" value="Aktifitas Tidak Wajar">
+          <label class="form-check-label" for="aktivitasTidakWajar">
+            Aktifitas Tidak Wajar
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+          <button type="submit" class="btn btn-danger">Ya</button>
+        </form>
       </div>
     </div>
   </div>
 </div>
+<?php endforeach ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('javascript') ?>

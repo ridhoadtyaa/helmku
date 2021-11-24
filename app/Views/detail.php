@@ -89,7 +89,7 @@
       <div class="modal-body">
         <div class="row">
             <div class="col-md-4">
-                <img src="/assets/img/produk/helm1.png" class="rounded img-thumbnail border-0">
+                <img src="<?= base_url('assets/img/produk/'.$data_produk['gambar']) ?>" class="rounded img-thumbnail border-0">
             </div>
             <div class="col-md-8">
                 <h3><?= $data_produk['nama_produk'] ?></h3>

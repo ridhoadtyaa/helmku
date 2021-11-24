@@ -380,7 +380,7 @@ class Pages extends BaseController
         $this->transaksiModel->where('kode_trx', $kode_trx);
         $this->transaksiModel->update();
 
-        session()->setFlashdata('success', 'Pembayaran telah berhasil, terimakasih.');
+        session()->setFlashdata('success', 'Pembayaran telah berhasil, kami akan memverifikasi pesanan anda, terimakasih.');
 		return redirect()->to('detail-order/'.$kode_trx);
     }
 

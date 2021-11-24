@@ -10,6 +10,8 @@
     </div>
     </div>
 
+    <?= $this->include('templates/dashboard/partials/alert') ?>
+
     <div class="section-body">
         <div class="card">
             <div class="card-body">
@@ -35,8 +37,8 @@
                         <td><button class="btn btn-primary" data-toggle="modal" data-target="#keranjangModal<?= $t['kode_trx'] ?>"><i class="fas fa-shopping-bag"></i></i></button></td>
                         <td><button class="btn btn-primary" data-toggle="modal" data-target="#buktiModal<?= $t['kode_trx'] ?>"><i class="fas fa-image"></i></button></td>
                         <td>
-                            <button class="btn btn-success" title="Valid"><i class="fas fa-check"></i></button>
-                            <button class="btn btn-danger" title="Tidak Valid / Batalkan"><i class="fas fa-times"></i></button>
+                            <button class="btn btn-success validButton" data-kodetrx="<?= $t['kode_trx'] ?>" data-toggle="modal" data-target="#validModal<?= $t['kode_trx'] ?>" title="Valid"><i class="fas fa-check"></i></button>
+                            <button class="btn btn-danger noValidButton" data-kodetrx="<?= $t['kode_trx'] ?>" data-toggle="modal" data-target="#tidakValidModal<?= $t['kode_trx'] ?>" title="Tidak Valid / Batalkan"><i class="fas fa-times"></i></button>
                         </td>
                       </tr>
                     <?php endforeach; ?>
@@ -123,13 +125,81 @@
     </div>
   </div>
 </div>
-<?php endforeach ?>
+<?php endforeach; ?>
+
+<!-- validModal -->
+<?php foreach($transaksi as $t) : ?>
+<div class="modal fade" id="validModal<?= $t['kode_trx'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Transaksi dinyatakan valid ? 
+      </div>
+      <div class="modal-footer">
+        <form action="/dashboard/data-transaksi/valid/<?= $t['kode_trx'] ?>" method="post">
+          <button type="submit" class="btn btn-primary">Ya</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<?php endforeach; ?>
+
+<!-- tidak valid Modal -->
+<?php foreach($transaksi as $t) : ?>
+<div class="modal fade" id="tidakValidModal<?= $t['kode_trx'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span> 
+        </button>
+      </div>
+      <div class="modal-body">
+      <form action="/dashboard/data-transaksi/tidak-valid/<?= $t['kode_trx'] ?>" method="post">
+        <p>Alasan dibatalkan : </p>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="alasan" id="stokKosong" value="Stok Kosong">
+          <label class="form-check-label" for="stokKosong">
+            Stok Kosong
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="alasan" id="pembayaranTidakValid" value="Pembayaran Tidak Valid">
+          <label class="form-check-label" for="pembayaranTidakValid">
+            Pembayaran Tidak Valid
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="alasan" id="spam" value="Spam">
+          <label class="form-check-label" for="spam">
+            Spam
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+          <button type="submit" class="btn btn-danger">Ya</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<?php endforeach; ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('javascript') ?>
 <script>
     $(document).ready(function() {
         $('#tabel-transaksi').DataTable();
+
+          const kodetrx = $('.validButton').data('kodetrx');
+
+          console.log(kodetrx);
     } );
 </script>
 <?= $this->endSection() ?>

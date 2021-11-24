@@ -73,7 +73,7 @@
             </div>
         </div>
         <div class="mt-3">
-            <?php if($data_trx[0]['status'] != 'Dibatalkan' && $data_trx[0]['status'] != 'Sudah membayar'): ?>
+            <?php if($data_trx[0]['status'] == 'Menunggu Pembayaran') : ?>
             <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#bayarModal">Bayar</button> 
             <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#batalModal">Batalkan</button>  
             <?php endif; ?>

@@ -26,10 +26,12 @@ class Transaksi extends BaseController
 
     public function belum_membayar()
     {
+        // dd($this->transaksiModel->where('kode_trx', 'HLM619DC17B84691')->findAll());
         $data = [
             'title'     => 'Data Transaksi Belum Membayar',
             'transaksi' => $this->getAllTransactionByStatus('Menunggu Pembayaran')
         ];  
+    
         return view('dashboard/transaksi/belum-membayar', $data);
     }
 
@@ -37,16 +39,52 @@ class Transaksi extends BaseController
     {
         $data = [
             'title' => 'Data Transaksi Sudah Membayar',
-            'transaksi' => $this->getAllTransactionByStatus('Sudah Membayar')
+            'transaksi' => $this->getAllTransactionByStatus('Sudah Membayar'),
+            'validation' => \Config\Services::validation()
         ];  
 
         return view('dashboard/transaksi/sudah-membayar', $data);
     }
 
+    public function validTransaction($kode_trx)
+    {
+        $this->transaksiModel->set('status', 'Terverifikasi');
+        $this->transaksiModel->where('kode_trx', $kode_trx);
+        $this->transaksiModel->update();
+
+        session()->setFlashdata('success', 'Transaksi berhasil terverifikasi');
+		return redirect()->to('/dashboard/data-transaksi/sudah-membayar');
+    }
+
+    public function notValidTransaction($kode_trx)
+    {
+        if(!$this->validate([
+            'alasan' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Pilih salah satu alasan'
+                ]
+            ]
+        ])) {
+            return redirect()->to('/dashboard/data-transaksi/sudah-membayar')->withInput();
+        }
+        
+        $this->transaksiModel->set('status', 'Dibatalkan - ' . $this->request->getPost('alasan'));
+        $this->transaksiModel->where('kode_trx', $kode_trx);
+        $this->transaksiModel->update();
+
+        // unlink("assets/img/bukti-bayar/" . $this->transaksiModel->where('kode_trx', $kode_trx)->findAll()[0]['bukti_bayar']);
+
+        session()->setFlashdata('success', 'Transaksi berhasil dibatalkan dengan alasan <strong>' . strtolower($this->request->getPost('alasan')) . '<strong>');
+		return redirect()->to('/dashboard/data-transaksi/sudah-membayar');
+    }
+
     public function terverifikasi()
     {
         $data = [
-            'title' => 'Data Transaksi Terverifikasi'
+            'title' => 'Data Transaksi Terverifikasi',
+            'transaksi' => $this->getAllTransactionByStatus('Terverifikasi'),
+            'validation' => \Config\Services::validation()
         ];  
 
         return view('dashboard/transaksi/terverifikasi', $data);
@@ -55,7 +93,7 @@ class Transaksi extends BaseController
     public function dikirim()
     {
         $data = [
-            'title' => 'Data Transaksi Sedang Dikirim'
+            'title' => 'Data Transaksi Sedang Dikirim',
         ];  
 
         return view('dashboard/transaksi/dikirim', $data);

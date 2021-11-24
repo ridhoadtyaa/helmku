@@ -80,6 +80,8 @@ $routes->group('dashboard', ['filter' => 'adminFilter'], function($routes){
 
     $routes->get('data-transaksi/belum-membayar', 'Dashboard\Transaksi::belum_membayar');
     $routes->get('data-transaksi/sudah-membayar', 'Dashboard\Transaksi::sudah_membayar');
+    $routes->post('data-transaksi/valid/(:any)', 'Dashboard\Transaksi::validTransaction/$1');
+    $routes->post('data-transaksi/tidak-valid/(:any)', 'Dashboard\Transaksi::notValidTransaction/$1');
     $routes->get('data-transaksi/terverifikasi', 'Dashboard\Transaksi::terverifikasi');
     $routes->get('data-transaksi/dikirim', 'Dashboard\Transaksi::dikirim');
     $routes->get('data-transaksi/selesai', 'Dashboard\Transaksi::selesai');
