@@ -31,7 +31,7 @@
                         <td>#<b><?= $trx['kode_trx'] ?></b></td>
                         <td><?= date('d F Y H:i:s', strtotime($trx['tgl_pesan'])) ?></td>
                         <td><?= $trx['nama'] ?></td>
-                        <td><button class="btnBag btn btn-primary" data-alamatJalan="<?= $trx['alamat_jalan'] ?>" data-items="<?= base64_encode(json_encode($trx['items'])) ?>"><i class="fas fa-shopping-bag"></i></i></button></td>
+                        <td><button class="btnBag btn btn-primary" data-alamatJalan="<?= $trx['alamat_pengiriman'] ?>" data-items="<?= base64_encode(json_encode($trx['items'])) ?>"><i class="fas fa-shopping-bag"></i></i></button></td>
                         <td><button class="btnDel btn btn-danger" data-url="<?= base_url('dashboard/data-transaksi/tidak-valid/'.$trx['kode_trx']) ?>" title="Batalkan"><i class="fas fa-times"></i></button></td>
                     </tr>
                   <?php endforeach ?>

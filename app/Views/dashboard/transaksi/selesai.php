@@ -33,7 +33,7 @@
                         <td><?= date('d F Y H:i:s', strtotime($t['tgl_pesan'])) ?></td>
                         <td><?= date('d F Y H:i:s', strtotime($t['tgl_pembayaran'])) ?></td>
                         <td><?= $t['nama'] ?></td>
-                        <td><button class="btnBag btn btn-primary" data-alamat="<?= $t['alamat_jalan'] ?>" data-pengiriman="<?= $t['kurir'].' - '.$t['no_resi'] ?>" data-items="<?= base64_encode(json_encode($t['items'])) ?>"><i class="fas fa-shopping-bag"></i></i></button></td>
+                        <td><button class="btnBag btn btn-primary" data-alamat="<?= $t['alamat_pengiriman'] ?>" data-pengiriman="<?= $t['kurir'].' - '.$t['no_resi'] ?>" data-items="<?= base64_encode(json_encode($t['items'])) ?>"><i class="fas fa-shopping-bag"></i></i></button></td>
                         <td><button class="btnBukti btn btn-primary" data-gambar="<?= $t['bukti_bayar'] ?>"><i class="fas fa-image"></i></button></td>
                       </tr>
                     <?php endforeach; ?>
