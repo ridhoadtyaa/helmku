@@ -285,13 +285,56 @@ class Pages extends BaseController
             }
         }
     }
+
+    public function getProductByKategori($kategori)
+    {
+        $this->produkModel->select('*, data_produk.nama AS nama');
+        $this->produkModel->select('data_produk.id AS id');
+        $this->produkModel->select('data_kategori.nama AS nama_kategori');
+        $this->produkModel->select('data_stok_produk.harga AS harga');
+        $this->produkModel->join('data_kategori', 'data_produk.kategori = data_kategori.id_kategori');
+        $this->produkModel->join('data_stok_produk', 'data_produk.id = data_stok_produk.id_produk');
+        $getResult = $this->produkModel->findAll();
+
+        $produkByKategori = [];
+
+        for($i = 0; $i < count($getResult); $i++) {
+            if(strtolower($getResult[$i]['nama_kategori']) == strtolower($kategori)) {
+                array_push($produkByKategori, $getResult[$i]);
+            }
+        } 
+
+        $filterByName = array_column($produkByKategori, 'nama');
+        $filterByName = array_unique($filterByName);
+        return array_filter($produkByKategori, function ($key, $value) use ($filterByName) {
+            return in_array($value, array_keys($filterByName));
+        }, ARRAY_FILTER_USE_BOTH);
+    }
+
     public function produk()
     {
         $data = [
             'title' => 'Produk',
         ];
 
-        $data['produks']     = $this->produkModel->paginate(5, 'produk_pagers');
+        $keyword = $this->request->getVar('keyword');
+        if($keyword) {
+            $data['produks'] = $this->produkModel->search($keyword);
+        } else if($this->request->getGet('kategori')) {
+            $data['produks'] = $this->getProductByKategori($this->request->getGet('kategori'));
+        } else {
+            $data['produks'] = $this->produkModel->paginate(5, 'produk_pagers');
+        }
+
+        $this->produkModel->select('data_kategori.nama AS nama_kategori');
+        $this->produkModel->join('data_kategori', 'data_produk.kategori = data_kategori.id_kategori');
+        $kategori = $this->produkModel->findAll();
+        $kategoriUnique = [];
+        foreach($kategori as $k) {
+            array_push($kategoriUnique, $k['nama_kategori']);
+        }
+        $data['kategori'] = array_unique($kategoriUnique);
+
         $data['pager']       = $this->produkModel->pager;
         $data['data_produk'] = [];
         $i = 0;
@@ -310,6 +353,8 @@ class Pages extends BaseController
                 ];
             }
         }
+    //    dd($data['data_produk']);
+
         return view('produk', $data);
     }
 

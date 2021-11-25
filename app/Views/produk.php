@@ -7,14 +7,24 @@
 <?= $this->section('content') ?>
 <section class="section-pages">
     <div class="pages-wrapper">
-        <div class="row">
-            <h4 class="my-3">Produk HELMKU</h4>
-            <div class="col-md-4">
+        <h4 class="mb-4 fw-bold">Produk HELMKU</h4>
+        <div class="row d-flex justify-content-between">
+            <div class="col-md-6 col-sm-6 col-lg-4 mb-3">
                 <select class="form-select kategori d-inline">
-                    <option selected>Semua kategori</option>
-                    <option value="1">Bogo</option>
-                    <option value="2">Sport</option>
+                    <option selected disabled>Pilih Kategori</option>
+                    <option value="">Semua kategori</option>
+                    <?php foreach($kategori as $k) : ?>
+                    <option value="<?= $k ?>"><?= $k ?></option>
+                    <?php endforeach; ?>
                 </select>
+            </div>
+            <div class="col-md-6 col-sm-6 col-lg-4">
+               <form action="">
+                <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Cari produk" name="keyword">
+                        <button class="btn btn-dark" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+               </form>
             </div>
         </div>
         <div class="row text-center justify-content-center">
@@ -30,10 +40,20 @@
             </div>
             <?php endforeach; ?>
         </div>
-        <?= $pager->links('produk_pagers', 'produk_pagers') ?>
+        <?php if(count($data_produk) > 5) : ?>
+            <?= $pager->links('produk_pagers', 'produk_pagers') ?>
+        <?php endif; ?>
     </div>
 </section>
 <?= $this->endSection() ?>
 
 <?= $this->section('javascript') ?>
+<script>
+    const kategori = document.querySelector('.kategori');
+
+    kategori.addEventListener('change', e => {
+        console.log(e.target.value);
+        window.location = '<?= base_url('produk?kategori=') ?>' + e.target.value
+    })
+</script>
 <?= $this->endSection() ?>

@@ -1,4 +1,3 @@
-tentang
 bantuan
 
 add feature search and select kategori di halaman produk

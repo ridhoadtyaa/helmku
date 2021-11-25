@@ -40,4 +40,9 @@ class Produk extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function search($keyword)
+    {
+        return $this->table('data_produk')->like('nama', $keyword)->findAll();
+    }
 }
