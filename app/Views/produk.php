@@ -58,9 +58,10 @@
         const urlParams = new URLSearchParams(queryString);
         const kategori = (urlParams.get('kategori'));
         if(kategori != "" && kategori != null){
-            console.log("ok");
-            $(`#kategoriS option[value=${kategori}]`).attr('selected', 'selected');
+            $('#kategoriS').val(kategori);
+        }else{
+            $('#kategoriS').val(kategori);
         }
-    })
+    });
 </script>
 <?= $this->endSection() ?>
