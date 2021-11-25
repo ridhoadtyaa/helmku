@@ -10,7 +10,7 @@
         <h4 class="mb-4 fw-bold">Produk HELMKU</h4>
         <div class="row d-flex justify-content-between">
             <div class="col-md-6 col-sm-6 col-lg-4 mb-3">
-                <select class="form-select kategori d-inline">
+                <select class="form-select kategori d-inline" id="kategoriS">
                     <option selected disabled>Pilih Kategori</option>
                     <option value="">Semua kategori</option>
                     <?php foreach($kategori as $k) : ?>
@@ -50,10 +50,17 @@
 <?= $this->section('javascript') ?>
 <script>
     const kategori = document.querySelector('.kategori');
-
     kategori.addEventListener('change', e => {
-        console.log(e.target.value);
         window.location = '<?= base_url('produk?kategori=') ?>' + e.target.value
+    });
+    $(document).ready(function(){
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const kategori = (urlParams.get('kategori'));
+        if(kategori != "" && kategori != null){
+            console.log("ok");
+            $(`#kategoriS option[value=${kategori}]`).attr('selected', 'selected');
+        }
     })
 </script>
 <?= $this->endSection() ?>

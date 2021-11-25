@@ -294,21 +294,11 @@ class Pages extends BaseController
         $this->produkModel->select('data_stok_produk.harga AS harga');
         $this->produkModel->join('data_kategori', 'data_produk.kategori = data_kategori.id_kategori');
         $this->produkModel->join('data_stok_produk', 'data_produk.id = data_stok_produk.id_produk');
+        $this->produkModel->where('data_kategori.nama', $kategori);
+        $this->produkModel->selectMin('data_produk.id');
+        $this->produkModel->groupBy('data_produk.url_slug');
         $getResult = $this->produkModel->findAll();
-
-        $produkByKategori = [];
-
-        for($i = 0; $i < count($getResult); $i++) {
-            if(strtolower($getResult[$i]['nama_kategori']) == strtolower($kategori)) {
-                array_push($produkByKategori, $getResult[$i]);
-            }
-        } 
-
-        $filterByName = array_column($produkByKategori, 'nama');
-        $filterByName = array_unique($filterByName);
-        return array_filter($produkByKategori, function ($key, $value) use ($filterByName) {
-            return in_array($value, array_keys($filterByName));
-        }, ARRAY_FILTER_USE_BOTH);
+        return $getResult;
     }
 
     public function produk()
@@ -325,7 +315,7 @@ class Pages extends BaseController
         } else {
             $data['produks'] = $this->produkModel->paginate(5, 'produk_pagers');
         }
-
+        
         $this->produkModel->select('data_kategori.nama AS nama_kategori');
         $this->produkModel->join('data_kategori', 'data_produk.kategori = data_kategori.id_kategori');
         $kategori = $this->produkModel->findAll();
