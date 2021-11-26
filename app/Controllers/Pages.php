@@ -296,8 +296,8 @@ class Pages extends BaseController
         $this->produkModel->join('data_stok_produk', 'data_produk.id = data_stok_produk.id_produk');
         $this->produkModel->where('data_kategori.nama', $kategori);
         $this->produkModel->selectMin('data_produk.id');
-        $this->produkModel->groupBy('data_produk.url_slug');
-        $getResult = $this->produkModel->paginate(5, 'produk_pagers');
+        $this->produkModel->groupBy('url_slug');
+        $getResult = $this->produkModel->findAll();
         return $getResult;
     }
 
@@ -310,10 +310,12 @@ class Pages extends BaseController
         $keyword = $this->request->getVar('keyword');
         if($keyword) {
             $data['produks'] = $this->produkModel->search($keyword);
+            $data['pager']   = $this->produkModel->pager;
         } else if($this->request->getGet('kategori')) {
             $data['produks'] = $this->getProductByKategori($this->request->getGet('kategori'));
         } else {
             $data['produks'] = $this->produkModel->paginate(5, 'produk_pagers');
+            $data['pager']   = $this->produkModel->pager;
         }
         
         $this->produkModel->select('data_kategori.nama AS nama_kategori');
@@ -325,7 +327,6 @@ class Pages extends BaseController
         }
         $data['kategori'] = array_unique($kategoriUnique);
 
-        $data['pager']       = $this->produkModel->pager;
         $data['data_produk'] = [];
         $i = 0;
         foreach($data['produks'] as $data_produk){

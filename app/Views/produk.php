@@ -40,7 +40,7 @@
             </div>
             <?php endforeach; ?>
         </div>
-        <?= $pager->links('produk_pagers', 'produk_pagers') ?>
+        <?= isset($pager) ? $pager->links('produk_pagers', 'produk_pagers') : '' ?>
     </div>
 </section>
 <?= $this->endSection() ?>
