@@ -242,7 +242,7 @@ class Produk extends BaseController
             $this->stokModel->where('id_produk', $id)->delete();
         }
         if($this->produkModel->where('id', $id)->delete()){
-            unlink('assets/img/produk/'.$data['data_produk']['nama']);
+            unlink('assets/img/produk/'.$data['data_produk']['gambar']);
             session()->setFlashdata('success', 'Sukses menghapus produk '.$data['data_produk']['nama']);
         }else{
             session()->setFlashdata('danger', 'Gagal menghapus produk '.$data['data_produk']['nama']);

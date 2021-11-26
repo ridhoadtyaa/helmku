@@ -9,7 +9,7 @@
         <div class="breadcrumb-item">Produk</div>
     </div>
     </div>
-
+    <?= $this->include('templates/dashboard/partials/alert') ?>
     <div class="section-body">
         <div class="card">
             <div class="card-body">

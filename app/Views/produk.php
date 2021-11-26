@@ -40,9 +40,7 @@
             </div>
             <?php endforeach; ?>
         </div>
-        <?php if(count($data_produk) > 5) : ?>
-            <?= $pager->links('produk_pagers', 'produk_pagers') ?>
-        <?php endif; ?>
+        <?= $pager->links('produk_pagers', 'produk_pagers') ?>
     </div>
 </section>
 <?= $this->endSection() ?>
