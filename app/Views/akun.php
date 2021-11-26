@@ -3,9 +3,12 @@
 <?= $this->section('styles') ?>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
 <style>
-    .page-item .page-link, .page-item.active .page-link {
+    .page-item .page-link {
+        color: black;
+    }
+
+    .page-item.active .page-link {
         background-color: #000;
-        border: 1px solid black;
         color: white;
     }
 

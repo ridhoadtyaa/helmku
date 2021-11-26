@@ -69,7 +69,7 @@
                                     </div>
                                     <div class="col-md-4 col-sm-4 col-4">
                                         <p>x<?= $v['qty'] ?></p>
-                                        <p><?= format_rupiah($v['harga']*$v['qty']) ?></p>
+                                        <p class="harga"><?= format_rupiah($v['harga']*$v['qty']) ?></p>
                                     </div>
                                 </div>
                                 <hr>
@@ -129,71 +129,23 @@
         <?php endif; ?>
     </div>
 </section>
-<?= $this->endSection() ?>
 
-<!-- Kalo ada barang  -->
-<div class="row">
-    <div class="col-md-6 mb-3">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-3 col-sm-3 col-3">
-                        <img src="/assets/img/produk/helm1.png" class="img-thumbnail rounded border-0">
-                    </div>
-                    <div class="col-md-5 col-sm-5 col-5">
-                        <p>Bogo Retro x1</p>
-                        <p>L</p>
-                        <i class='bx bx-trash'></i>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-4">
-                        <p>Rp 300.000</p>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-3 col-sm-3 col-3">
-                        <img src="/assets/img/produk/helm1.png" class="img-thumbnail rounded border-0">
-                    </div>
-                    <div class="col-md-5 col-sm-5 col-5">
-                        <p>Bogo Retro x1</p>
-                        <p>L</p>
-                        <i class='bx bx-trash'></i>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-4">
-                        <p>Rp 300.000</p>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-3 col-sm-3 col-3">
-                        <img src="/assets/img/produk/helm1.png" class="img-thumbnail rounded border-0">
-                    </div>
-                    <div class="col-md-5 col-sm-5 col-5">
-                        <p>Bogo Retro x1</p>
-                        <p>L</p>
-                        <i class='bx bx-trash'></i>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-4">
-                        <p>Rp 300.000</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="modal fade" id="removeCart" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Berhasil menghapus barang dari keranjang</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+      </div>
     </div>
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <div class="justify-content-between d-flex">
-                    <h3>Total</h3>
-                    <h4>Rp 300.000</h4>
-                </div>
-                <div class="justify-content-end d-flex">
-                    <button class="btn btn-dark mt-2">Beli</button>
-                </div>
-            </div>
-        </div>
-    </div>
+  </div>
 </div>
+<?= $this->endSection() ?>
 
 <?= $this->section('javascript') ?>
 <script>
@@ -207,17 +159,12 @@
             if(data == "need_login"){
                 window.location.href = '<?= base_url('login-member') ?>';
             }else if(data == "ok" || data == "okk"){
-                alert('Berhasil menghapus barang dari keranjang');
-                window.location.href = '<?= base_url('keranjang') ?>';
+                $('#removeCart').modal('show');
+                $("#removeCart").on('hide.bs.modal', () => {
+                    window.location = '<?= base_url('keranjang') ?>'
+                });
             }
         });
     })
 </script>
 <?= $this->endSection() ?>
-<!-- no cart -->
-<!-- <div class="text-center">
-    <img src="/assets/img/nocart.png" width="180" alt="">
-    <h3 class="text-muted my-3">Keranjangmu masih kosong.</h3>
-    <a href="/produk" class="btn btn-dark">Belanja</a>
-</div> -->
-<!--  -->

@@ -7,7 +7,6 @@
 <?= $this->section('content') ?>
 <section class="section-pages">
     <div class="pages-wrapper">
-        <?= $this->include('templates/dashboard/partials/alert') ?>
         <h3 class="text-center title">Login Member</h3>
         <p class="text-center">Selamat datang. Sebelum memesan, login terlebih dahulu.</p>
         <form action="<?= base_url('login-member-post') ?>" method="post">
