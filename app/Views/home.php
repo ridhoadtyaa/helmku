@@ -10,12 +10,12 @@
     <h2 class="text-center text-uppercase">Produk Kami</h2>
     <div class="card-wrapper justify-content-center">
         <?php foreach($produk as $pd): ?>
-        <div class="card border-0 text-center">
-            <div class="card-body">
-                <a href="<?= base_url('detail/'.$pd['url_slug']) ?>"><img class="card-img mb-2" src="<?= base_url('assets/img/produk/'.$pd['gambar']) ?>"></a>
-                <div class="card-title"><?= $pd['nama'] ?></div>
+            <div class="card border-0 text-center">
+                <div class="card-body">
+                    <a href="<?= base_url('detail/'.$pd['url_slug']) ?>"><img class="card-img mb-2" src="<?= base_url('assets/img/produk/'.$pd['gambar']) ?>"></a>
+                    <div class="card-title"><?= $pd['nama'] ?></div>
+                </div>
             </div>
-        </div>
         <?php endforeach ?>
     </div>
 </section>
