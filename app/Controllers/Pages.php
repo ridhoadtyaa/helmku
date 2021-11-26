@@ -297,7 +297,7 @@ class Pages extends BaseController
         $this->produkModel->where('data_kategori.nama', $kategori);
         $this->produkModel->selectMin('data_produk.id');
         $this->produkModel->groupBy('data_produk.url_slug');
-        $getResult = $this->produkModel->findAll();
+        $getResult = $this->produkModel->paginate(5, 'produk_pagers');
         return $getResult;
     }
 
