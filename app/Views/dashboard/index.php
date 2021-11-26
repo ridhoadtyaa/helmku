@@ -91,9 +91,9 @@
                     <li class="media">
                         <img class="mr-3 rounded-circle" width="50" src="../assets/img/avatar/avatar-<?= $rnd[array_rand($rnd)] ?>.png" alt="avatar">
                         <div class="media-body">
-                        <div class="float-right text-primary"><?= date('d/m/Y H:i:s', strtotime($order['tgl_pesan'])) ?></div>
-                        <div class="media-title"><?= $order['nama'] ?></div>
-                        <span class="text-small text-muted">Kode TRX : <?= $order['kode_trx'] ?></span>
+                            <div class="float-right text-primary"><?= date('d/m/Y H:i:s', strtotime($order['tgl_pesan'])) ?></div>
+                            <div class="media-title"><?= $order['nama'] ?></div>
+                            <span class="text-small text-muted">Kode TRX : <?= $order['kode_trx'] ?></span>
                         </div>
                     </li>
                     <?php endforeach ?>
