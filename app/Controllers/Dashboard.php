@@ -44,9 +44,9 @@ class Dashboard extends BaseController
                 'sedang_dikirim'    => count($this->getAllTransactionByStatus('Sedang dikirim')),
                 'selesai'           => count($this->getAllTransactionByStatus('Selesai'))
             ],
+            'trx_selesai'   => $this->getAllTransactionByStatus('Selesai'),
             'recent_orders' => $this->getRecentOrders(5)
         ];
-        // dd($data);
         return view('dashboard/index', $data);
     }
 }
