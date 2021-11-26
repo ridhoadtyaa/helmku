@@ -181,6 +181,7 @@ class Auth extends BaseController
                         [
                             'isAdmin'   => true,
                             'username'  => $cek['username'],
+                            'nama'      => $cek['nama']
                         ]
                     );
                     session()->setFlashdata('success', 'Sukses login, Selamat datang!');
