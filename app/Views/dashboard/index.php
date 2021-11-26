@@ -107,6 +107,55 @@
 
 <?= $this->section('javascript') ?>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="/assets/js/page/index-0.js"></script>
+<script>
+    <?php
+        $arrBulan = "["; $arrCount = "[";
+        foreach($trx_selesai as $key => $val){
+            $arrBulan .= "'".$key."', ";
+            $arrCount .= "'".$val."', ";
+        }
+        $arrBulan .= "]"; $arrCount .= "]";
+    ?>
+    var statistics_chart = document.getElementById("myChart").getContext('2d');
+    var myChart = new Chart(statistics_chart, {
+    type: 'line',
+    data: {
+        labels: <?= $arrBulan ?>,
+        datasets: [{
+        label: 'Penjualan',
+        data: <?= $arrCount ?>,
+        borderWidth: 5,
+        borderColor: '#6777ef',
+        backgroundColor: 'transparent',
+        pointBackgroundColor: '#fff',
+        pointBorderColor: '#6777ef',
+        pointRadius: 7
+        }]
+    },
+    options: {
+        legend: {
+        display: false
+        },
+        scales: {
+        yAxes: [{
+            gridLines: {
+            display: false,
+            drawBorder: false,
+            },
+            ticks: {
+            stepSize: 150
+            }
+        }],
+        xAxes: [{
+            gridLines: {
+            color: '#fbfbfb',
+            lineWidth: 2
+            }
+        }]
+        },
+    }
+    });
+
+</script>
 <?= $this->endSection() ?>
 
