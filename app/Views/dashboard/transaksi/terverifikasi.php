@@ -113,13 +113,13 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="kurir">Kurir</label>
-                  <input type="text" class="form-control" name="kurir" id="kurir" placeholder="JNE">
+                  <input type="text" class="form-control" name="kurir" id="kurir" placeholder="JNE" required>
                 </div>
               </div>
               <div class="col-md-8">
                 <div class="form-group">
                   <label for="resi">No. Resi</label>
-                  <input type="text" class="form-control" name="resi" id="resi" placeholder="JNE9329131023">
+                  <input type="text" class="form-control" name="resi" id="resi" placeholder="JNE9329131023" required>
                 </div>
               </div>
           </div>

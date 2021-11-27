@@ -23,7 +23,6 @@
                         <th>Tanggal Pembayaran</th>
                         <th>Nama</th>
                         <th>Detail Pesanan</th>
-                        <th>Bukti Transfer</th>
                         <th>Lihat Resi</th>
                         <th>Selesai</th>
                     </tr>
@@ -36,7 +35,6 @@
                         <td><?= date('d F Y H:i:s', strtotime($t['tgl_pembayaran'])) ?></td>
                         <td><?= $t['nama'] ?></td>
                         <td><button class="btnBag btn btn-primary" data-alamat="<?= $t['alamat_pengiriman'] ?>" data-items="<?= base64_encode(json_encode($t['items'])) ?>"><i class="fas fa-shopping-bag"></i></i></button></td>
-                        <td><button class="btnBukti btn btn-primary" data-gambar="<?= $t['bukti_bayar'] ?>"><i class="fas fa-image"></i></button></td>
                         <td>
                             <button class="btnShip btn btn-success" data-kodetrx="<?= $t['kode_trx'] ?>" data-kurir="<?= $t['kurir'] ?>" data-resi="<?= $t['no_resi'] ?>" title="Resi"><i class="fas fa-eye"></i></button>
                         </td>
@@ -100,22 +98,6 @@
         <tbody id="dataPesanan">
         </tbody>
         </table>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- bukti Modal -->
-<div class="modal fade" id="buktiModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body text-center">
-        <img id="buktiBayarSrc" class="img-fluid">
       </div>
     </div>
   </div>

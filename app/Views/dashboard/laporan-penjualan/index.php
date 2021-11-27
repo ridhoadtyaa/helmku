@@ -1,5 +1,5 @@
 <?= $this->extend('templates/dashboard/dashboard-template') ?>
-
+<?php helper('rupiah') ?>
 <?= $this->section('styles') ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 <?= $this->endSection() ?>
@@ -7,7 +7,7 @@
 <?= $this->section('content') ?>
 <section class="section">
     <div class="section-header">
-    <h1>Laporan Penjualan <?= date('F Y') ?></h1>
+    <h1>Laporan Penjualan <?= $header ?></h1>
     <div class="section-header-breadcrumb">
         <div class="breadcrumb-item active"><a href="/dashboard">Dashboard</a></div>
         <div class="breadcrumb-item">Laporan Penjualan</div>
@@ -15,62 +15,68 @@
     </div>
 
     <div class="row mb-3">
-        <div class="col-sm-3">
-        <div class="input-group date" id="datepicker">
-                <input type="text" class="form-control" name="tglLaporan" id="tglLaporan" autocomplete="off" data-date-end-date="0d" placeholder="Pilih tanggal laporan">
-                <span class="input-group-append">
-                    <span class="input-group-text bg-white d-block">
-                        <i class="fas fa-calendar"></i>
+        <div class="col-sm-3 mb-3">
+            <form action="" method="get">
+                <div class="input-group date" id="datepicker">
+                    <input type="text" class="form-control" name="tglLaporan" id="tglLaporan" autocomplete="off" data-date-end-date="0d" placeholder="Pilih tanggal laporan">
+                    <span class="input-group-append">
+                        <span class="input-group-text bg-white d-block">
+                            <i class="fas fa-calendar"></i>
+                        </span>
                     </span>
-                </span>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 
     <div class="section-body">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body overflow-auto">
             <table id="tabel-laporan" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
-                        <th>No</th>
-                        <th>Kode Produk</th>
-                        <th>Nama Produk</th>
+                        <th>Tangggal Transaksi</th>
+                        <th>No. Pesanan</th>
+                        <th>Produk</th>
                         <th>Terjual</th>
-                        <th>Pendapatan</th>
+                        <th>Jumlah Harga</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>1242-4424-5244-4252</td>
-                        <td>Bogo Retro</td>
-                        <td>3</td>
-                        <td>Rp 600.000</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>1242-4424-5244-4252</td>
-                        <td>Bogo Supra</td>
-                        <td>3</td>
-                        <td>Rp 600.000</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>1242-4424-5244-4252</td>
-                        <td>GM</td>
-                        <td>3</td>
-                        <td>Rp 600.000</td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" class="text-center">Total</td>
-                        <td class="d-none"></td>
-                        <td class="d-none"></td>
-                        <td>9</td>
-                        <td>Rp 1.800.000</td>
-                    </tr>
+                    <?php if(count($laporan_penjualan) > 0) { ?>
+                        <?php $totalTerjual = 0; $totalHarga = 0; ?>
+                        <?php foreach($laporan_penjualan as $lp) : ?>
+                        <tr>
+                            <td><?= date('d F Y H:i:s', strtotime($lp['updated_at'])) ?></td>
+                            <td><?= $lp['kode_trx'] ?></td>
+                            <td><?= $lp['nama_produk'] ?></td>
+                            <td><?= $lp['kuantitas'] ?></td>
+                            <td><?= format_rupiah($lp['harga']) ?></td>
+                        </tr>
+                        <?php 
+                        $totalTerjual += $lp['kuantitas'];
+                        $totalHarga += $lp['harga'];
+                        ?>
+                        <?php endforeach; ?>
+                        <tr>
+                            <td colspan="3" class="text-center">Total</td>
+                            <td class="d-none"></td>
+                            <td class="d-none"></td>
+                            <td><?= $totalTerjual ?></td>
+                            <td><?= format_rupiah($totalHarga) ?></td>
+                        </tr>
+                    <?php } else { ?>
+                        <tr class="">
+                            <td colspan="5" class="text-center ">
+                                <div class="alert alert-danger" role="alert">
+                                    Data laporan penjualan pada <strong><?= $header ?></strong> tidak ada.
+                                </div>
+                            </td>
+                        </tr>
+                    <?php } ?>
                 </tfoot>
             </table>
+            <a href="" class="btn btn-danger mt-3"><i class="fas fa-file-pdf"></i> Download PDF</a>
             </div>
         </div>
     </div>
@@ -89,6 +95,9 @@
             format: "mm-yyyy",
             startView: "months", 
             minViewMode: "months"
+        }).on('changeDate', (e) => {
+            const tglLaporan = $('#tglLaporan').val().split('-').reverse().join('-');
+            window.open('<?= base_url('dashboard/laporan-penjualan?tglLaporan=') ?>' + tglLaporan, '_self');
         });
     })
 </script>
