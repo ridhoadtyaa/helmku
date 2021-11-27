@@ -2,6 +2,14 @@
 <?php helper('rupiah') ?>
 <?= $this->section('styles') ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+   <!-- datatables css -->
+<link rel="stylesheet" href="https://evote.ijel.me/assets/DataTables/DataTables/css/dataTables.bootstrap4.min.css">
+
+<!-- select2 -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -61,7 +69,8 @@
                         ?>
                         <?php endforeach; ?>
                         <tr>
-                            <td colspan="3" class="text-center">Total</td>
+                            <td colspan="4" class="text-center">Total</td>
+                            <td class="d-none"></td>
                             <td class="d-none"></td>
                             <td class="d-none"></td>
                             <td><?= $totalTerjual ?></td>
@@ -78,7 +87,6 @@
                     <?php } ?>
                 </tfoot>
             </table>
-            <a href="" class="btn btn-danger mt-3"><i class="fas fa-file-pdf"></i> Download PDF</a>
             </div>
         </div>
     </div>
@@ -87,9 +95,23 @@
 
 <?= $this->section('javascript') ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<!-- <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> -->
+<script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#tabel-laporan').DataTable();
+        $('#tabel-laporan').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ],
+            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+        });
     } );
 
     $(function() {
