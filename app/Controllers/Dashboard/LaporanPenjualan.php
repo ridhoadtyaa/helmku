@@ -31,11 +31,10 @@ class LaporanPenjualan extends BaseController
         }
 
         $data = [
-            'title' => 'Laporan Penjualan',
             'laporan_penjualan' => $dataLaporanByTanggal,
             'header' => $this->request->getGet('tglLaporan') ? tgl_bulanTahun($this->request->getGet('tglLaporan')) : tgl_bulanTahun(date('Y-m'))
         ];
-
+        $data['title'] = "Laporan Penjualan - ".$data['header'];
         return view('dashboard/laporan-penjualan/index', $data);
     }
 }
