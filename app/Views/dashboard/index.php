@@ -1,5 +1,13 @@
 <?= $this->extend('templates/dashboard/dashboard-template') ?>
 
+<?= $this->section('styles') ?>
+<style>
+    .wait, .pay, .send, .done {
+        cursor: pointer;
+    }
+</style>
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 <section class="section">
     <div class="section-header">
@@ -7,7 +15,7 @@
     </div>
     <div class="row">
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-            <div class="card card-statistic-1">
+            <div class="card card-statistic-1 wait">
             <div class="card-icon bg-primary">
                 <i class="far fa-bookmark"></i>
             </div>
@@ -22,7 +30,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-            <div class="card card-statistic-1">
+            <div class="card card-statistic-1 pay">
             <div class="card-icon bg-danger">
                 <i class="far fa-credit-card"></i>
             </div>
@@ -37,7 +45,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-            <div class="card card-statistic-1">
+            <div class="card card-statistic-1 send">
             <div class="card-icon bg-warning">
                 <i class="far fa-paper-plane"></i>
             </div>
@@ -52,7 +60,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-            <div class="card card-statistic-1">
+            <div class="card card-statistic-1 done">
             <div class="card-icon bg-success">
                 <i class="fas fa-calendar-check"></i>
             </div>
@@ -116,8 +124,30 @@
         }
         $arrBulan .= "]"; $arrCount .= "]";
     ?>
-    var statistics_chart = document.getElementById("myChart").getContext('2d');
-    var myChart = new Chart(statistics_chart, {
+
+    const wait = document.querySelector('.wait');
+    const pay = document.querySelector('.pay');
+    const send = document.querySelector('.send');
+    const done = document.querySelector('.done');
+
+    wait.addEventListener('click', () => {
+        window.location = '<?= base_url('dashboard/data-transaksi/belum-membayar') ?>';
+    });
+
+    pay.addEventListener('click', () => {
+        window.location = '<?= base_url('dashboard/data-transaksi/sudah-membayar') ?>';
+    });
+
+    send.addEventListener('click', () => {
+        window.location = '<?= base_url('dashboard/data-transaksi/dikirim') ?>';
+    });
+
+    done.addEventListener('click', () => {
+        window.location = '<?= base_url('dashboard/data-transaksi/selesai') ?>';
+    });
+
+    const statistics_chart = document.getElementById("myChart").getContext('2d');
+    const myChart = new Chart(statistics_chart, {
     type: 'line',
     data: {
         labels: <?= $arrBulan ?>,

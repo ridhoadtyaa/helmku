@@ -12,4 +12,21 @@ const sidebarSlide = () => {
     });
 };
 
+const upButton = document.getElementById("upBtn");
+
+window.onscroll = () => {scrollFunction()};
+
+const scrollFunction = () => {
+  if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+    upButton.style.display = "block";
+  } else {
+    upButton.style.display = "none";
+  }
+}
+
+const topFunction = () => {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+
 sidebarSlide();
