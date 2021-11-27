@@ -38,6 +38,7 @@
                         <th>Tangggal Transaksi</th>
                         <th>No. Pesanan</th>
                         <th>Produk</th>
+                        <th>Variasi</th>
                         <th>Terjual</th>
                         <th>Jumlah Harga</th>
                     </tr>
@@ -47,9 +48,10 @@
                         <?php $totalTerjual = 0; $totalHarga = 0; ?>
                         <?php foreach($laporan_penjualan as $lp) : ?>
                         <tr>
-                            <td><?= date('d F Y H:i:s', strtotime($lp['updated_at'])) ?></td>
+                            <td><?= date('d F Y H:i:s', strtotime($lp['created_at'])) ?></td>
                             <td><?= $lp['kode_trx'] ?></td>
                             <td><?= $lp['nama_produk'] ?></td>
+                            <td><?= $lp['variasi'] ?></td>
                             <td><?= $lp['kuantitas'] ?></td>
                             <td><?= format_rupiah($lp['harga']) ?></td>
                         </tr>

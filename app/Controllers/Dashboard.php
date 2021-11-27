@@ -42,7 +42,7 @@ class Dashboard extends BaseController
         $this->transaksiModel->select('data_pengguna.*');
         $this->transaksiModel->join('data_pengguna', 'id_buyer = data_pengguna.users_id');
         $this->transaksiModel->where('status', 'Selesai');
-        $this->transaksiModel->like('data_transaksi.created_at', date('Y').'-'.$bln);
+        $this->transaksiModel->like('data_transaksi.updated_at', date('Y').'-'.$bln);
         $this->transaksiModel->orderBy('tgl_pembayaran', 'DESC');
         return $this->transaksiModel->get()->getResultArray();
     }
