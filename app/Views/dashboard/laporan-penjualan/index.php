@@ -77,8 +77,8 @@
                             <td><?= format_rupiah($totalHarga) ?></td>
                         </tr>
                     <?php } else { ?>
-                        <tr class="">
-                            <td colspan="5" class="text-center ">
+                        <tr>
+                            <td colspan="6" class="text-center">
                                 <div class="alert alert-danger" role="alert">
                                     Data laporan penjualan pada <strong><?= $header ?></strong> tidak ada.
                                 </div>
@@ -95,7 +95,6 @@
 
 <?= $this->section('javascript') ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-<!-- <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> -->
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
@@ -119,7 +118,7 @@
             format: "mm-yyyy",
             startView: "months", 
             minViewMode: "months"
-        }).on('changeDate', (e) => {
+        }).on('changeDate', () => {
             const tglLaporan = $('#tglLaporan').val().split('-').reverse().join('-');
             window.open('<?= base_url('dashboard/laporan-penjualan?tglLaporan=') ?>' + tglLaporan, '_self');
         });

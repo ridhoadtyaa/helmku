@@ -25,7 +25,7 @@ class Kategori extends BaseController
         if($this->validate([
             'nama_kategori' => [
                 'rules'     => 'required',
-                'errors'    => '{field} Wajib di isi'
+                'errors'    => 'Nama kategori Wajib di isi'
             ]
         ])){
             if($this->kategoriModel->insert(['nama' => $this->request->getPost('nama_kategori')]))

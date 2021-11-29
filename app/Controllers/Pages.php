@@ -555,4 +555,11 @@ class Pages extends BaseController
 
         return view('tentang', $data);
     }
+
+    public function bantuan()
+    {
+        $data['title'] = 'Bantuan';
+
+        return view('bantuan', $data);
+    }
 }

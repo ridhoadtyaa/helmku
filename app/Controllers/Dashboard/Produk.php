@@ -19,7 +19,8 @@ class Produk extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'Daftar Produk'
+            'title' => 'Daftar Produk',
+            'validation' => \Config\Services::validation(),
         ];
         $data['data_produk'] = [];
         $i = 0;

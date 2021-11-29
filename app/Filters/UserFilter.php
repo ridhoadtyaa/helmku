@@ -27,7 +27,6 @@ class UserFilter implements FilterInterface
     {
         if(!session()->isUserLogin)
         {
-            session()->setFlashdata('danger', 'Sebelum mengakses dibutuhkan sesi masuk terlebih dahulu!');
             return redirect()->to(base_url('login-member'));
         }
     }

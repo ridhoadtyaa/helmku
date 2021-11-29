@@ -2,8 +2,8 @@
     <ul>
         <li class="clickable"><i class='bx bx-x'></i></li>
         <li><a href="<?= base_url('produk') ?>" class="text-white text-decoration-none">Produk</a></li>
-        <li><a href="#" class="text-white text-decoration-none">Tentang</a></li>
-        <li><a href="#" class="text-white text-decoration-none">Bantuan</a></li>
+        <li><a href="<?= base_url('tentang') ?>" class="text-white text-decoration-none">Tentang</a></li>
+        <li><a href="<?= base_url('bantuan') ?>" class="text-white text-decoration-none">Bantuan</a></li>
     </ul>
 
     <?php if(!session()->isUserLogin) { ?>

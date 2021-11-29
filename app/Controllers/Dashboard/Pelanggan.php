@@ -17,7 +17,8 @@ class Pelanggan extends BaseController
     {
         $data = [
             'title' => 'Data Pelanggan',
-            'pelanggan' => $this->pelangganModel->findAll()
+            'pelanggan' => $this->pelangganModel->findAll(),
+            'validation' => \Config\Services::validation(),
         ];
 
         return view('dashboard/pelanggan/index', $data);

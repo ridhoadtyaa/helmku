@@ -25,7 +25,7 @@
                     <div class="form-group row">
                         <label for="nama" class="col-sm-2 col-form-label">Nama Kategori</label>
                         <div class="col-sm-10">
-                            <input type="text" name="nama_kategori" class="form-control" id="nama" placeholder="Masukkan nama kategori">
+                            <input type="text" name="nama_kategori" class="form-control" id="nama" placeholder="Masukkan nama kategori" required>
                         </div>
                     </div>
                     <button class="btn btn-primary" type="submit">Tambah</button>

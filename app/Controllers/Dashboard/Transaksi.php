@@ -31,6 +31,7 @@ class Transaksi extends BaseController
         // dd($this->transaksiModel->where('kode_trx', 'HLM619DC17B84691')->findAll());
         $data = [
             'title' => 'Data Transaksi Belum Membayar',
+            'validation' => \Config\Services::validation()
         ];
         $data['transaksi'] = [];
         $allData = $this->getAllTransactionByStatus('Menunggu Pembayaran');
