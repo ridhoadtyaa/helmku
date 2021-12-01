@@ -7,6 +7,11 @@
 <?= $this->section('content') ?>
 <section class="section-pages">
     <div class="pages-wrapper">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-8">
+            <?= $this->include('templates/dashboard/partials/alert') ?>
+            </div>
+        </div>
         <h3 class="text-center title">Registrasi Member</h3>
         <p class="text-center">Buat akun untuk melihat dan melacak pesanan anda.</p>
         <form action="<?= base_url('register-member-post') ?>" method="post">
