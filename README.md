@@ -14,7 +14,7 @@
 
 ![home](https://i.ibb.co/CBsnysW/image.png)
 <br>
-![dashboard](https://awesomescreenshot.s3.amazonaws.com/image/1983074/17745136-d6c270ce1812cc0d715f294db6a3c497.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJSCJQ2NM3XLFPVKA%2F20211201%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20211201T151355Z&X-Amz-Expires=28800&X-Amz-SignedHeaders=host&X-Amz-Signature=c36e169b887947f80c50268607f8dda8b3a81b9d9424b8afbd8379ab0ead8000)
+![dashboard](https://i.ibb.co/M67KQsN/image.png)
 
 ## 🎡 Teknologi
 
